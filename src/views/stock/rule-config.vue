@@ -1,9 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-select v-model="listQuery.platform" placeholder="平台编码" clearable style="width: 120px" class="filter-item">
-        <el-option v-for="item in platformOptions" :key="item" :label="item" :value="item" />
-      </el-select>
+      <PlatformCode v-model="listQuery.platform" />
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         Search
       </el-button>
@@ -50,7 +48,7 @@
           <span>{{ scope.row.ruleType }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="仓库编码" min-width="80px">
+      <el-table-column label="仓库编码" min-width="60px" align="center">
         <template slot-scope="{row}">
           <span>{{ row.warehouseIds }}</span>
         </template>
@@ -95,12 +93,12 @@
           <span>{{ row.exclusiveCondition }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="线上库存调整阈值" class-name="status-col" width="160">
+      <el-table-column label="线上库存调整阈值" class-name="status-col" width="180">
         <template slot-scope="{row}">
           <span>{{ row.onlineStockCondition }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="设置库存数" class-name="status-col" width="65">
+      <el-table-column label="设置库存数" class-name="status-col" width="75">
         <template slot-scope="{row}">
           <span>{{ updateStockFilter(row.updateStock) }}</span>
         </template>
@@ -138,16 +136,16 @@
       <el-table-column label="操作" align="center" width="240" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleUpdate(row.id)">
-            Edit
-          </el-button>
-          <el-button v-if="!row.enable" size="mini" type="success" @click="handleEnable(row, true)">
-            Enable
-          </el-button>
-          <el-button v-if="row.enable" size="mini" type="danger" @click="handleEnable(row, false)">
-            Disable
+            编辑
           </el-button>
           <el-button type="success" size="mini" @click="handleCreate(row)">
-            Copy
+            复制
+          </el-button>
+          <el-button v-if="!row.enable" size="mini" type="success" @click="handleEnable(row, true)">
+            启用
+          </el-button>
+          <el-button v-if="row.enable" size="mini" type="danger" @click="handleEnable(row, false)">
+            禁用
           </el-button>
         </template>
       </el-table-column>
@@ -248,13 +246,14 @@
 </template>
 
 <script>
+import PlatformCode from '@/components/PlatformCode'
 import { fetchList, getRuleConfig, enableRuleConfig, addRuleConfig, updateRuleConfig } from '@/api/stock'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
 export default {
   name: 'ComplexTable',
-  components: { Pagination },
+  components: { PlatformCode, Pagination },
   directives: { waves },
   data() {
     return {
@@ -267,7 +266,6 @@ export default {
         limit: 50,
         platform: 'ALI'
       },
-      platformOptions: ['ALI', 'AMAZON', 'daraz', 'EB', 'JM', 'KF', 'LAZADA', 'MY', 'SHOPEE'],
       showCreateTimeCondition: false,
       showPurchasingCycleCondition: false,
       showExclusiveCondition: false,

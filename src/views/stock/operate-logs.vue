@@ -1,15 +1,29 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-select v-model="listQuery.platformCode" class="filter-item" placeholder="平台">
-        <el-option v-for="item in platformOptions" :key="item" :label="item" :value="item" />
-      </el-select>
-      <el-input v-model="listQuery.executionId" placeholder="执行批次号" style="width: 200px;" class="filter-item" />
-      <el-input v-model="listQuery.sku" placeholder="sku" style="width: 200px;" class="filter-item" />
-      <el-input v-model="listQuery.platformProductId" placeholder="平台商品ID" style="width: 200px;" class="filter-item" />
-      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-        Search
-      </el-button>
+      <el-row>
+        <el-col :span="2">
+          <PlatformCode v-model="listQuery.platformCode" />
+        </el-col>
+        <el-col :span="3">
+          <el-input v-model="listQuery.executionId" placeholder="执行批次号" style="width: 180px;" class="filter-item" />
+        </el-col>
+        <el-col :span="2">
+          <el-input v-model="listQuery.sku" placeholder="sku" style="width: 120px;" class="filter-item" />
+        </el-col>
+        <el-col :span="3">
+          <el-input v-model="listQuery.platformProductId" placeholder="平台商品ID" style="width: 180px;" class="filter-item" />
+        </el-col>
+        <el-col :span="7">
+          <el-date-picker v-model="listQuery.createTime[0]" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="开始时间" />
+          <el-date-picker v-model="listQuery.createTime[1]" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="结束时间" />
+        </el-col>
+        <el-col :span="2">
+          <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+            Search
+          </el-button>
+        </el-col>
+      </el-row>
     </div>
 
     <el-table
@@ -21,12 +35,17 @@
       highlight-current-row
       style="width: 100%;"
     >
-      <el-table-column label="账号ID" width="120px" prop="productId" align="center">
+      <el-table-column label="账号" width="80px" prop="productId" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.accountId }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="平台商品ID" width="110px" align="center">
+      <el-table-column label="站点" width="70px" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.siteId }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="平台商品ID" width="160px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.platformProductId }}</span>
         </template>
@@ -61,12 +80,12 @@
           {{ statusFilter(scope.row.status) }}
         </template>
       </el-table-column>
-      <el-table-column label="处理批次号" width="170px" align="center">
+      <el-table-column label="处理批次号" width="190px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.executionId }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="重试次数" width="170px" align="center">
+      <el-table-column label="重试次数" width="80px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.retryCount }}</span>
         </template>
@@ -76,7 +95,7 @@
           <span>{{ scope.row.createTime }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="响应消息" width="170px" align="center">
+      <el-table-column label="响应消息" width="240px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.msg }}</span>
         </template>
@@ -89,6 +108,7 @@
 </template>
 
 <script>
+import PlatformCode from '@/components/PlatformCode'
 import { fetchOperateLogList } from '@/api/stock'
 import waves from '@/directive/waves'
 import Pagination from '@/components/Pagination'
@@ -96,7 +116,7 @@ import Pagination from '@/components/Pagination'
 export default {
   name: 'OperateLogs',
   components: {
-    Pagination
+    PlatformCode, Pagination
   },
   directives: { waves },
   data() {
@@ -114,7 +134,8 @@ export default {
         'platformCode': '',
         'platformProductId': '',
         'sku': '',
-        'executionId': ''
+        'executionId': '',
+        'createTime': []
       },
       statusMap: [
         '',

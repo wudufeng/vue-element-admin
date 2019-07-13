@@ -28,13 +28,13 @@ const stockRouter = {
       path: 'logs',
       component: () => import('@/views/stock/operate-logs'),
       name: 'logs',
-      meta: { title: '库存日志' }
+      meta: { title: '库存日志', noCache: false }
     },
     {
       path: 'logs/:platform(\\w+)/:id(\\d+)',
       component: () => import('@/views/stock/operate-logs'),
       name: 'logs+',
-      meta: { title: '库存日志', noCache: true, activeMenu: '/stock/trigger' },
+      meta: { title: '库存日志', noCache: false, activeMenu: '/stock/trigger' },
       hidden: true
     }
   ]

@@ -1,8 +1,10 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.platformCode" placeholder="平台" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-input v-model="listQuery.platformProduct" placeholder="平台" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <PlatformCode v-model="listQuery.platformCode" />
+      <el-input v-model="listQuery.accountId" placeholder="账号" style="width: 200px;" class="filter-item" />
+      <el-input v-model="listQuery.platformProductId" placeholder="平台商品编号" style="width: 200px;" class="filter-item" />
+      <el-input v-model="listQuery.sku" placeholder="sku" style="width: 200px;" class="filter-item" />
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         Search
       </el-button>
@@ -17,11 +19,6 @@
       highlight-current-row
       style="width: 100%;"
     >
-      <el-table-column label="序号" prop="id" align="center" width="50">
-        <template slot-scope="scope">
-          <span>{{ scope.row.index }}</span>
-        </template>
-      </el-table-column>
       <el-table-column label="账号ID" width="120px" prop="productId" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.accountId }}</span>
@@ -29,18 +26,18 @@
       </el-table-column>
       <el-table-column label="平台商品ID" width="110px" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.platformProductId }}</span>
+          <a class="link-type" @click="listQuery.platformProductId=scope.row.platformProductId;handleFilter">{{ scope.row.platformProductId }}</a>
         </template>
       </el-table-column>
       <el-table-column label="商品名称" min-width="150px">
         <template slot-scope="{row}">
-          <a v-if="row.url !== ''" class="link-type" :href="row.url" target="_blank">{{ row.name }}</a>
+          <a v-if="row.url !== undefined" class="link-type" :href="row.url" target="_blank">{{ row.name }}</a>
           <span v-else>{{ row.name }}</span>
         </template>
       </el-table-column>
       <el-table-column label="Sku" width="110px" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.sku }}</span>
+          <a v-if="scope.row.sku != '0'" class="link-type" @click="listQuery.sku=scope.row.sku;handleFilter">{{ scope.row.sku }}</a>
         </template>
       </el-table-column>
       <el-table-column label="库存" width="110px" align="center">
@@ -73,7 +70,7 @@
           <el-button type="success" size="mini" @click="handleProductDetail(row)">
             详情
           </el-button>
-          <el-button type="primary" size="mini" @click="handleRefresh(row)">
+          <el-button v-if="row.parentProductId === undefined || row.parentProductId === '' || row.parentProductId === '0'" type="primary" size="mini" @click="handleRefresh(row)">
             刷新
           </el-button>
         </template>
@@ -97,12 +94,7 @@
         <el-form-item label="点赞/关注数"><el-input v-model="temp.interest" :readonly="true" /></el-form-item>
         <el-form-item label="已售数"><el-input v-model="temp.sold" :readonly="true" /></el-form-item>
         <el-form-item label="促销/活动ID"><el-input v-model="temp.activityId" :readonly="true" /></el-form-item>
-        <el-form-item label="是否多属性"><el-input v-model.trim="temp.variation" :readonly="true" />
-          <el-select v-model="temp.variation" class="filter-item" placeholder="Please select" :readonly="true">
-            <el-option key="false" label="否" value="false" />
-            <el-option key="true" label="是" value="true" />
-          </el-select>
-        </el-form-item>
+        <el-form-item label="是否多属性"><el-input v-model.trim="temp.variation" :readonly="true" /></el-form-item>
         <el-form-item label="商品链接"><el-input v-model="temp.url" :readonly="true" /></el-form-item>
         <el-form-item label="商品创建时间"><el-input v-model="temp.productCreateTime" :readonly="true" /></el-form-item>
         <el-form-item label="商品更新时间"><el-input v-model="temp.productUpdateTime" :readonly="true" /></el-form-item>
@@ -119,6 +111,7 @@
 </template>
 
 <script>
+import PlatformCode from '@/components/PlatformCode'
 import { fetchList, refreshProduct } from '@/api/product'
 import waves from '@/directive/waves'
 import Pagination from '@/components/Pagination'
@@ -126,7 +119,7 @@ import Pagination from '@/components/Pagination'
 export default {
   name: 'ProductList',
   components: {
-    Pagination },
+    PlatformCode, Pagination },
   directives: { waves },
   data() {
     return {
@@ -141,7 +134,7 @@ export default {
         },
         'platformCode': '',
         'platformProductId': '',
-        'platformSku': ''
+        'sku': ''
       },
       temp: {},
       statusMap: [

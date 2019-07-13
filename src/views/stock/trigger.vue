@@ -6,9 +6,7 @@
         <el-row>
           <el-col :span="10">
             <el-form-item label="平台编码:" prop="platform" class="trigger-container-item">
-              <el-select v-model="triggerForm.platform" class="filter-item" placeholder="Please select" @change="getRuleConfigList()">
-                <el-option v-for="item in platformOptions" :key="item" :label="item" :value="item" />
-              </el-select>
+              <PlatformCode v-model="triggerForm.platform" />
             </el-form-item>
           </el-col>
           <el-col :span="10">
@@ -65,10 +63,11 @@
 <script>
 import MDinput from '@/components/MDinput'
 import { fetchList, operateStock } from '@/api/stock'
+import PlatformCode from '@/components/PlatformCode'
 
 export default {
   name: 'RuleConfigTrigger',
-  components: { MDinput },
+  components: { PlatformCode, MDinput },
   props: {
   },
   data() {
@@ -76,7 +75,6 @@ export default {
       triggerForm: Object.assign({}),
       loading: false,
       ruleConfigListOptions: [],
-      platformOptions: ['ALI', 'AMAZON', 'daraz', 'EB', 'JM', 'KF', 'LAZADA', 'MY', 'SHOPEE'],
       rules: {
         sku: [{ required: true, message: '请输入要处理的Sku!', trigger: 'blur' }]
       },
