@@ -138,7 +138,7 @@
           <el-button type="primary" size="mini" @click="handleUpdate(row.id)">
             编辑
           </el-button>
-          <el-button type="success" size="mini" @click="handleCreate(row)">
+          <el-button type="info" size="mini" @click="handleCreate(row)">
             复制
           </el-button>
           <el-button v-if="!row.enable" size="mini" type="success" @click="handleEnable(row, true)">
@@ -159,9 +159,7 @@
           <el-input v-model="temp.id" readonly="true" />
         </el-form-item>
         <el-form-item label="平台编码" prop="platform">
-          <el-select v-model="temp.platform" class="filter-item" placeholder="Please select">
-            <el-option v-for="item in platformOptions" :key="item" :label="item" :value="item" />
-          </el-select>
+          <PlatformCode v-model="temp.platform" />
         </el-form-item>
         <el-form-item label="规则类型" prop="ruleType">
           <el-select v-model="temp.ruleType" class="filter-item" placeholder="Please select">

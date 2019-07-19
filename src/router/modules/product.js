@@ -17,6 +17,19 @@ const productRouter = {
       component: () => import('@/views/product/product-list'),
       name: 'product-list',
       meta: { title: '商品列表' }
+    },
+    {
+      path: 'event-log',
+      component: () => import('@/views/product/event-log'),
+      name: 'event-log',
+      meta: { title: '变更日志' }
+    },
+    {
+      path: 'extension/:platform(\\w+)/:productId(\\d+)',
+      component: () => import('@/views/product/product-extension'),
+      name: 'extension',
+      meta: { title: '商品详情', noCache: false, activeMenu: '/product/list' },
+      hidden: true
     }
   ]
 }

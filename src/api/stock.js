@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function fetchList(query) {
   return request({
-    url: '/stock/getRuleConfigList',
+    url: '/sales/stock/getRuleConfigList',
     method: 'get',
     params: { platform: query }
   })
@@ -10,7 +10,7 @@ export function fetchList(query) {
 
 export function getRuleConfig(data) {
   return request({
-    url: '/stock/getRuleConfig',
+    url: '/sales/stock/getRuleConfig',
     method: 'get',
     params: { ruleConfigId: data }
   })
@@ -18,7 +18,7 @@ export function getRuleConfig(data) {
 
 export function enableRuleConfig(id, enable) {
   return request({
-    url: '/stock/updateEnable',
+    url: '/sales/stock/updateEnable',
     method: 'post',
     params: { id: id, enable: enable }
   })
@@ -26,7 +26,7 @@ export function enableRuleConfig(id, enable) {
 
 export function addRuleConfig(data) {
   return request({
-    url: '/stock/addRuleConfig',
+    url: '/sales/stock/addRuleConfig',
     method: 'post',
     data
   })
@@ -34,7 +34,7 @@ export function addRuleConfig(data) {
 
 export function updateRuleConfig(data) {
   return request({
-    url: '/stock/updateRuleConfig',
+    url: '/sales/stock/updateRuleConfig',
     method: 'post',
     data
   })
@@ -42,7 +42,7 @@ export function updateRuleConfig(data) {
 
 export function operateStock(query) {
   return request({
-    url: 'stock/batch/operate',
+    url: '/sales/stock/batch/operate',
     method: 'post',
     params: query
   })
@@ -50,7 +50,7 @@ export function operateStock(query) {
 
 export function fetchOperateLogList(data) {
   return request({
-    url: '/stock/getOperateLogPage',
+    url: '/sales/stock/getOperateLogPage',
     method: 'post',
     data
   })

@@ -39,15 +39,15 @@ module.exports = {
     proxy: {
       // change xxx-api/login => mock/login
       // detail: https://cli.vuejs.org/config/#devserver-proxy
-      '/dev-api/product': {
-        target: `http://172.16.6.241:10120/sale/app`,
+      '/dev-api/sale/app/product': {
+        target: `http://172.16.6.241:10120`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       },
-      '/dev-api/stock': {
-        target: `http://172.16.6.241:10121/sales`,
+      '/dev-api/sales/stock': {
+        target: `http://172.16.6.241:10121`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
