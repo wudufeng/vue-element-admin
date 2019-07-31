@@ -19,10 +19,16 @@ const productRouter = {
       meta: { title: '商品列表' }
     },
     {
-      path: 'event-log',
+      path: 'pull',
+      component: () => import('@/views/product/pull-product'),
+      name: 'PullProduct',
+      meta: { title: ' 拉取商品' }
+    },
+    {
+      path: 'event-log/list',
       component: () => import('@/views/product/event-log'),
-      name: 'event-log',
-      meta: { title: '变更日志' }
+      name: 'EventLogList',
+      meta: { title: ' 变更日志' }
     },
     {
       path: 'extension/:platform(\\w+)/:productId(\\d+)',

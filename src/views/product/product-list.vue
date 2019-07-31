@@ -16,13 +16,14 @@
     <el-table
       :key="tableKey"
       v-loading="listLoading"
+      :row-class-name="tableRowClassName"
       :data="list"
       border
       fit
       highlight-current-row
       style="width: 100%;"
     >
-      <el-table-column label="账号ID" width="120px" prop="productId" align="center">
+      <el-table-column label="账号ID" width="100px" prop="productId" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.accountId }}</span>
         </template>
@@ -179,6 +180,13 @@ export default {
     this.getList()
   },
   methods: {
+    tableRowClassName({ row, rowIndex }) {
+      if (row.parentProductId === '0') {
+        return 'warning-row'
+      } else {
+        return 'success-row'
+      }
+    },
     getList() {
       this.listLoading = true
       fetchList(this.listQuery).then(response => {
@@ -222,3 +230,13 @@ export default {
   }
 }
 </script>
+
+<style>
+  .el-table .warning-row {
+    background: #fdf5e6;
+  }
+
+  .el-table .success-row {
+    background: #f0f9eb;
+  }
+</style>

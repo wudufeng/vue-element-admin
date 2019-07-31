@@ -11,6 +11,14 @@ export function fetchList(data) {
   })
 }
 
+export function pullProduct(data) {
+  return request({
+    url: '/sale/app/product/pullList',
+    method: 'get',
+    params: data
+  })
+}
+
 export function refreshProduct(data) {
   return request({
     url: '/sale/app/product/pullDetail',
@@ -28,5 +36,16 @@ export function getProductExtension(query) {
     url: '/sale/app/product/extension',
     method: 'get',
     params: query
+  })
+}
+
+export function getEventLogList(data) {
+  return request({
+    url: '/sale/app/product/getEventLogPage',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    data
   })
 }
