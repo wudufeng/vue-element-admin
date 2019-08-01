@@ -253,7 +253,7 @@ import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
 export default {
-  name: 'ComplexTable',
+  name: 'RuleConfig',
   components: { PlatformCode, Pagination },
   directives: { waves },
   data() {

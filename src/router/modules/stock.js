@@ -15,26 +15,26 @@ const stockRouter = {
     {
       path: 'config',
       component: () => import('@/views/stock/rule-config'),
-      name: 'rule-config',
+      name: 'RuleConfig',
       meta: { title: '规则配置' }
     },
     {
       path: 'trigger',
       component: () => import('@/views/stock/trigger'),
-      name: 'trigger',
+      name: 'RuleConfigTrigger',
       meta: { title: '触发调整' }
     },
     {
       path: 'logs',
       component: () => import('@/views/stock/operate-logs'),
-      name: 'logs',
-      meta: { title: '库存日志', noCache: false }
+      name: 'OperateLogs',
+      meta: { title: '库存日志' }
     },
     {
       path: 'logs/:platform(\\w+)/:id(\\d+)',
       component: () => import('@/views/stock/operate-logs'),
-      name: 'logs+',
-      meta: { title: '库存日志', noCache: false, activeMenu: '/stock/trigger' },
+      name: 'OperateLogs+',
+      meta: { title: '库存日志', noCache: true, activeMenu: '/stock/trigger' },
       hidden: true
     }
   ]
