@@ -17,6 +17,9 @@
       <el-checkbox v-model="showExclusiveCondition" class="filter-item" style="margin-left:15px;" @change="tableKey=tableKey+1">
         排除条件
       </el-checkbox>
+      <el-checkbox v-model="showOnlineStockCondition" class="filter-item" style="margin-left:15px;" @change="tableKey=tableKey+1">
+        线上库存调整阀值
+      </el-checkbox>
       <el-checkbox v-model="showDescription" class="filter-item" style="margin-left:15px;" @change="tableKey=tableKey+1">
         描述
       </el-checkbox>
@@ -93,7 +96,7 @@
           <span>{{ row.exclusiveCondition }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="线上库存调整阈值" class-name="status-col" width="180">
+      <el-table-column v-if="showOnlineStockCondition" label="线上库存调整阈值" class-name="status-col" width="180">
         <template slot-scope="{row}">
           <span>{{ row.onlineStockCondition }}</span>
         </template>
@@ -250,7 +253,7 @@ import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
 export default {
-  name: 'ComplexTable',
+  name: 'RuleConfig',
   components: { PlatformCode, Pagination },
   directives: { waves },
   data() {
@@ -265,6 +268,7 @@ export default {
         platform: 'ALI'
       },
       showCreateTimeCondition: false,
+      showOnlineStockCondition: false,
       showPurchasingCycleCondition: false,
       showExclusiveCondition: false,
       showDescription: false,

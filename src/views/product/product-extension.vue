@@ -11,7 +11,7 @@ import JsonEditor from '@/components/JsonEditor'
 import { getProductExtension } from '@/api/product'
 
 export default {
-  name: 'JsonEditorDemo',
+  name: 'ProductExtension',
   components: { JsonEditor },
   data() {
     return {

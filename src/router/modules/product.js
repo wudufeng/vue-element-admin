@@ -15,13 +15,13 @@ const productRouter = {
     {
       path: 'list',
       component: () => import('@/views/product/product-list'),
-      name: 'product-list',
+      name: 'ProductList',
       meta: { title: '商品列表' }
     },
     {
       path: 'pull',
       component: () => import('@/views/product/pull-product'),
-      name: 'PullProduct',
+      name: 'PullProductTrigger',
       meta: { title: ' 拉取商品' }
     },
     {
@@ -33,7 +33,7 @@ const productRouter = {
     {
       path: 'extension/:platform(\\w+)/:productId(\\d+)',
       component: () => import('@/views/product/product-extension'),
-      name: 'extension',
+      name: 'ProductExtension',
       meta: { title: '商品详情', noCache: false, activeMenu: '/product/list' },
       hidden: true
     }
