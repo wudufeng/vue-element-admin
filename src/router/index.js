@@ -11,6 +11,7 @@ import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
+import sequenceRouter from './modules/sequence'
 import productRouter from './modules/product'
 import stockRouter from './modules/stock'
 
@@ -119,6 +120,7 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  sequenceRouter,
   productRouter,
   stockRouter,
   {
