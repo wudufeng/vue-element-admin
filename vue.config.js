@@ -40,28 +40,28 @@ module.exports = {
       // change xxx-api/login => mock/login
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       '/dev-api/sale/app/product': {
-        target: `http://172.16.6.241:10120`,
+        target: `http://127.0.0.1:10120`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       },
       '/dev-api/sales/stock': {
-        target: `http://172.16.6.241:10121`,
+        target: `http://127.0.0.1:10121`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       },
       '/dev-api/codegen': {
-        target: `http://192.168.68.1:10004`,
+        target: `http://127.0.0.1:10004`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       },
       '/dev-api/sequence': {
-        target: `http://192.168.68.1:10003`,
+        target: `http://127.0.0.1:10003`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
