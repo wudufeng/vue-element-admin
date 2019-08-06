@@ -33,3 +33,11 @@ export function updateSequenceDefinition(seqId, data) {
     params: data
   })
 }
+
+export function removeSequenceDefinition(data) {
+  return request({
+    url: '/sequence/definition',
+    method: 'delete',
+    params: data
+  })
+}

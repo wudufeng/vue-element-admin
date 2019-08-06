@@ -2,8 +2,7 @@
   <div class="app-container">
     <div class="filter-container">
       <el-input v-model="listQuery.condition.tenantId" placeholder="租户" style="width: 200px;" class="filter-item" clearable />
-      <el-date-picker v-model="listQuery.queryBeginTime" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="开始时间" clearable />
-      <el-date-picker v-model="listQuery.queryEndTime" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="结束时间" clearable />
+      <el-input v-model="listQuery.condition.dbName" placeholder="名称" style="width: 200px;" class="filter-item" clearable />
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         搜索
       </el-button>
@@ -19,53 +18,50 @@
       border
       fit
       highlight-current-row
-      style="width: 100%"
+      style="width: 100%;"
     >
-      <el-table-column label="主键" width="120px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.id }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="租户编码" width="120px" align="center">
+      <el-table-column label="租户" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.tenantId }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="数据源名称" width="120px" align="center">
+      <el-table-column label="数据源名称" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.dbName }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="JdbcUrl" width="120px" align="center">
+      <el-table-column label="JdbcUrl" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.jdbcUrl }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="用户名" width="120px" align="center">
+      <el-table-column label="用户名" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.userName }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="密码" width="120px" align="center">
+      <el-table-column label="密码" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.password }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" width="160px" align="center">
+      <el-table-column label="创建时间" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.createTime }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="最后更新时间" width="160px" align="center">
+      <el-table-column label="最后更新时间" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.updateTime }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" width="240" class-name="small-padding fixed-width">
+      <el-table-column label="操作" width="240" align="center">
         <template slot-scope="{row}">
-          <el-button type="primary" size="mini" @click="handleDetail('view',row)">查看</el-button>
-          <el-button type="info" size="mini" @click="handleDetail('update',row)">编辑</el-button>
-          <el-button type="danger" size="mini" @click="rowDel(row)">删除</el-button>
+          <router-link :to="'/codegen/'+row.id">
+            <el-button size="mini">查看</el-button>
+          </router-link>
+          <el-button size="mini" @click="handleDetail('update',row)">编辑</el-button>
+          <el-button size="mini" @click="rowDel(row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -75,16 +71,16 @@
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="databaseInfoForm" label-position="right" label-width="46%">
         <el-row>
-          <el-col style="width:400px;"><el-form-item prop="id" label="主键"><el-input v-model="databaseInfoForm.id" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
-          <el-col style="width:400px;"><el-form-item prop="tenantId" label="租户编码"><el-input v-model="databaseInfoForm.tenantId" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
-        </el-row>
-        <el-row>
+          <el-col style="width:400px;"><el-form-item prop="tenantId" label="租户"><el-input v-model="databaseInfoForm.tenantId" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
           <el-col style="width:400px;"><el-form-item prop="dbName" label="数据源名称"><el-input v-model="databaseInfoForm.dbName" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
-          <el-col style="width:400px;"><el-form-item prop="jdbcUrl" label="JdbcUrl"><el-input v-model="databaseInfoForm.jdbcUrl" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
         </el-row>
         <el-row>
+          <el-col style="width:400px;"><el-form-item prop="jdbcUrl" label="JdbcUrl"><el-input v-model="databaseInfoForm.jdbcUrl" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
           <el-col style="width:400px;"><el-form-item prop="userName" label="用户名"><el-input v-model="databaseInfoForm.userName" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
+        </el-row>
+        <el-row>
           <el-col style="width:400px;"><el-form-item prop="password" label="密码"><el-input v-model="databaseInfoForm.password" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
+          <el-col style="width:400px;"><el-form-item prop="id" label="主键" hidden><el-input v-model="databaseInfoForm.id" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
         </el-row>
       </el-form>
 
@@ -109,22 +105,11 @@ const defaultForm = {
 }
 
 export default {
-  name: 'DatabaseInfoList',
+  name: 'DatabaseInfo',
   components: {
     Pagination },
   directives: { waves },
   data() {
-    const validateRequire = (rule, value, callback) => {
-      if (value === undefined || value === '') {
-        this.$message({
-          message: rule.field + '为必传项',
-          type: 'error'
-        })
-        callback(new Error(rule.field + '为必传项'))
-      } else {
-        callback()
-      }
-    }
     return {
       databaseInfoForm: Object.assign({}, defaultForm),
       loading: false,
@@ -148,12 +133,11 @@ export default {
         create: '新增'
       },
       rules: {
-        id: [{ validator: validateRequire }],
-        tenantId: [{ validator: validateRequire }],
-        dbName: [{ validator: validateRequire }],
-        jdbcUrl: [{ validator: validateRequire }],
-        userName: [{ validator: validateRequire }],
-        password: [{ validator: validateRequire }]
+        tenantId: [{ required: true, message: '请输入活动名称', trigger: 'blur' }],
+        dbName: [{ required: true, message: '请输入数据源名称', trigger: 'blur' }],
+        jdbcUrl: [{ required: true, message: '请输入JdbcUrl', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }, { min: 1, max: 64, message: '长度在 1 到 64 个字符', trigger: 'blur' }],
+        userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }]
       }
     }
   },

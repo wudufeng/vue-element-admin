@@ -42,3 +42,23 @@ export function removeDatabaseInfo(data) {
     params: data
   })
 }
+
+export function getCodeGeneratorList(data) {
+  return request({
+    url: '/codegen/table/list',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    data
+  })
+}
+
+export function addCodeGenerator(data) {
+  request({
+    url: '/codegen/code/generate',
+    method: 'get',
+    params: data,
+    responseType: 'blob'
+  })
+}

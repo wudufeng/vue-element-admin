@@ -43,6 +43,20 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
+    if (response.headers['content-type'] === 'application/octet-stream') {
+      const res = response
+      const blob = new Blob([res.data])
+      const url = window.URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.style.display = 'none'
+      link.href = url
+      link.setAttribute('download', res.headers['content-disposition'].split(';')[1].substring(9))
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link) // 下载完成移除元素
+      window.URL.revokeObjectURL(url) // 释放掉blob对象
+      return
+    }
     const res = response.data
     const code = res.retCode !== undefined ? res.retCode : res.code
 

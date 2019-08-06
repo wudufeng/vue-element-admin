@@ -5,7 +5,7 @@ import Layout from '@/layout'
 const codegenRouter = {
   path: '/codegen',
   component: Layout,
-  redirect: '/database-info/list',
+  redirect: '/codegen',
   name: 'codegen',
   meta: {
     title: '代码生成',
@@ -13,16 +13,18 @@ const codegenRouter = {
   },
   children: [
     {
-      path: 'database-info/list',
-      component: () => import('@/views/codegen/DatabaseInfoList'),
-      name: 'DatabaseInfoList',
-      meta: { title: '数据源列表', icon: 'list' }
+      path: '/',
+      component: () => import('@/views/codegen/DatabaseInfo'),
+      name: 'DatabaseInfo',
+      meta: { title: '数据源管理', icon: 'table' },
+      hidden: true
     },
     {
-      path: '/generator',
-      component: () => import('@/views/codegen/DatabaseInfoList'),
+      path: '/codegen/:databaseId(\\d+)',
+      component: () => import('@/views/codegen/CodeGenerator'),
       name: 'CodeGenerator',
-      meta: { title: '代码生成', icon: 'edit' }
+      meta: { title: '代码生成', activeMenu: '/codegen' },
+      hidden: true
     }
   ]
 }
