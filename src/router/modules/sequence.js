@@ -5,18 +5,19 @@ import Layout from '@/layout'
 const sequenceRouter = {
   path: '/sequence',
   component: Layout,
-  redirect: '/definition/list',
-  name: 'sequenceManage',
+  redirect: '/sequence',
+  name: 'sequence',
   meta: {
     title: '序列管理',
-    icon: 'table'
+    icon: 'list'
   },
   children: [
     {
-      path: 'definition/list',
+      path: '/',
       component: () => import('@/views/sequence/SequenceDefinition'),
       name: 'SequenceDefintion',
-      meta: { title: '序列定义', icon: 'list' }
+      meta: { title: '序列定义', icon: 'list' },
+      hidden: true
     }
   ]
 }

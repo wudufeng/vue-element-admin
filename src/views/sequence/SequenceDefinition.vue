@@ -94,32 +94,34 @@
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="sequenceDefinitionForm" label-position="right" label-width="46%">
         <el-row>
-          <el-col style="width:400px;" :hidden="dialogStatus==='update'"><el-form-item prop="id" label="主键"><el-input v-model="sequenceDefinitionForm.id" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
-          <el-col style="width:400px;" :hidden="dialogStatus==='update'"><el-form-item prop="tenantId" label="租户编码"><el-input v-model="sequenceDefinitionForm.tenantId" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
+          <el-col style="width:400px;" :hidden="dialogStatus!=='view'"><el-form-item prop="id" label="主键"><el-input v-model="sequenceDefinitionForm.id" :disabled="dialogStatus==='view'" clearable /></el-form-item></el-col>
+          <el-col style="width:400px;" :hidden="dialogStatus==='update'"><el-form-item prop="tenantId" label="租户编码"><el-input v-model="sequenceDefinitionForm.tenantId" :disabled="dialogStatus==='view'" clearable /></el-form-item></el-col>
         </el-row>
         <el-row>
-          <el-col style="width:400px;" :hidden="dialogStatus==='update'"><el-form-item prop="seqName" label="序列名称"><el-input v-model="sequenceDefinitionForm.seqName" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
-          <el-col style="width:400px;"><el-form-item prop="minValue" label="最小值"><el-input v-model="sequenceDefinitionForm.minValue" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
+          <el-col style="width:400px;" :hidden="dialogStatus==='update'"><el-form-item prop="seqName" label="序列名称"><el-input v-model="sequenceDefinitionForm.seqName" :disabled="dialogStatus==='view'" clearable /></el-form-item></el-col>
+          <el-col style="width:400px;"><el-form-item prop="minValue" label="最小值"><el-input v-model="sequenceDefinitionForm.minValue" :disabled="dialogStatus==='view'" clearable /></el-form-item></el-col>
         </el-row>
         <el-row>
-          <el-col style="width:400px;"><el-form-item prop="maxValue" label="最大值"><el-input v-model="sequenceDefinitionForm.maxValue" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
-          <el-col style="width:400px;"><el-form-item prop="increase" label="增长缓冲区"><el-input v-model="sequenceDefinitionForm.increase" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
+          <el-col style="width:400px;"><el-form-item prop="maxValue" label="最大值"><el-input v-model="sequenceDefinitionForm.maxValue" :disabled="dialogStatus==='view'" clearable /></el-form-item></el-col>
+          <el-col style="width:400px;"><el-form-item prop="increase" label="增长缓冲区"><el-input v-model="sequenceDefinitionForm.increase" :disabled="dialogStatus==='view'" clearable /></el-form-item></el-col>
         </el-row>
         <el-row>
-          <el-col style="width:400px;" :hidden="dialogStatus==='update'"><el-form-item prop="currentValue" label="当前值"><el-input v-model="sequenceDefinitionForm.currentValue" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
-          <el-col style="width:400px;"><el-form-item prop="cycle" label="是否允许循环">
-            <el-select v-model="sequenceDefinitionForm.cycle" default-first-option>
-              <el-option label="是" value="true" />
-              <el-option label="否" value="false" />
-            </el-select>
-          </el-form-item></el-col>
+          <el-col style="width:400px;" :hidden="dialogStatus==='update'"><el-form-item prop="currentValue" label="当前值"><el-input v-model="sequenceDefinitionForm.currentValue" :disabled="dialogStatus==='view'" clearable /></el-form-item></el-col>
+          <el-col style="width:400px;">
+            <el-form-item prop="cycle" label="是否允许循环">
+              <el-select v-model="sequenceDefinitionForm.cycle" :disabled="dialogStatus==='view'">
+                <el-option label="是" value="true" />
+                <el-option label="否" value="false" />
+              </el-select>
+            </el-form-item>
+          </el-col>
         </el-row>
         <el-row>
-          <el-col style="width:400px;"><el-form-item prop="charLength" label="字符长度"><el-input v-model="sequenceDefinitionForm.charLength" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
-          <el-col style="width:400px;"><el-form-item prop="prefix" label="序列前缀"><el-input v-model="sequenceDefinitionForm.prefix" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
+          <el-col style="width:400px;"><el-form-item prop="charLength" label="字符长度"><el-input v-model="sequenceDefinitionForm.charLength" :disabled="dialogStatus==='view'" clearable /></el-form-item></el-col>
+          <el-col style="width:400px;"><el-form-item prop="prefix" label="序列前缀"><el-input v-model="sequenceDefinitionForm.prefix" :disabled="dialogStatus==='view'" clearable /></el-form-item></el-col>
         </el-row>
         <el-row>
-          <el-col style="width:400px;"><el-form-item prop="appendDateFormat" label="日期填充格式"><el-input v-model="sequenceDefinitionForm.appendDateFormat" :readonly="dialogStatus==='view'" clearable /></el-form-item></el-col>
+          <el-col style="width:400px;"><el-form-item prop="appendDateFormat" label="日期填充格式"><el-input v-model="sequenceDefinitionForm.appendDateFormat" :disabled="dialogStatus==='view'" clearable /></el-form-item></el-col>
         </el-row>
       </el-form>
 

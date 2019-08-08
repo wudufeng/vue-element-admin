@@ -60,6 +60,13 @@ module.exports = {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       },
+      '/dev-api/upms': {
+        target: `http://127.0.0.1:10005`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API]: ''
+        }
+      },
       '/dev-api/sequence': {
         target: `http://127.0.0.1:10003`,
         changeOrigin: true,

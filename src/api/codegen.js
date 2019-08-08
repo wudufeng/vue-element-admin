@@ -19,14 +19,6 @@ export function addDatabaseInfo(data) {
   })
 }
 
-export function getDatabaseInfoDetail(data) {
-  return request({
-    url: '/codegen/database-info',
-    method: 'get',
-    params: data
-  })
-}
-
 export function updateDatabaseInfo(data) {
   return request({
     url: '/codegen/database-info',
@@ -35,11 +27,10 @@ export function updateDatabaseInfo(data) {
   })
 }
 
-export function removeDatabaseInfo(data) {
+export function removeDatabaseInfo(id) {
   return request({
-    url: '/codegen/database-info',
-    method: 'delete',
-    params: data
+    url: '/codegen/database-info/' + id,
+    method: 'delete'
   })
 }
 

@@ -6,6 +6,7 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 import codegenRouter from './modules/codegen'
+import upmsRouter from './modules/upms'
 import sequenceRouter from './modules/sequence'
 import productRouter from './modules/product'
 import stockRouter from './modules/stock'
@@ -115,6 +116,7 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  upmsRouter,
   codegenRouter,
   sequenceRouter,
   productRouter,

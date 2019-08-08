@@ -58,7 +58,7 @@
       <el-table-column label="操作" width="240" align="center">
         <template slot-scope="{row}">
           <router-link :to="'/codegen/'+row.id">
-            <el-button size="mini">查看</el-button>
+            <el-button size="mini">查表</el-button>
           </router-link>
           <el-button size="mini" @click="handleDetail('update',row)">编辑</el-button>
           <el-button size="mini" @click="rowDel(row)">删除</el-button>
@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import { getDatabaseInfoList, addDatabaseInfo, getDatabaseInfoDetail, updateDatabaseInfo, removeDatabaseInfo } from '@/api/codegen'
+import { getDatabaseInfoList, addDatabaseInfo, updateDatabaseInfo, removeDatabaseInfo } from '@/api/codegen'
 import waves from '@/directive/waves'
 import Pagination from '@/components/Pagination'
 
@@ -165,18 +165,6 @@ export default {
       })
       this.dialogFormVisible = true
     },
-    fetchData(id) {
-      const params = {
-        id: id
-      }
-      getDatabaseInfoDetail(params).then(response => {
-        this.databaseInfoForm = response.data
-        this.setTagsViewTitle()
-        this.setPageTitle()
-      }).catch(err => {
-        console.log(err)
-      })
-    },
     submitForm() {
       console.log(this.databaseInfoForm)
       this.$refs.dataForm.validate(valid => {
@@ -218,10 +206,7 @@ export default {
         type: 'warning'
       })
         .then(function() {
-          const params = {
-            id: row.id
-          }
-          return removeDatabaseInfo(params)
+          return removeDatabaseInfo(row.id)
         })
         .then(data => {
           _this.$message({
