@@ -25,6 +25,12 @@ const productRouter = {
       meta: { title: ' 拉取商品' }
     },
     {
+      path: 'pull-product-log/list',
+      component: () => import('@/views/product/ProductPullLog'),
+      name: 'ProductPullLog',
+      meta: { title: '执行记录' }
+    },
+    {
       path: 'event-log/list',
       component: () => import('@/views/product/event-log'),
       name: 'EventLogList',

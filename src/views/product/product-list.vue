@@ -71,10 +71,10 @@
       </el-table-column>
       <el-table-column label="操作" align="center" width="180" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
-          <el-button v-if="!row.variation" type="success" size="mini" @click="handleProductDetail(row)">
-            详情
+          <el-button v-if="!row.variation" size="mini" @click="handleProductDetail(row)">
+            查看
           </el-button>
-          <el-button v-if="row.parentProductId === '0'" type="primary" size="mini" @click="handleRefresh(row)">
+          <el-button v-if="row.parentProductId === '0'" size="mini" @click="handleRefresh(row)">
             刷新
           </el-button>
         </template>
@@ -156,13 +156,14 @@ export default {
       tableKey: 0,
       list: null,
       total: 0,
-      listLoading: true,
+      listLoading: false,
       listQuery: {
         'page': {
           'current': 1,
           'size': 20
         },
         'platformCode': '',
+        'accountId': '',
         'platformProductId': '',
         'sku': ''
       },
@@ -177,7 +178,6 @@ export default {
     }
   },
   created() {
-    this.getList()
   },
   methods: {
     tableRowClassName({ row, rowIndex }) {
@@ -200,6 +200,13 @@ export default {
       })
     },
     handleFilter() {
+      if (this.listQuery.platformCode === '') {
+        this.$message({
+          message: '请选择平台编码!',
+          type: 'error'
+        })
+        return
+      }
       this.listQuery.page.current = 1
       this.getList()
     },
