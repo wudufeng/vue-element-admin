@@ -13,16 +13,10 @@ const stockRouter = {
   },
   children: [
     {
-      path: 'config',
-      component: () => import('@/views/stock/rule-config'),
-      name: 'RuleConfig',
-      meta: { title: '规则配置' }
-    },
-    {
       path: 'rule-config',
       component: () => import('@/views/stock/rule-config-crud'),
       name: 'RuleConfigCrud',
-      meta: { title: '规则配置2' }
+      meta: { title: '规则配置' }
     },
     {
       path: 'trigger',
