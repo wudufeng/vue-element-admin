@@ -20,14 +20,14 @@ const upmsRouter = {
     },
     {
       path: 'organization',
-      component: () => import('@/views/upms/Tenant'),
+      component: () => import('@/views/upms/Organization'),
       name: 'Organization',
-      meta: { title: '机构管理', icon: 'list' }
+      meta: { title: '组织架构', icon: 'list' }
     },
     {
       path: 'user',
-      component: () => import('@/views/upms/Tenant'),
-      name: 'User',
+      component: () => import('@/views/upms/UserInfo'),
+      name: 'UserInfo',
       meta: { title: '用户管理', icon: 'list' }
     }
   ]

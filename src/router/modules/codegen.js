@@ -28,7 +28,7 @@ const codegenRouter = {
     {
       path: 'project',
       component: () => import('@/views/codegen/DatabaseInfo'),
-      name: 'DatabaseInfo',
+      name: 'Project',
       meta: { title: '生成项目', icon: 'edit' }
     }
   ]
