@@ -153,7 +153,7 @@ const defaultForm = {
 }
 
 export default {
-  name: 'UserInfo',
+  name: 'UserInfo2',
   components: {
     Pagination },
   directives: { waves },

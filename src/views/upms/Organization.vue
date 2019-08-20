@@ -10,7 +10,7 @@
         </div>
       </el-header>
       <el-container>
-        <el-aside align="center">
+        <el-aside align="center" style="background-color: #ffffff">
           <el-button-group>
             <el-button type="info" size="small" icon="el-icon-plus" @click="handleAction('add')">新增</el-button>
             <el-button type="info" size="small" icon="el-icon-edit" @click="handleAction('update')">编辑</el-button>
