@@ -5,7 +5,7 @@ import Layout from '@/layout'
 const productRouter = {
   path: '/product',
   component: Layout,
-  redirect: '/product/list',
+  redirect: '/sale/app/product',
   name: 'productManage',
   meta: {
     title: '商品管理',
@@ -13,9 +13,9 @@ const productRouter = {
   },
   children: [
     {
-      path: 'list',
-      component: () => import('@/views/product/product-list'),
-      name: 'ProductList',
+      path: '/sale/app/product',
+      component: () => import('@/views/product/product'),
+      name: 'Product',
       meta: { title: '商品列表' }
     },
     {
@@ -40,7 +40,7 @@ const productRouter = {
       path: 'extension/:platform(\\w+)/:productId(\\d+)',
       component: () => import('@/views/product/product-extension'),
       name: 'ProductExtension',
-      meta: { title: '商品详情', noCache: false, activeMenu: '/product/list' },
+      meta: { title: '原报文数据', noCache: false, activeMenu: '/sale/app/product' },
       hidden: true
     }
   ]

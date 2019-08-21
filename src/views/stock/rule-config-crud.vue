@@ -14,7 +14,7 @@
       @refresh-change="handleGetList"
     >
       <template slot="menu" slot-scope="scope">
-        <el-button icon="el-icon-check" class="el-button el-button--text el-button--small" label="复制" @click="handleCopy(scope.row)">复制</el-button>
+        <el-button icon="el-icon-check" class="el-button el-button--text el-button--small" @click="handleCopy(scope.row)">复制</el-button>
         <el-button v-if="!scope.row.enable" icon="el-icon-circle-check" class="el-button el-button--text el-button--small" @click="handleDel(scope.row)">启用</el-button>
         <el-button v-if="scope.row.enable" icon="el-icon-delete" class="el-button el-button--text el-button--small" @click="handleDel(scope.row)">禁用</el-button>
       </template>

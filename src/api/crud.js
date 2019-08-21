@@ -67,7 +67,7 @@ export function update(pathVal, data) {
 
 export function remove(pathVal, id) {
   return request({
-    url: pathVal + id,
+    url: pathVal + '/' + id,
     method: 'delete'
   })
 }
