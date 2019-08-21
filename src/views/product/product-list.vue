@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <PlatformCode v-model="listQuery.platformCode" />
-      <el-input v-model="listQuery.accountId" placeholder="账号" style="width: 200px;" class="filter-item" clearable />
-      <el-input v-model="listQuery.platformProductId" placeholder="平台商品编号" style="width: 200px;" class="filter-item" clearable />
-      <el-input v-model="listQuery.sku" placeholder="sku" style="width: 200px;" class="filter-item" clearable />
+      <PlatformCode v-model="listQuery.condition.platformCode" />
+      <el-input v-model="listQuery.condition.accountId" placeholder="账号" style="width: 200px;" class="filter-item" clearable />
+      <el-input v-model="listQuery.condition.platformProductId" placeholder="平台商品编号" style="width: 200px;" class="filter-item" clearable />
+      <el-input v-model="listQuery.condition.sku" placeholder="sku" style="width: 200px;" class="filter-item" clearable />
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         搜索
       </el-button>
@@ -81,7 +81,7 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page.current" :limit.sync="listQuery.page.size" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.current" :limit.sync="listQuery.size" @pagination="getList" />
 
     <el-dialog title="详情" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :model="temp" label-position="right" label-width="46%">
@@ -158,14 +158,9 @@ export default {
       total: 0,
       listLoading: false,
       listQuery: {
-        'page': {
-          'current': 1,
-          'size': 20
-        },
-        'platformCode': '',
-        'accountId': '',
-        'platformProductId': '',
-        'sku': ''
+        'current': 1,
+        'size': 20,
+        'condition': {}
       },
       temp: {},
       statusMap: [
@@ -200,14 +195,14 @@ export default {
       })
     },
     handleFilter() {
-      if (this.listQuery.platformCode === '') {
+      if (this.listQuery.condition.platformCode === '') {
         this.$message({
           message: '请选择平台编码!',
           type: 'error'
         })
         return
       }
-      this.listQuery.page.current = 1
+      this.listQuery.current = 1
       this.getList()
     },
     statusFilter(status) {
@@ -218,14 +213,14 @@ export default {
       this.dialogFormVisible = true
     },
     handleRefresh(row) {
-      this.listQuery.platformCode = row.platformCode
-      this.listQuery.accountId = row.accountId
-      this.listQuery.platformProductId = row.platformProductId
+      this.listQuery.condition.platformCode = row.platformCode
+      this.listQuery.condition.accountId = row.accountId
+      this.listQuery.condition.platformProductId = row.platformProductId
       this.refresh()
     },
     refresh() {
       this.listLoading = true
-      refreshProduct(this.listQuery).then(() => {
+      refreshProduct(this.listQuery.condition).then(() => {
         this.$notify({
           title: 'Success',
           message: 'Refresh Successfully',
