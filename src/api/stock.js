@@ -2,9 +2,9 @@ import request from '@/utils/request'
 
 export function fetchList(query) {
   return request({
-    url: '/sales/stock/getRuleConfigList',
-    method: 'get',
-    params: { platform: query }
+    url: '/sales/stock/rule-config/list',
+    method: 'post',
+    query
   })
 }
 
