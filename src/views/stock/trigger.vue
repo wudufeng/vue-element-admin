@@ -30,7 +30,7 @@
         <el-row align="center">
           <el-col :span="20">
             <el-form-item style="margin-bottom: 40px;" prop="sku">
-              <MDinput v-model.trim="triggerForm.sku" :maxlength="80" name="name" required>
+              <MDinput v-model.trim="triggerForm.sku" name="name" required>
                 SKU
               </MDinput>
             </el-form-item>
