@@ -1,10 +1,13 @@
 import request from '@/utils/request'
 
-export function fetchList(query) {
+export function fetchList(data) {
   return request({
     url: '/sales/stock/rule-config/list',
     method: 'post',
-    query
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    data
   })
 }
 
