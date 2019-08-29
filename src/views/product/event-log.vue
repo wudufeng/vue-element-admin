@@ -25,11 +25,6 @@
           <span>{{ scope.row.platformCode }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="站点" width="120px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.siteId }}</span>
-        </template>
-      </el-table-column>
       <el-table-column label="账号" width="120px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.accountId }}</span>
