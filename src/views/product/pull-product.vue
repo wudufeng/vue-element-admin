@@ -9,7 +9,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="10">
-            <el-form-item label="账号:" prop="accountId">
+            <el-form-item label="账号:" prop="accountId" placeholder="留空表示所有账号">
               <el-input v-model="triggerForm.accountId" style="width: 180px;" clearable />
             </el-form-item>
           </el-col>
@@ -79,7 +79,7 @@ export default {
       loading: false,
       rules: {
         platformCode: [{ required: true, message: '请选择平台编码!', trigger: 'change' }],
-        accountId: [{ required: true, message: '请输入账号!', trigger: 'blur' }, { min: 1, max: 6, message: '长度在 1 到 6 个字符', trigger: 'blur' }],
+        accountId: [{ min: 1, max: 6, message: '长度在 1 到 6 个字符', trigger: 'blur' }],
         queryBeginTime: [{ required: true, message: '请选择开始时间!', trigger: 'change' }],
         queryEndTime: [{ required: true, message: '请选择结束时间!', trigger: 'change' }]
       }
