@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-row>
-      <el-col span="18">
+      <el-col :span="18">
         <avue-form v-model="data" :option="option" @submit="handleSubmit" />
       </el-col>
     </el-row>
