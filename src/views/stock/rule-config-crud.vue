@@ -61,7 +61,7 @@ export default {
           { label: '平台', prop: 'platform', type: 'select', valueDefault: 'ALI', hide: true, search: { searchDefault: 'ALI' }, editDisabled: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }] },
           { label: '规则类型', prop: 'ruleType', type: 'select', dicData: [{ value: 'AUTO', label: '自动触发' }, { value: 'MANUAL', label: '人工触发' }] },
           { label: '仓库编码', prop: 'warehouseIds', rules: [{ required: true, message: '请输入仓库编码', trigger: 'blur' }] },
-          { label: '库存汇总类型', prop: 'stockTypes', type: 'checkbox', dicData: [{ value: 'AVAILABLE', label: '可用' }, { value: 'TRANSIT', label: '在途' }] },
+          { label: '库存汇总类型', prop: 'stockTypes', type: 'checkbox', dicData: [{ value: 'AVAILABLE', label: '可用' }, { value: 'TRANSIT', label: '在途' }, { value: 'TRUE', label: '实际' }] },
           { label: '当前库存数量条件', prop: 'stockCondition' },
           { label: 'Sku状态', prop: 'statusCondition', type: 'checkbox', dicData: [{ value: 4, label: '在售中' }, { value: 5, label: '已滞销' }, { value: 6, label: '待清仓' }, { value: 7, label: '已停售' }] },
           { label: 'Sku创建时间', prop: 'createTimeCondition', hide: true },
@@ -88,7 +88,7 @@ export default {
               { label: '平台', prop: 'platform', type: 'select', valueDefault: 'ALI', hide: true, search: true, editDisabled: true, rules: [{ required: true, message: '请选择平台编码', trigger: 'change' }], dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }] },
               { label: '规则类型', prop: 'ruleType', type: 'select', rules: [{ required: true, message: '请选择规则类型', trigger: 'change' }], dicData: [{ value: 'AUTO', label: '自动触发' }, { value: 'MANUAL', label: '人工触发' }] },
               { label: '仓库编码', prop: 'warehouseIds', rules: [{ required: true, message: '请输入仓库编码', trigger: 'change' }] },
-              { label: '库存汇总类型', prop: 'stockTypes', type: 'checkbox', rules: [{ required: true, message: '请输入库存汇总类型', trigger: 'change' }], dicData: [{ value: 'AVAILABLE', label: '可用' }, { value: 'TRANSIT', label: '在途' }] },
+              { label: '库存汇总类型', prop: 'stockTypes', type: 'checkbox', rules: [{ required: true, message: '请输入库存汇总类型', trigger: 'change' }], dicData: [{ value: 'AVAILABLE', label: '可用' }, { value: 'TRANSIT', label: '在途' }, { value: 'TRUE', label: '实际' }] },
               { label: '操作类型', prop: 'operType', hide: true },
               { label: '描述', prop: 'description', rules: [{ required: true, message: '请输入规则描述', trigger: 'change' }] },
               { label: '是否启用', prop: 'enable', type: 'select', rules: [{ required: true, message: '请选择是否启用', trigger: 'change' }], dicData: [{ value: true, label: '启用' }, { value: false, label: '禁用' }] }
