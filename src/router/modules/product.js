@@ -26,7 +26,7 @@ const productRouter = {
     },
     {
       path: 'pull-product-log/list',
-      component: () => import('@/views/product/ProductPullLog'),
+      component: () => import('@/views/product/product-pull-log'),
       name: 'ProductPullLog',
       meta: { title: '执行记录' }
     },
