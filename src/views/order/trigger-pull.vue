@@ -26,7 +26,7 @@ export default {
         labelWidth: '38%',
         labelPosition: 'right',
         column: [
-          { label: '内部平台编码', prop: 'platformCode', rules: [{ required: true, message: '内部平台编码不能为空', trigger: 'blur' }] },
+          { label: '平台编码', prop: 'platformCode', rules: [{ required: true, message: '内部平台编码不能为空', trigger: 'blur' }] },
           { label: '账号ID', prop: 'accountId', rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
           { label: '开始时间', prop: 'queryBeginTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss', rules: [{ required: true, message: '处理起始时间不能为空', trigger: 'blur' }] },
           { label: '结束时间', prop: 'queryEndTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss', rules: [{ required: true, message: '处理结束时间不能为空', trigger: 'blur' }] },

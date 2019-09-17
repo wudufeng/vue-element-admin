@@ -16,7 +16,8 @@
       @current-change="handleCurrentChange"
     >
       <template slot="menu" slot-scope="scope">
-        <el-button icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row)">重试</el-button>
+        <el-button v-if="scope.row.executionStatus === 1" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row)">执行</el-button>
+        <el-button v-if="scope.row.executionStatus === 4 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row)">重试</el-button>
       </template>
     </avue-crud>/
   </div>
@@ -50,23 +51,25 @@ export default {
         border: true,
         searchResetBtn: false,
         viewBtn: true,
-        delBtn: true,
-        updateBtnTitle: '重试',
+        delBtn: false,
+        addBtn: false,
+        editBtn: false,
         index: true,
         headerAlign: 'center',
         align: 'center',
+        menuWidth: 140,
         labelWidth: '42%',
         dialogType: 'drawer',
         indexLabel: '序号',
         column: [
           { label: '执行编号', prop: 'executionId', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '执行编号不能为空', trigger: 'blur' }] },
-          { label: '内部平台编码', prop: 'platformCode', rules: [{ required: true, message: '内部平台编码不能为空', trigger: 'blur' }] },
-          { label: '账号ID', prop: 'accountId', rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
+          { label: '平台编码', prop: 'platformCode', type: 'select', search: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }] },
+          { label: '账号ID', prop: 'accountId', width: 80, search: true, rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
           { label: '处理起始时间', prop: 'queryBeginTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss', rules: [{ required: true, message: '处理起始时间不能为空', trigger: 'blur' }] },
           { label: '处理结束时间', prop: 'queryEndTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss', rules: [{ required: true, message: '处理结束时间不能为空', trigger: 'blur' }] },
           { label: '执行状态', prop: 'executionStatus', rules: [{ required: true, message: '执行状态不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '待处理' }, { value: 2, label: '处理中' }, { value: 3, label: '处理成功' }, { value: 4, label: '处理失败' }] },
-          { label: '处理数据数量', prop: 'dataRecord', rules: [{ required: true, message: '处理数据数量不能为空', trigger: 'blur' }] },
-          { label: '重试次数', prop: 'retryCount', rules: [{ required: true, message: '重试次数不能为空', trigger: 'blur' }] },
+          { label: '处理数据数量', prop: 'dataRecord', width: 80, rules: [{ required: true, message: '处理数据数量不能为空', trigger: 'blur' }] },
+          { label: '重试次数', prop: 'retryCount', width: 80, rules: [{ required: true, message: '重试次数不能为空', trigger: 'blur' }] },
           { label: '响应消息', prop: 'message', rules: [{ required: true, message: '响应消息不能为空', trigger: 'blur' }] },
           { label: '创建时间', prop: 'createTime', addDisplay: false, addDisabled: true, editDisabled: true, rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] },
           { label: '修改时间', prop: 'updateTime', addDisplay: false, addDisabled: true, editDisabled: true, rules: [{ required: true, message: '修改时间不能为空', trigger: 'blur' }] }
