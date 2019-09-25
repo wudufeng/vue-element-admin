@@ -19,7 +19,7 @@
         <el-button v-if="scope.row.executionStatus === 1" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row)">执行</el-button>
         <el-button v-if="scope.row.executionStatus === 4 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row)">重试</el-button>
       </template>
-    </avue-crud>/
+    </avue-crud>
   </div>
 </template>
 
@@ -82,11 +82,13 @@ export default {
   },
   methods: {
     handleGetList() {
+      this.loading = true
       this.query.current = this.page.currentPage
       this.query.size = this.page.pageSize
       getList(this.routerVal, this.query).then(res => {
         this.datas = res.body.data
         this.page.total = res.body.totalRecord
+        this.loading = false
       })
     },
     handleSearch(params) {

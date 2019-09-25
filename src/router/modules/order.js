@@ -13,22 +13,22 @@ const orderRouter = {
   },
   children: [
     {
-      path: '/sale/app/order/order-info',
-      component: () => import('@/views/order/order-info'),
-      name: 'OrderInfo',
-      meta: { title: '订单信息', icon: 'list' }
-    },
-    {
       path: '/sale/app/order/pull',
       component: () => import('@/views/order/trigger-pull'),
       name: 'OrderPullTrigger',
-      meta: { title: '触发任务', icon: 'list' }
+      meta: { title: '触发拉单', icon: 'list' }
     },
     {
       path: '/sale/app/order/order-pull-log',
       component: () => import('@/views/order/order-pull-log'),
       name: 'OrderPullLog',
-      meta: { title: '执行记录', icon: 'list' }
+      meta: { title: '拉单记录', icon: 'list' }
+    },
+    {
+      path: '/sale/app/order/order-info',
+      component: () => import('@/views/order/order-info'),
+      name: 'OrderInfo',
+      meta: { title: '原始订单', icon: 'list' }
     }
   ]
 }

@@ -63,8 +63,8 @@ export default {
         column: [
           { label: '订单ID', prop: 'id', viewDisplay: false, addDisplay: false, addDisabled: true, editDisabled: true, hide: true },
           { label: '平台编码', prop: 'platformCode', viewDisplay: false, type: 'select', search: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }] },
-          { label: '账号ID', prop: 'accountId', viewDisplay: false, width: 80 },
-          { label: '平台订单编号', prop: 'platformOrderId', viewDisplay: false },
+          { label: '账号ID', prop: 'accountId', search: true, viewDisplay: false, width: 80 },
+          { label: '平台订单编号', prop: 'platformOrderId', search: true, viewDisplay: false },
           { label: '平台订单状态', prop: 'platformOrderStatus', viewDisplay: false },
           { label: '平台订单支付时间', prop: 'platformOrderPaymentTime', viewDisplay: false },
           { label: '平台订单创建时间', prop: 'platformOrderCreateTime', viewDisplay: false },
