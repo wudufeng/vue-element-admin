@@ -3,9 +3,9 @@
 import Layout from '@/layout'
 
 const orderRouter = {
-  path: '/order',
+  path: '/sale/app/order/',
   component: Layout,
-  redirect: '/sale/app/order/order-pull-log',
+  redirect: '',
   name: 'orderManage',
   meta: {
     title: '拉单管理',
@@ -13,19 +13,19 @@ const orderRouter = {
   },
   children: [
     {
-      path: '/sale/app/order/pull',
+      path: 'pull',
       component: () => import('@/views/order/trigger-pull'),
       name: 'OrderPullTrigger',
       meta: { title: '触发拉单', icon: 'list' }
     },
     {
-      path: '/sale/app/order/order-pull-log',
+      path: 'pull-log',
       component: () => import('@/views/order/order-pull-log'),
       name: 'OrderPullLog',
       meta: { title: '拉单记录', icon: 'list' }
     },
     {
-      path: '/sale/app/order/order-info',
+      path: '',
       component: () => import('@/views/order/order-info'),
       name: 'OrderInfo',
       meta: { title: '原始订单', icon: 'list' }

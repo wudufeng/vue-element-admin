@@ -17,12 +17,16 @@
           <json-editor ref="jsonEditor" :value="data.originData" />
         </div>
       </template>
+      <template slot="menu" slot-scope="scope">
+        <el-button icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retryPullOrder(scope.row)">刷新</el-button>
+        <el-button v-if="scope.row.processStatus==='PULL'" icon="el-icon-message" class="el-button el-button--text el-button--small" @click="transferOrder(scope.row)">推送</el-button>
+      </template>
     </avue-crud>
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/crud'
+import { getList, get } from '@/api/crud'
 import JsonEditor from '@/components/JsonEditor'
 
 export default {
@@ -56,7 +60,7 @@ export default {
         index: true,
         headerAlign: 'center',
         align: 'center',
-        menuWidth: 120,
+        menuWidth: 180,
         labelWidth: '42%',
         dialogType: 'drawer',
         indexLabel: '序号',
@@ -69,6 +73,8 @@ export default {
           { label: '平台订单支付时间', prop: 'platformOrderPaymentTime', viewDisplay: false },
           { label: '平台订单创建时间', prop: 'platformOrderCreateTime', viewDisplay: false },
           { label: '平台订单修改时间', prop: 'platformOrderUpdateTime', viewDisplay: false },
+          { label: '处理状态', prop: 'processStatus', viewDisplay: false, width: 100 },
+          { label: '处理信息', prop: 'processMessage', viewDisplay: false },
           { label: '创建时间', prop: 'createTime', viewDisplay: false },
           { label: '修改时间', prop: 'updateTime', viewDisplay: false },
           { label: '', prop: 'originData', labelWidth: '5%', hide: true, formslot: true, span: 24 }
@@ -84,10 +90,12 @@ export default {
       this.loading = true
       this.query.current = this.page.currentPage
       this.query.size = this.page.pageSize
-      getList(this.routerVal, this.query).then(res => {
+      getList(this.routerVal + '/info', this.query).then(res => {
         this.datas = res.body.data
         for (var i = 0; i < this.datas.length; i++) {
-          this.datas[i].originData = JSON.parse(this.datas[i].originData)
+          if (this.datas[i].originData !== undefined && this.datas[i].originData !== null && this.datas[i].originData !== '') {
+            this.datas[i].originData = JSON.parse(this.datas[i].originData)
+          }
         }
         this.page.total = res.body.totalRecord
         this.loading = false
@@ -105,6 +113,36 @@ export default {
     handleSizeChange(pageSize) {
       this.page.pageSize = pageSize
       this.handleGetList()
+    },
+    retryPullOrder(row) {
+      const data = {
+        platformCode: row.platformCode,
+        accountId: row.accountId,
+        platformOrderId: row.platformOrderId
+      }
+      get(this.routerVal + '/pull/detail', data).then(() => {
+        this.$notify({
+          title: 'Success',
+          message: '刷新成功!',
+          type: 'success'
+        })
+        this.handleGetList
+      })
+    },
+    transferOrder(row) {
+      const data = {
+        platformCode: row.platformCode,
+        accountId: row.accountId,
+        platformOrderId: row.platformOrderId
+      }
+      get(this.routerVal + '/transfer', data).then(() => {
+        this.$notify({
+          title: 'Success',
+          message: '推送订单成功!',
+          type: 'success'
+        })
+        this.handleGetList
+      })
     }
   }
 }

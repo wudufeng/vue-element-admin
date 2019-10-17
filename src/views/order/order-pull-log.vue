@@ -67,7 +67,7 @@ export default {
           { label: '账号ID', prop: 'accountId', width: 80, search: true, rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
           { label: '处理起始时间', prop: 'queryBeginTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss', rules: [{ required: true, message: '处理起始时间不能为空', trigger: 'blur' }] },
           { label: '处理结束时间', prop: 'queryEndTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss', rules: [{ required: true, message: '处理结束时间不能为空', trigger: 'blur' }] },
-          { label: '执行状态', prop: 'executionStatus', rules: [{ required: true, message: '执行状态不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '待处理' }, { value: 2, label: '处理中' }, { value: 3, label: '处理成功' }, { value: 4, label: '处理失败' }] },
+          { label: '执行状态', prop: 'executionStatus', search: true, rules: [{ required: true, message: '执行状态不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '待处理' }, { value: 2, label: '处理中' }, { value: 3, label: '处理成功' }, { value: 4, label: '处理失败' }] },
           { label: '处理数据数量', prop: 'dataRecord', width: 80, rules: [{ required: true, message: '处理数据数量不能为空', trigger: 'blur' }] },
           { label: '重试次数', prop: 'retryCount', width: 80, rules: [{ required: true, message: '重试次数不能为空', trigger: 'blur' }] },
           { label: '响应消息', prop: 'message', rules: [{ required: true, message: '响应消息不能为空', trigger: 'blur' }] },

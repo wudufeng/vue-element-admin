@@ -104,9 +104,11 @@ export default {
       }
       this.query.current = this.page.currentPage
       this.query.size = this.page.pageSize
+      this.loading = true
       getList('/sales/stock/operate-log', this.query).then(res => {
         this.datas = res.body.data
         this.page.total = res.body.totalRecord
+        this.loading = false
       })
     },
     handleSearch(params) {
