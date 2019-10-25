@@ -14,7 +14,7 @@ export function fetchList(data) {
 export function pullProduct(data) {
   return request({
     url: '/sale/app/product/pullList',
-    method: 'get',
+    method: 'post',
     params: data
   })
 }

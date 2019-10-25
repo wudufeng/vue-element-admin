@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { getList, getDetail, add, update, remove } from '@/api/crud'
+import { getList, get, add, update, remove } from '@/api/crud'
 
 export default {
   name: 'OrderPullLog',
@@ -68,11 +68,12 @@ export default {
           { label: '处理起始时间', prop: 'queryBeginTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss', rules: [{ required: true, message: '处理起始时间不能为空', trigger: 'blur' }] },
           { label: '处理结束时间', prop: 'queryEndTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss', rules: [{ required: true, message: '处理结束时间不能为空', trigger: 'blur' }] },
           { label: '执行状态', prop: 'executionStatus', search: true, rules: [{ required: true, message: '执行状态不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '待处理' }, { value: 2, label: '处理中' }, { value: 3, label: '处理成功' }, { value: 4, label: '处理失败' }] },
-          { label: '处理数据数量', prop: 'dataRecord', width: 80, rules: [{ required: true, message: '处理数据数量不能为空', trigger: 'blur' }] },
+          { label: '处理数据数量', prop: 'dataRecord', width: 80, search: true },
           { label: '重试次数', prop: 'retryCount', width: 80, rules: [{ required: true, message: '重试次数不能为空', trigger: 'blur' }] },
           { label: '响应消息', prop: 'message', rules: [{ required: true, message: '响应消息不能为空', trigger: 'blur' }] },
           { label: '创建时间', prop: 'createTime', addDisplay: false, addDisabled: true, editDisabled: true, rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] },
-          { label: '修改时间', prop: 'updateTime', addDisplay: false, addDisabled: true, editDisabled: true, rules: [{ required: true, message: '修改时间不能为空', trigger: 'blur' }] }
+          { label: '修改时间', prop: 'updateTime', addDisplay: false, addDisabled: true, editDisabled: true, rules: [{ required: true, message: '修改时间不能为空', trigger: 'blur' }] },
+          { label: '请求参数', prop: 'extraJSON', hide: true, span: 24 }
         ]
       }
     }
@@ -150,7 +151,7 @@ export default {
         })
     },
     retry(row) {
-      getDetail('/sale/app/order/pull', row.executionId).then(() => {
+      get('/sale/app/order/pull/retry?executionId=' + row.executionId).then(() => {
         this.$notify({
           title: 'Success',
           message: '处理成功!',

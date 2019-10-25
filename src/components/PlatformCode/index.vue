@@ -27,7 +27,9 @@ export default {
         { label: 'WISH', value: 'KF' },
         { label: 'LAZADA', value: 'LAZADA' },
         { label: 'MYMALL', value: 'MY' },
-        { label: 'SHOPEE', value: 'SHOPEE' }
+        { label: 'SHOPEE', value: 'SHOPEE' },
+        { label: 'RAKUTEN', value: 'rakuten' },
+        { label: 'MEESHO', value: 'Meesho' }
       ]
     }
   },

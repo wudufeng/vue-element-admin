@@ -26,9 +26,15 @@ const orderRouter = {
     },
     {
       path: '',
-      component: () => import('@/views/order/order-info'),
-      name: 'OrderInfo',
+      component: () => import('@/views/order/origin-order'),
+      name: 'OriginOrder',
       meta: { title: '原始订单', icon: 'list' }
+    },
+    {
+      path: 'transfer',
+      component: () => import('@/views/order/transfer-order'),
+      name: 'TransferOrder',
+      meta: { title: '转换订单', icon: 'list' }
     }
   ]
 }

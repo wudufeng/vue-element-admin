@@ -281,15 +281,14 @@ export default {
         index: true,
         headerAlign: 'center',
         align: 'center',
-        labelWidth: '42%',
+        labelWidth: '142',
         menuWidth: '140',
         dialogType: 'drawer',
         indexLabel: '序号',
         column: [
           { label: '执行编号', prop: 'executionId', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '执行编号不能为空', trigger: 'blur' }] },
-          { label: '平台编码', prop: 'platformCode', type: 'select', width: 120, search: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }] },
+          { label: '平台编码', prop: 'platformCode', type: 'select', width: 120, search: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'MEESHO', value: 'Meesho' }] },
           { label: '账号ID', prop: 'accountId', search: true, width: 80, rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
-          { label: '商品状态', prop: 'productStatus', hide: true, dicData: [{ value: 0, label: '所有' }, { value: 1, label: '在售中' }, { value: 2, label: '已下架' }, { value: 3, label: '已删除' }] },
           { label: '处理起始时间', prop: 'queryBeginTime', rules: [{ required: true, message: '处理起始时间不能为空', trigger: 'blur' }] },
           { label: '处理结束时间', prop: 'queryEndTime', rules: [{ required: true, message: '处理结束时间不能为空', trigger: 'blur' }] },
           { label: '执行状态', prop: 'executionStatus', width: 100, type: 'select', search: true, dicData: [{ value: 1, label: '待处理' }, { value: 2, label: '处理中' }, { value: 3, label: '处理成功' }, { value: 4, label: '处理失败' }] },
@@ -297,7 +296,8 @@ export default {
           { label: '重试次数', prop: 'retryCount', width: 80, rules: [{ required: true, message: '重试次数不能为空', trigger: 'blur' }] },
           { label: '异常消息', prop: 'message', rules: [{ required: true, message: '响应消息不能为空', trigger: 'blur' }] },
           { label: '创建时间', prop: 'createTime', rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] },
-          { label: '修改时间', prop: 'updateTime', rules: [{ required: true, message: '修改时间不能为空', trigger: 'blur' }] }
+          { label: '修改时间', prop: 'updateTime', rules: [{ required: true, message: '修改时间不能为空', trigger: 'blur' }] },
+          { label: '请求参数', prop: 'extraJSON', hide: true, span: 24 }
         ]
       }
     }

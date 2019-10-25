@@ -19,7 +19,7 @@
       </template>
       <template slot="menu" slot-scope="scope">
         <el-button icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retryPullOrder(scope.row)">刷新</el-button>
-        <el-button v-if="scope.row.processStatus==='PULL'" icon="el-icon-message" class="el-button el-button--text el-button--small" @click="transferOrder(scope.row)">推送</el-button>
+        <el-button v-if="scope.row.processStatus==='PULL'" icon="el-icon-message" class="el-button el-button--text el-button--small" @click="transferOrder(scope.row)">转换</el-button>
       </template>
     </avue-crud>
   </div>
@@ -30,7 +30,7 @@ import { getList, get } from '@/api/crud'
 import JsonEditor from '@/components/JsonEditor'
 
 export default {
-  name: 'OrderInfo',
+  name: 'OriginOrder',
   components: { JsonEditor },
   props: {
   },
@@ -66,14 +66,14 @@ export default {
         indexLabel: '序号',
         column: [
           { label: '订单ID', prop: 'id', viewDisplay: false, addDisplay: false, addDisabled: true, editDisabled: true, hide: true },
-          { label: '平台编码', prop: 'platformCode', viewDisplay: false, type: 'select', search: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }] },
+          { label: '平台编码', prop: 'platformCode', viewDisplay: false, type: 'select', search: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }] },
           { label: '账号ID', prop: 'accountId', search: true, viewDisplay: false, width: 80 },
           { label: '平台订单编号', prop: 'platformOrderId', search: true, viewDisplay: false },
           { label: '平台订单状态', prop: 'platformOrderStatus', viewDisplay: false },
-          { label: '平台订单支付时间', prop: 'platformOrderPaymentTime', viewDisplay: false },
           { label: '平台订单创建时间', prop: 'platformOrderCreateTime', viewDisplay: false },
+          { label: '平台订单支付时间', prop: 'platformOrderPaymentTime', viewDisplay: false },
           { label: '平台订单修改时间', prop: 'platformOrderUpdateTime', viewDisplay: false },
-          { label: '处理状态', prop: 'processStatus', viewDisplay: false, width: 100 },
+          { label: '处理状态', prop: 'processStatus', viewDisplay: false, width: 100, type: 'select', dicData: [{ label: '拉单处理中', value: 'INIT' }, { label: '未转换', value: 'PULL' }, { label: '已转换', value: 'TRANSFORM' }, { label: '已取消', value: 'CANCELED' }] },
           { label: '处理信息', prop: 'processMessage', viewDisplay: false },
           { label: '创建时间', prop: 'createTime', viewDisplay: false },
           { label: '修改时间', prop: 'updateTime', viewDisplay: false },
@@ -90,7 +90,7 @@ export default {
       this.loading = true
       this.query.current = this.page.currentPage
       this.query.size = this.page.pageSize
-      getList(this.routerVal + '/info', this.query).then(res => {
+      getList(this.routerVal + '/origin', this.query).then(res => {
         this.datas = res.body.data
         for (var i = 0; i < this.datas.length; i++) {
           if (this.datas[i].originData !== undefined && this.datas[i].originData !== null && this.datas[i].originData !== '') {
@@ -138,7 +138,7 @@ export default {
       get(this.routerVal + '/transfer', data).then(() => {
         this.$notify({
           title: 'Success',
-          message: '推送订单成功!',
+          message: '转换订单成功!',
           type: 'success'
         })
         this.handleGetList

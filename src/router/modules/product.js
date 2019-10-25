@@ -19,7 +19,7 @@ const productRouter = {
       meta: { title: '商品列表' }
     },
     {
-      path: 'pull',
+      path: '/sale/app/product/pull',
       component: () => import('@/views/product/pull-product'),
       name: 'PullProductTrigger',
       meta: { title: ' 拉取商品' }
