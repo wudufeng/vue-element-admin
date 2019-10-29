@@ -4,12 +4,12 @@
     <el-form ref="triggerForm" :model="triggerForm" :rules="rules" class="form-container">
       <div class="main-container">
         <el-row>
-          <el-col :span="10">
+          <el-col :span="12">
             <el-form-item label="平台编码:" prop="platform" class="trigger-container-item">
               <PlatformCode v-model="triggerForm.platform" @change="getRuleConfigList" />
             </el-form-item>
           </el-col>
-          <el-col :span="10">
+          <el-col :span="12">
             <el-form-item label="规则类型:" prop="ruleType">
               <el-select v-model="triggerForm.ruleType" placeholder="Please select" default-first-option class="filter-item">
                 <el-option label="AUTO" value="AUTO" />
@@ -19,16 +19,21 @@
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="20">
+          <el-col :span="12">
             <el-form-item label="执行规则:" class="postInfo-container-item" prop="ruleConfigId">
               <el-select v-model="triggerForm.ruleConfigId" clearable placeholder="Search rule">
                 <el-option v-for="(item) in ruleConfigListOptions" :key="item.id" :label="item.id + '-' + item.description" :value="item.id" />
               </el-select>
             </el-form-item>
           </el-col>
+          <el-col :span="12">
+            <el-form-item label="账号:" class="postInfo-container-item" prop="accountId">
+              <el-input v-model="triggerForm.accountId" clearable placeholder="请输入账号" style="width: 240px" />
+            </el-form-item>
+          </el-col>
         </el-row>
         <el-row align="center">
-          <el-col :span="20">
+          <el-col :span="24">
             <el-form-item style="margin-bottom: 40px;" prop="sku">
               <MDinput v-model.trim="triggerForm.sku" name="name" required>
                 SKU

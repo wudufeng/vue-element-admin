@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { getList, get } from '@/api/crud'
+import { getList, get, add } from '@/api/crud'
 import JsonEditor from '@/components/JsonEditor'
 
 export default {
@@ -120,7 +120,7 @@ export default {
         accountId: row.accountId,
         platformOrderId: row.platformOrderId
       }
-      get(this.routerVal + '/pull/detail', data).then(() => {
+      add(this.routerVal + '/pull/detail', data).then(() => {
         this.$notify({
           title: 'Success',
           message: '刷新成功!',
