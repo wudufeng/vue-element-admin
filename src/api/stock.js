@@ -43,11 +43,24 @@ export function updateRuleConfig(data) {
   })
 }
 
-export function operateStock(query) {
+export function operateStock(data) {
   return request({
     url: '/sales/stock/batch/operate',
     method: 'post',
-    params: query
+    transformRequest: [function(data) {
+      let ret = ''
+      for (const it in data) {
+        const key = encodeURIComponent(it)
+        if (key.slice(0, 1) !== '$') {
+          ret += key + '=' + encodeURIComponent(data[it]) + '&'
+        }
+      }
+      return ret
+    }],
+    data: data,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
   })
 }
 

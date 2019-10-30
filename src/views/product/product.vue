@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     rowStyle({ row, column, rowIndex }) {
-      if (row.parentProductId === '0') {
+      if (row.parentProductId === row.productId) {
         return {
           backgroundColor: '#fdf5e6'
         }
