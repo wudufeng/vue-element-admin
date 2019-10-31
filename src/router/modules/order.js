@@ -35,6 +35,12 @@ const orderRouter = {
       component: () => import('@/views/order/transfer-order'),
       name: 'TransferOrder',
       meta: { title: '转换订单', icon: 'list' }
+    },
+    {
+      path: 'cancel',
+      component: () => import('@/views/order/cancel-order'),
+      name: 'TransferOrder',
+      meta: { title: '取消订单', icon: 'list' }
     }
   ]
 }

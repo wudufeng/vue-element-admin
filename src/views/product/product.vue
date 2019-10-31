@@ -21,7 +21,7 @@
         <el-button size="small" icon="el-icon-refresh" @click="reloadData(null)">拉取</el-button>
       </template>
       <template slot="menu" slot-scope="scope">
-        <el-button v-if="scope.row.parentProductId === '0'" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="reloadData(scope.row)">刷新</el-button>
+        <el-button v-if="scope.row.parentProductId === scope.row.productId" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="reloadData(scope.row)">刷新</el-button>
       </template>
       <template slot="menuForm">
         <router-link :to="'/product/extension/'+data.platformCode+'/'+(data.parentProductId == 0 ? data.productId : data.parentProductId)">
