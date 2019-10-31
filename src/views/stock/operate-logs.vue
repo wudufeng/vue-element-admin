@@ -68,7 +68,7 @@ export default {
         indexLabel: '序号',
         column: [
           { label: '主键', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
-          { label: '平台', prop: 'platformCode', type: 'select', search: { searchDefault: 'ALI' }, hide: true, rules: [{ required: true, message: '平台CODE不能为空', trigger: 'blur' }], dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }] },
+          { label: '平台', prop: 'platformCode', type: 'select', search: { searchDefault: 'ALI' }, hide: true, rules: [{ required: true, message: '平台CODE不能为空', trigger: 'blur' }], dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'MEESHO', value: 'Meesho' }, { label: 'RAKUTEN', value: 'rakuten' }] },
           { label: '站点ID', prop: 'siteId', hide: true, rules: [{ required: true, message: '站点ID不能为空', trigger: 'blur' }] },
           { label: '账号ID', prop: 'accountId', search: true, rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
           { label: '内部listing ID', prop: 'productId', hide: true, rules: [{ required: true, message: '内部listing ID不能为空', trigger: 'blur' }] },
