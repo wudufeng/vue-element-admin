@@ -10,6 +10,7 @@ import Layout from '@/layout'
 import productRouter from './modules/product'
 import stockRouter from './modules/stock'
 import orderRouter from './modules/order'
+import marketingRouter from './modules/marketing'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -116,6 +117,7 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  marketingRouter,
   productRouter,
   stockRouter,
   orderRouter,
