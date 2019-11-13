@@ -73,7 +73,7 @@ export default {
           { label: '平台订单创建时间', prop: 'platformOrderCreateTime', viewDisplay: false },
           { label: '平台订单支付时间', prop: 'platformOrderPaymentTime', viewDisplay: false },
           { label: '平台订单修改时间', prop: 'platformOrderUpdateTime', viewDisplay: false },
-          { label: '处理状态', prop: 'processStatus', viewDisplay: false, width: 100, type: 'select', dicData: [{ label: '拉单处理中', value: 'INIT' }, { label: '未转换', value: 'PULL' }, { label: '已转换', value: 'TRANSFORM' }, { label: '已取消', value: 'CANCELED' }] },
+          { label: '处理状态', prop: 'processStatus', search: true, viewDisplay: false, width: 100, type: 'select', dicData: [{ label: '拉单处理中', value: 'INIT' }, { label: '未转换', value: 'PULL' }, { label: '已转换', value: 'TRANSFORM' }, { label: '已取消', value: 'CANCELED' }] },
           { label: '处理信息', prop: 'processMessage', viewDisplay: false },
           { label: '创建时间', prop: 'createTime', viewDisplay: false },
           { label: '修改时间', prop: 'updateTime', viewDisplay: false },
