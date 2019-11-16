@@ -39,14 +39,14 @@ const orderRouter = {
     {
       path: 'transfer/detail',
       component: () => import('@/views/order/transfer-order-detail'),
-      name: 'TransferOrder',
+      name: 'TransferOrderDetail',
       meta: { title: '订单明细', icon: 'list' },
       hidden: true
     },
     {
       path: 'transfer/exception',
       component: () => import('@/views/order/transfer-order-exception'),
-      name: 'TransferOrder',
+      name: 'TransferOrderException',
       meta: { title: '异常信息', icon: 'list' },
       hidden: true
     },

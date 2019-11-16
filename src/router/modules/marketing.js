@@ -21,7 +21,7 @@ const marketingRouter = {
     {
       path: 'platform-sku-map',
       component: () => import('@/views/marketing/platform-sku-map'),
-      name: 'GiftRelation',
+      name: 'PlatformSkuMap',
       meta: { title: '销售SKU映射', icon: 'list' }
     }
   ]
