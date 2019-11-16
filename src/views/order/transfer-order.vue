@@ -11,6 +11,7 @@
       @refresh-change="handleGetList"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
+      @cell-dblclick="handleCellDblclick"
     >
       <template slot="menu" slot-scope="scope">
         <el-button v-if="scope.row.syncOmsStatus===0 || scope.row.syncOmsStatus===2" icon="el-icon-message" class="el-button el-button--text el-button--small" @click="syncOrder(scope.row)">同步</el-button>
@@ -31,6 +32,8 @@ export default {
     return {
       routerVal: '',
       data: {},
+      detailData: {},
+      exceptionData: {},
       loading: false,
       query: {
         current: 1,
@@ -147,6 +150,13 @@ export default {
         })
         this.handleGetList
       })
+    },
+    handleCellDblclick(row, column, cell, event) {
+      if (column.property === 'orderNo') {
+        this.$router.push(this.routerVal + '/detail')
+      } else if (column.property === 'orderStatus' && row.orderStatus === 4) {
+        this.$router.push(this.routerVal + '/exception')
+      }
     }
   }
 }

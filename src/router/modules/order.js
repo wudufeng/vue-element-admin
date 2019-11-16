@@ -37,6 +37,20 @@ const orderRouter = {
       meta: { title: '转换订单', icon: 'list' }
     },
     {
+      path: 'transfer/detail',
+      component: () => import('@/views/order/transfer-order-detail'),
+      name: 'TransferOrder',
+      meta: { title: '订单明细', icon: 'list' },
+      hidden: true
+    },
+    {
+      path: 'transfer/exception',
+      component: () => import('@/views/order/transfer-order-exception'),
+      name: 'TransferOrder',
+      meta: { title: '异常信息', icon: 'list' },
+      hidden: true
+    },
+    {
       path: 'cancel',
       component: () => import('@/views/order/cancel-order'),
       name: 'TransferOrder',
