@@ -97,7 +97,7 @@ export default {
           { label: '平台订单修改时间(转北京时间)', prop: 'platformUpdateTimePek', hide: true },
           { label: '是否锁定', prop: 'isLock', type: 'select', dicData: [{ value: 0, label: '否' }, { value: 1, label: '是' }] },
           { label: '是否海外物流', prop: 'isAss', type: 'select', dicData: [{ value: 0, label: '本地发货' }, { value: 1, label: '海外发货' }] },
-          { label: '同步oms状态', prop: 'syncOmsStatus', type: 'select', search: true, dicData: [{ value: 0, label: '未处理' }, { value: 1, label: '同步成功' }, { value: 2, label: '同步失败' }, { value: 2, label: '已取消' }] },
+          { label: '同步oms状态', prop: 'syncOmsStatus', type: 'select', search: true, dicData: [{ value: 0, label: '未处理' }, { value: 1, label: '同步成功' }, { value: 2, label: '同步失败' }, { value: 9, label: '已取消' }] },
           { label: '同步oms时间', prop: 'syncOmsTime', rules: [{ required: true, message: '同步oms时间不能为空', trigger: 'blur' }] },
           { label: '同步oms错误信息', prop: 'syncOmsError', rules: [{ required: true, message: '同步oms错误信息不能为空', trigger: 'blur' }] },
           { label: '订单拉取时间', prop: 'orderPullTime', rules: [{ required: true, message: '订单拉取时间不能为空', trigger: 'blur' }] },

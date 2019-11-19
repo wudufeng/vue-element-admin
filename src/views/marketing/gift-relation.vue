@@ -46,7 +46,7 @@ export default {
         border: true,
         searchResetBtn: false,
         viewBtn: true,
-        delBtn: true,
+        delBtn: false,
         index: true,
         headerAlign: 'center',
         align: 'center',
