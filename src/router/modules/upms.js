@@ -25,6 +25,18 @@ const upmsRouter = {
       meta: { title: '组织架构', icon: 'list' }
     },
     {
+      path: 'menu',
+      component: () => import('@/views/upms/menu'),
+      name: 'Menu',
+      meta: { title: '菜单管理', icon: 'list' }
+    },
+    {
+      path: 'role',
+      component: () => import('@/views/upms/role'),
+      name: 'Role',
+      meta: { title: '角色管理', icon: 'list' }
+    },
+    {
       path: 'user-info',
       component: () => import('@/views/upms/userinfo'),
       name: 'UserInfo',

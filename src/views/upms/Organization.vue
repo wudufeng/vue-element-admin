@@ -10,11 +10,11 @@
         </div>
       </el-header>
       <el-container>
-        <el-aside align="center" style="background-color: #ffffff">
+        <el-aside align="center" style="background-color: #ffffff; width: 318px">
           <el-button-group>
-            <el-button type="info" size="small" icon="el-icon-plus" @click="handleAction('add')">新增</el-button>
-            <el-button type="info" size="small" icon="el-icon-edit" @click="handleAction('update')">编辑</el-button>
-            <el-button type="info" size="small" icon="el-icon-delete" @click="remove">删除</el-button>
+            <el-button type="info" size="medium" icon="el-icon-plus" @click="handleAction('add')">新增</el-button>
+            <el-button type="info" size="medium" icon="el-icon-edit" @click="handleAction('update')">编辑</el-button>
+            <el-button type="info" size="medium" icon="el-icon-delete" @click="remove">删除</el-button>
           </el-button-group>
           <el-input
             v-model="filterText"
@@ -35,7 +35,7 @@
         </el-aside>
 
         <el-main>
-          <el-form ref="dataForm" :rules="rules" :model="organizationForm" label-position="right" label-width="42%" style="width: 40%">
+          <el-form ref="dataForm" :rules="rules" :model="organizationForm" label-position="right" label-width="32%" style="width: 40%">
             <el-row>
               <el-col><el-form-item prop="tenantId" label="租户"><el-input v-model="organizationForm.tenantId" readonly :disabled="dialogStatus==='view'" /></el-form-item></el-col>
             </el-row>
