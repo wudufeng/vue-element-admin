@@ -14,8 +14,15 @@ export function fetchList(data) {
 export function pullProduct(data) {
   return request({
     url: '/sale/app/product/pullList',
-    method: 'get',
+    method: 'post',
     params: data
+  })
+}
+
+export function pullRetry(data) {
+  return request({
+    url: '/sale/app/product/pull/' + data,
+    method: 'get'
   })
 }
 
@@ -42,6 +49,17 @@ export function getProductExtension(query) {
 export function getEventLogList(data) {
   return request({
     url: '/sale/app/product/getEventLogPage',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    data
+  })
+}
+
+export function getPullProductLogList(data) {
+  return request({
+    url: '/sale/app/product/getPullProductLogPage',
     method: 'post',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'

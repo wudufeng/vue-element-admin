@@ -39,7 +39,7 @@ module.exports = {
     proxy: {
       // change xxx-api/login => mock/login
       // detail: https://cli.vuejs.org/config/#devserver-proxy
-      '/dev-api/sale/app/product': {
+      '/dev-api/sale/app': {
         target: `http://172.16.6.241:10120`,
         changeOrigin: true,
         pathRewrite: {

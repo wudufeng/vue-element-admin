@@ -8,6 +8,8 @@ import Layout from '@/layout'
 import sequenceRouter from './modules/sequence'
 import productRouter from './modules/product'
 import stockRouter from './modules/stock'
+import orderRouter from './modules/order'
+import marketingRouter from './modules/marketing'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -115,15 +117,17 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   sequenceRouter,
+  marketingRouter,
   productRouter,
   stockRouter,
+  orderRouter,
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
+  mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })

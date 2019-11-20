@@ -30,7 +30,7 @@ export default {
   methods: {
     getDetail() {
       getProductExtension(this.listQuery).then(response => {
-        this.value = JSON.parse(response.body)
+        this.value = response.body.substring(0, 1) === '<' ? response.body : JSON.parse(response.body)
       })
     }
   }
