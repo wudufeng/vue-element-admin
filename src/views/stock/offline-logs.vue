@@ -32,7 +32,7 @@
 import { getList } from '@/api/crud'
 
 export default {
-  name: 'ProductOfflineLog',
+  name: 'OfflineLogs',
   components: { },
   props: {
   },
