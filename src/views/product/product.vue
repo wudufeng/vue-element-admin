@@ -199,7 +199,7 @@ export default {
           message: 'Refresh Successfully',
           type: 'success'
         })
-        this.handleSearch()
+        this.handleSearch(params)
       })
     },
     handleCellDblclick(row, column, cell, event) {
