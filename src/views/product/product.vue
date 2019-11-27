@@ -82,14 +82,14 @@ export default {
           { label: '平台销售sku', prop: 'platformSku', rules: [{ required: true, message: '平台销售sku不能为空', trigger: 'blur' }] },
           { label: '内部分类ID', prop: 'categoryId', hide: true, rules: [{ required: true, message: '内部分类ID不能为空', trigger: 'blur' }] },
           { label: '平台分类ID', prop: 'platformCategoryId', hide: true, rules: [{ required: true, message: '平台分类ID不能为空', trigger: 'blur' }] },
-          { label: '线上库存数', prop: 'quantity', width: 100, rules: [{ required: true, message: '线上库存数不能为空', trigger: 'blur' }] },
-          { label: '价格', prop: 'price', rules: [{ required: true, message: '价格不能为空', trigger: 'blur' }] },
+          { label: '线上库存数', prop: 'quantity', search: true, width: 100, rules: [{ required: true, message: '线上库存数不能为空', trigger: 'blur' }] },
+          { label: '价格', prop: 'price', search: true, rules: [{ required: true, message: '价格不能为空', trigger: 'blur' }] },
           { label: '浏览量', prop: 'pageview', hide: true, rules: [{ required: true, message: '浏览量不能为空', trigger: 'blur' }] },
           { label: '点赞/关注数', prop: 'interest', hide: true, rules: [{ required: true, message: '点赞/关注数不能为空', trigger: 'blur' }] },
           { label: '已售数', prop: 'sold', hide: true, rules: [{ required: true, message: '已售数不能为空', trigger: 'blur' }] },
           { label: '促销/活动ID', prop: 'activityId', hide: true, rules: [{ required: true, message: '促销/活动ID不能为空', trigger: 'blur' }] },
           { label: '多属性', prop: 'variation', hide: true, rules: [{ required: true, message: '请选择是否为多属性', trigger: 'blur' }], type: 'radio', button: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
-          { label: '状态', prop: 'status', width: 80, rules: [{ required: true, message: '产品状态不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '在线' }, { value: 2, label: '下线' }, { value: 3, label: '已删除' }] },
+          { label: '状态', prop: 'status', width: 80, search: true, rules: [{ required: true, message: '产品状态不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '在线' }, { value: 2, label: '下线' }, { value: 3, label: '已删除' }] },
           { label: '产品链接', prop: 'url', hide: true, rules: [{ required: true, message: '产品链接不能为空', trigger: 'blur' }] },
           { label: '商品创建时间', prop: 'productCreateTime', rules: [{ required: true, message: '平台产品创建时间不能为空', trigger: 'blur' }] },
           { label: '商品修改时间', prop: 'productUpdateTime', rules: [{ required: true, message: '平台产品修改时间不能为空', trigger: 'blur' }] },
@@ -115,11 +115,13 @@ export default {
       }
     },
     handleGetList() {
+      this.loading = true
       this.query.current = this.page.currentPage
       this.query.size = this.page.pageSize
       getList(this.routerVal, this.query).then(res => {
         this.datas = res.body.data
         this.page.total = res.body.totalRecord
+        this.loading = false
       })
     },
     handleSearch(params) {
