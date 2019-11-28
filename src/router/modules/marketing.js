@@ -28,7 +28,7 @@ const marketingRouter = {
       path: 'customer-blacklist',
       component: () => import('@/views/marketing/customer-blacklist'),
       name: 'CustomerBlacklist',
-      meta: { title: '黑名单', icon: 'list' }
+      meta: { title: '顾客黑名单', icon: 'list' }
     }
   ]
 }
