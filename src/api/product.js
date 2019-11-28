@@ -38,9 +38,9 @@ export function refreshProduct(data) {
   })
 }
 
-export function getProductExtension(query) {
+export function getProductPayload(query) {
   return request({
-    url: '/sale/app/product/extension',
+    url: '/sale/app/product/payload',
     method: 'get',
     params: query
   })

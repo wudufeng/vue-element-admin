@@ -8,10 +8,10 @@
 
 <script>
 import JsonEditor from '@/components/JsonEditor'
-import { getProductExtension } from '@/api/product'
+import { getProductPayload } from '@/api/product'
 
 export default {
-  name: 'ProductExtension',
+  name: 'ProductPayload',
   components: { JsonEditor },
   data() {
     return {
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     getDetail() {
-      getProductExtension(this.listQuery).then(response => {
+      getProductPayload(this.listQuery).then(response => {
         this.value = response.body.substring(0, 1) === '<' ? response.body : JSON.parse(response.body)
       })
     }

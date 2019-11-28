@@ -24,7 +24,7 @@
         <el-button v-if="scope.row.parentProductId === scope.row.productId" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="reloadData(scope.row)">刷新</el-button>
       </template>
       <template slot="menuForm">
-        <router-link :to="'/product/extension/'+data.platformCode+'/'+(data.parentProductId == 0 ? data.productId : data.parentProductId)">
+        <router-link :to="'/product/payload/'+data.platformCode+'/'+(data.parentProductId == 0 ? data.productId : data.parentProductId)">
           <el-button type="info" icon="el-icon-check" size="small">查看原始报文</el-button>
         </router-link>
       </template>
