@@ -25,17 +25,23 @@ const stockRouter = {
       meta: { title: '触发调整' }
     },
     {
-      path: 'logs',
+      path: 'operate-logs',
       component: () => import('@/views/stock/operate-logs'),
       name: 'OperateLogs',
       meta: { title: '库存日志' }
     },
     {
-      path: 'logs/:platform(\\w+)/:id(\\d+)',
+      path: 'operate-logs/:platform(\\w+)/:id(\\d+)',
       component: () => import('@/views/stock/operate-logs'),
       name: 'OperateLogs+',
       meta: { title: '库存日志', noCache: true, activeMenu: '/stock/trigger' },
       hidden: true
+    },
+    {
+      path: 'offline-log',
+      component: () => import('@/views/stock/offline-logs'),
+      name: 'OfflineLogs',
+      meta: { title: '下架日志' }
     }
   ]
 }

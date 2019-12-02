@@ -8,6 +8,9 @@ import Layout from '@/layout'
 import codegenRouter from './modules/codegen'
 import upmsRouter from './modules/upms'
 import sequenceRouter from './modules/sequence'
+
+/* Router Modules */
+import sysRouter from './modules/sys'
 import productRouter from './modules/product'
 import stockRouter from './modules/stock'
 import orderRouter from './modules/order'
@@ -121,6 +124,7 @@ export const asyncRoutes = [
   upmsRouter,
   codegenRouter,
   sequenceRouter,
+  sysRouter,
   marketingRouter,
   productRouter,
   stockRouter,

@@ -71,6 +71,7 @@ export default {
           { label: '排除条件', prop: 'exclusiveCondition', hide: true },
           { label: '线上库存调整阈值', prop: 'onlineStockCondition', hide: true },
           { label: '设置库存数', prop: 'updateStock', dicData: [{ value: -1, label: '实时库存' }, { value: -2, label: '刊登库存' }] },
+          { label: '是否触发拉取listing', prop: 'triggerListing', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
           { label: '下架/删除', prop: 'offline', type: 'select', dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
           { label: '判断多属性', prop: 'offlineConsiderOtherSku', type: 'select', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
           { label: '判断活动', prop: 'dropActivity', type: 'select', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
