@@ -72,11 +72,11 @@ export default {
         dialogType: 'drawer',
         indexLabel: '序号',
         column: [
-          { label: '内部listing ID', prop: 'productId', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '内部listing ID不能为空', trigger: 'blur' }] },
+          { label: '商品编码', prop: 'productId', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '内部listing ID不能为空', trigger: 'blur' }] },
           { label: '父ID', prop: 'parentProductId', hide: true, rules: [{ required: true, message: '上级product_id(0表示无上级)不能为空', trigger: 'blur' }] },
           { label: '平台', prop: 'platformCode', type: 'select', search: { searchDefault: 'ALI' }, editDisabled: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'MEESHO', value: 'Meesho' }] },
           { label: '账号ID', prop: 'accountId', width: 80, search: true, rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
-          { label: '平台商品编号', prop: 'platformProductId', search: true, rules: [{ required: true, message: '平台listing ID不能为空', trigger: 'blur' }] },
+          { label: '平台商品编码', prop: 'platformProductId', search: true, rules: [{ required: true, message: '平台listing ID不能为空', trigger: 'blur' }] },
           { label: '商品名称', prop: 'name', rules: [{ required: true, message: '产品标题/名称不能为空', trigger: 'blur' }] },
           { label: 'sku', prop: 'sku', search: true, rules: [{ required: true, message: '系统sku不能为空', trigger: 'blur' }] },
           { label: '平台销售sku', prop: 'platformSku', rules: [{ required: true, message: '平台销售sku不能为空', trigger: 'blur' }] },
