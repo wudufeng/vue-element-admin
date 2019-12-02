@@ -43,6 +43,10 @@ export default {
       handler(newVal, oldVal) {
         if (newVal === 'ALI') {
           this.triggerForm.extraJSON = '[{"productStatus":"onSelling"},{"productStatus":"offline"}]'
+        } else if (newVal === 'rakuten') {
+          this.triggerForm.extraJSON = '[{"searchKey":"【"},{"searchKey":"☆"}]'
+        } else if (newVal === 'LAZADA') {
+          this.triggerForm.extraJSON = '[{"filter":"deleted"},{"filter":"all"}]'
         } else {
           this.triggerForm.extraJSON = ''
         }

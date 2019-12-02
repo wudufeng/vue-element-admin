@@ -23,6 +23,12 @@ const marketingRouter = {
       component: () => import('@/views/marketing/platform-sku-map'),
       name: 'PlatformSkuMap',
       meta: { title: '销售SKU映射', icon: 'list' }
+    },
+    {
+      path: 'customer-blacklist',
+      component: () => import('@/views/marketing/customer-blacklist'),
+      name: 'CustomerBlacklist',
+      meta: { title: '顾客黑名单', icon: 'list' }
     }
   ]
 }

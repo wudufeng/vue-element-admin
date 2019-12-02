@@ -37,9 +37,9 @@ const productRouter = {
       meta: { title: ' 变更日志' }
     },
     {
-      path: 'extension/:platform(\\w+)/:productId(\\d+)',
-      component: () => import('@/views/product/product-extension'),
-      name: 'ProductExtension',
+      path: 'payload/:platform(\\w+)/:productId(\\d+)',
+      component: () => import('@/views/product/product-payload'),
+      name: 'ProductPayload',
       meta: { title: '原报文数据', noCache: false, activeMenu: '/sale/app/product' },
       hidden: true
     }

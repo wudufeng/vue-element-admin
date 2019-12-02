@@ -16,17 +16,18 @@
       @current-change="handleCurrentChange"
     >
       <template slot="menu" slot-scope="scope">
-        <el-button v-if="scope.row.cancelOmsOrderStatus===0 || scope.row.cancelOmsOrderStatus===2" icon="el-icon-message" class="el-button el-button--text el-button--small" @click="cancelOrder(scope.row)">取消</el-button>
+        <el-button v-if="scope.row.status === 1 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row)">重发</el-button>
+        <el-button v-if="scope.row.status === 1 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="handleDel(scope.row)">忽略</el-button>
       </template>
     </avue-crud>
   </div>
 </template>
 
 <script>
-import { getList, get, add, update, remove } from '@/api/crud'
+import { getList, add, update, remove } from '@/api/crud'
 
 export default {
-  name: 'TransferOrderCancel',
+  name: 'MessageRecoverer',
   components: { },
   props: {
   },
@@ -50,8 +51,7 @@ export default {
         border: true,
         searchResetBtn: false,
         viewBtn: true,
-        addBtn: false,
-        editBtn: false,
+        editBtn: true,
         delBtn: false,
         index: true,
         headerAlign: 'center',
@@ -61,18 +61,20 @@ export default {
         indexLabel: '序号',
         column: [
           { label: '主键', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
-          { label: '平台代码', prop: 'platformCode', rules: [{ required: true, message: '平台代码不能为空', trigger: 'blur' }] },
-          { label: '账号', prop: 'accountId', search: true, rules: [{ required: true, message: '账号不能为空', trigger: 'blur' }] },
-          { label: '系统订单号', prop: 'orderNo', search: true, rules: [{ required: true, message: 'ueb订单号不能为空', trigger: 'blur' }] },
-          { label: '平台订单号', prop: 'platformOrderId', search: true, rules: [{ required: true, message: '平台订单号不能为空', trigger: 'blur' }] },
-          { label: '平台订单状态', prop: 'platformOrderStatus', rules: [{ required: true, message: '平台订单状态不能为空', trigger: 'blur' }] },
-          { label: '是否部分取消', prop: 'isPartCancel', rules: [{ required: true, message: '是否部分取消:0-全部取消,1-部分取消不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 0, label: '全部取消' }, { value: 1, label: '部分取消' }] },
-          { label: '取消oms订单状态:', prop: 'cancelOmsOrderStatus', search: true, dataType: 'number', rules: [{ required: true, message: '取消oms订单状态:0-默认,1-取消成功,2-取消失败不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 0, label: '默认' }, { value: 1, label: '取消成功' }, { value: 2, label: '取消失败' }] },
-          { label: '取消oms订单时间', prop: 'cancelOmsOrderTime', rules: [{ required: true, message: '取消oms订单时间不能为空', trigger: 'blur' }] },
-          { label: '取消oms订单请求', prop: 'cancelOmsOrderRequest', hide: true, rules: [{ required: true, message: '取消oms订单请求不能为空', trigger: 'blur' }] },
-          { label: '取消oms订单响应', prop: 'cancelOmsOrderResponse', hide: true, rules: [{ required: true, message: '取消oms订单响应不能为空', trigger: 'blur' }] },
-          { label: '同步退款状态', prop: 'syncOmsRefundStatus', rules: [{ required: true, message: '同步退款状态不能为空', trigger: 'blur' }] },
-          { label: '同步退款时间', prop: 'syncOmsRefundTime', rules: [{ required: true, message: '同步退款时间不能为空', trigger: 'blur' }] },
+          { label: '应用名称', prop: 'applicationName', rules: [{ required: true, message: '应用名称不能为空', trigger: 'blur' }] },
+          { label: '虚拟主机', prop: 'virtualHost', hide: true, rules: [{ required: true, message: '虚拟主机不能为空', trigger: 'blur' }] },
+          { label: '交换机', prop: 'exchange', rules: [{ required: true, message: '交换机不能为空', trigger: 'blur' }] },
+          { label: '路由名', prop: 'routingKey', rules: [{ required: true, message: '路由名不能为空', trigger: 'blur' }] },
+          { label: '队列名称', prop: 'consumerQueue', search: true, rules: [{ required: true, message: '队列名称不能为空', trigger: 'blur' }] },
+          { label: '消息编号', prop: 'messageId', hide: true, rules: [{ required: true, message: '消息编号不能为空', trigger: 'blur' }] },
+          { label: '消息内容', prop: 'messageBody', rules: [{ required: true, message: '消息编号不能为空', trigger: 'blur' }] },
+          { label: '异常信息', prop: 'exception', hide: true, rules: [{ required: true, message: '异常信息不能为空', trigger: 'blur' }] },
+          { label: 'TraceId', prop: 'traceId', hide: true, rules: [{ required: true, message: '跟踪号不能为空', trigger: 'blur' }] },
+          { label: 'SpanId', prop: 'spanId', hide: true, rules: [{ required: true, message: '跟踪号不能为空', trigger: 'blur' }] },
+          { label: '异常机器IP', prop: 'ip', rules: [{ required: true, message: '异常机器IP不能为空', trigger: 'blur' }] },
+          { label: '消息出错时间', prop: 'messageTime', rules: [{ required: true, message: '消息出错时间不能为空', trigger: 'blur' }] },
+          { label: '处理次数', prop: 'retryCount', width: 60, rules: [{ required: true, message: '处理次数不能为空', trigger: 'blur' }] },
+          { label: '处理状态', prop: 'status', search: true, width: 60, rules: [{ required: true, message: '状态:1-待处理,2-已处理,3-忽略不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '待处理' }, { value: 2, label: '已处理' }, { value: 3, label: '忽略' }] },
           { label: '创建时间', prop: 'createTime', rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] },
           { label: '修改时间', prop: 'updateTime', rules: [{ required: true, message: '修改时间不能为空', trigger: 'blur' }] }
         ]
@@ -134,7 +136,7 @@ export default {
     },
     handleDel(scope) {
       const _this = this
-      this.$confirm('是否确认删除记录', '提示', {
+      this.$confirm('是否确认忽略记录', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -145,24 +147,19 @@ export default {
         .then(data => {
           _this.$message({
             showClose: true,
-            message: '删除成功',
+            message: '处理成功',
             type: 'success'
           })
           this.getList()
         })
     },
-    cancelOrder(row) {
-      const data = {
-        platformCode: row.platformCode,
-        orderNo: row.orderNo
-      }
-      get(this.routerVal + '/sync', data).then(() => {
+    retry(row) {
+      update(this.routerVal + '/retry/' + row.id).then(() => {
         this.$notify({
           title: 'Success',
-          message: '取消订单成功!',
+          message: '处理成功!',
           type: 'success'
         })
-        this.handleGetList
       })
     }
   }

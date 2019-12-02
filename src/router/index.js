@@ -6,6 +6,9 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 import sequenceRouter from './modules/sequence'
+
+/* Router Modules */
+import sysRouter from './modules/sys'
 import productRouter from './modules/product'
 import stockRouter from './modules/stock'
 import orderRouter from './modules/order'
@@ -117,6 +120,7 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   sequenceRouter,
+  sysRouter,
   marketingRouter,
   productRouter,
   stockRouter,
