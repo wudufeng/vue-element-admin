@@ -53,7 +53,7 @@
             </el-button>
           </el-col>
           <el-col v-if="processResult !== ''" :span="3">
-            <router-link :to="'/sales/stock/logs/'+triggerForm.platform+'/'+processResult">
+            <router-link :to="'/sales/stock/operate-logs/'+triggerForm.platform+'/'+processResult">
               <el-button style="margin-left: 10px;" type="info">
                 查看执行结果
               </el-button>
