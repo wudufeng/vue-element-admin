@@ -5,6 +5,7 @@
       <el-input v-model="listQuery.condition.accountId" placeholder="账号" style="width: 200px;" class="filter-item" clearable />
       <el-input v-model="listQuery.condition.platformProductId" placeholder="平台商品编号" style="width: 200px;" class="filter-item" clearable />
       <el-input v-model="listQuery.condition.sku" placeholder="sku" style="width: 200px;" class="filter-item" clearable />
+      <el-input v-model="listQuery.condition.field" placeholder="field" style="width: 200px;" class="filter-item" clearable />
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         搜索
       </el-button>
@@ -23,11 +24,6 @@
       <el-table-column label="平台" width="120px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.platformCode }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="站点" width="120px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.siteId }}</span>
         </template>
       </el-table-column>
       <el-table-column label="账号" width="120px" align="center">

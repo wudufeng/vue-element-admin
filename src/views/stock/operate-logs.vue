@@ -1,175 +1,132 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
-      <el-row>
-        <el-col :span="2">
-          <PlatformCode v-model="listQuery.platformCode" style="width: 120px;" />
-        </el-col>
-        <el-col :span="3">
-          <el-input v-model="listQuery.executionId" placeholder="执行批次号" style="width: 180px;padding-left: 10px" class="filter-item" />
-        </el-col>
-        <el-col :span="2">
-          <el-input v-model="listQuery.accountId" placeholder="账号" style="width: 120px;" class="filter-item" />
-        </el-col>
-        <el-col :span="2">
-          <el-input v-model="listQuery.sku" placeholder="sku" style="width: 120px;" class="filter-item" />
-        </el-col>
-        <el-col :span="3">
-          <el-input v-model="listQuery.platformProductId" placeholder="平台商品ID" style="width: 180px;" class="filter-item" />
-        </el-col>
-        <el-col :span="7">
-          <el-date-picker v-model="listQuery.createTime[0]" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="开始时间" />
-          <el-date-picker v-model="listQuery.createTime[1]" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="结束时间" />
-        </el-col>
-        <el-col :span="2">
-          <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-            Search
-          </el-button>
-        </el-col>
-      </el-row>
-    </div>
-
-    <el-table
-      :key="tableKey"
-      v-loading="listLoading"
-      :data="list"
-      border
-      fit
-      highlight-current-row
-      style="width: 100%;"
+    <avue-crud
+      ref="crud"
+      v-model="data"
+      :option="option"
+      :data="datas"
+      :table-loading="loading"
+      :page="page"
+      @search-change="handleSearch"
+      @refresh-change="handleGetList"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
     >
-      <el-table-column label="账号" width="80px" prop="productId" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.accountId }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="站点" width="70px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.siteId }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="平台商品ID" width="160px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.platformProductId }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="Sku" width="110px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.sku }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="当时库存" width="110px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.stock }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="原线上库存" width="110px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.oldQuantity }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="更新库存" width="110px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.newQuantity }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="状态" width="110px" align="center">
-        <template slot-scope="scope">
-          {{ statusFilter(scope.row.status) }}
-        </template>
-      </el-table-column>
-      <el-table-column label="处理批次号" width="190px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.executionId }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="重试次数" width="80px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.retryCount }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="处理时间" width="170px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.createTime }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作类型" width="110px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.operType }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="响应消息" width="240px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.msg }}</span>
-        </template>
-      </el-table-column>
-    </el-table>
-
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page.current" :limit.sync="listQuery.page.size" @pagination="getList" />
-
+      <template slot="search">
+        <el-form-item label="处理时间">
+          <el-date-picker
+            v-model="query.queryTime"
+            type="datetimerange"
+            value-format="yyyyMMddHHmmss"
+            range-separator="至"
+            start-placeholder="开始时间"
+            end-placeholder="结束时间"
+          />
+        </el-form-item>
+      </template>
+    </avue-crud>
   </div>
 </template>
 
 <script>
-import PlatformCode from '@/components/PlatformCode'
-import { fetchOperateLogList } from '@/api/stock'
-import waves from '@/directive/waves'
-import Pagination from '@/components/Pagination'
+import { getList } from '@/api/crud'
 
 export default {
   name: 'OperateLogs',
-  components: {
-    PlatformCode, Pagination
+  components: { },
+  props: {
   },
-  directives: { waves },
   data() {
     return {
-      tableKey: 0,
-      list: null,
-      total: 0,
-      platformOptions: ['ALI', 'AMAZON', 'daraz', 'EB', 'JM', 'KF', 'LAZADA', 'MY', 'SHOPEE'],
-      listLoading: false,
-      listQuery: {
-        'page': {
-          current: 1,
-          size: 50
-        },
-        'platformCode': '',
-        'platformProductId': '',
-        'sku': '',
-        'executionId': '',
-        'createTime': []
+      routerVal: '',
+      data: {},
+      loading: false,
+      query: {
+        current: 1,
+        size: 100,
+        condition: { }
       },
-      statusMap: [
-        '',
-        '成功',
-        '失败'
-      ]
+      page: {
+        total: 0,
+        currentPage: 1,
+        pageSize: 100
+      },
+      datas: [],
+      option: {
+        border: true,
+        searchResetBtn: true,
+        viewBtn: true,
+        delBtn: false,
+        addBtn: false,
+        editBtn: false,
+        index: true,
+        menuWidth: 68,
+        headerAlign: 'center',
+        align: 'center',
+        labelWidth: '42%',
+        dialogType: 'drawer',
+        indexLabel: '序号',
+        column: [
+          { label: '主键', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
+          { label: '平台', prop: 'platformCode', type: 'select', search: { searchDefault: 'ALI' }, hide: true, rules: [{ required: true, message: '平台CODE不能为空', trigger: 'blur' }], dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'MEESHO', value: 'Meesho' }, { label: 'RAKUTEN', value: 'rakuten' }] },
+          { label: '站点ID', prop: 'siteId', hide: true, rules: [{ required: true, message: '站点ID不能为空', trigger: 'blur' }] },
+          { label: '账号ID', prop: 'accountId', search: true, rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
+          { label: '内部listing ID', prop: 'productId', hide: true, rules: [{ required: true, message: '内部listing ID不能为空', trigger: 'blur' }] },
+          { label: '平台商品编码', prop: 'platformProductId', search: true, rules: [{ required: true, message: '平台listing ID不能为空', trigger: 'blur' }] },
+          { label: '多属性产品表主键', prop: 'itemId', hide: true, rules: [{ required: true, message: '多属性产品表主键不能为空', trigger: 'blur' }] },
+          { label: '平台多属性产品id', prop: 'platformItemId', hide: true, rules: [{ required: true, message: '平台多属性产品id不能为空', trigger: 'blur' }] },
+          { label: 'sku', prop: 'sku', search: true, rules: [{ required: true, message: '系统sku不能为空', trigger: 'blur' }] },
+          { label: '平台销售sku', prop: 'platformSku', hide: true, rules: [{ required: true, message: '平台销售sku不能为空', trigger: 'blur' }] },
+          { label: '当时库存', prop: 'stock', width: 80, rules: [{ required: true, message: '当前库存数不能为空', trigger: 'blur' }] },
+          { label: '原线上库存', prop: 'oldQuantity', width: 90, rules: [{ required: true, message: '原线上库存数不能为空', trigger: 'blur' }] },
+          { label: '更新库存', prop: 'newQuantity', width: 80, rules: [{ required: true, message: '更新线上库存数不能为空', trigger: 'blur' }] },
+          { label: '操作类型', prop: 'operType', search: {}, rules: [{ required: true, message: '操作类型不能为空', trigger: 'blur' }] },
+          { label: '处理状态', prop: 'status', type: 'select', width: 80, search: {}, rules: [{ required: true, message: '处理状态1：成功 , 2：失败不能为空', trigger: 'blur' }], dicData: [{ value: 1, label: '成功' }, { value: 2, label: '失败' }] },
+          { label: '响应信息', prop: 'msg', rules: [{ required: true, message: '响应信息不能为空', trigger: 'blur' }] },
+          { label: '处理批次号', prop: 'executionId', search: true, rules: [{ required: true, message: '处理批次号不能为空', trigger: 'blur' }] },
+          { label: '重试次数', prop: 'retryCount', width: 80, hide: true, rules: [{ required: true, message: '失败重试次数不能为空', trigger: 'blur' }] },
+          { label: '操作人', prop: 'operUserId', hide: true, rules: [{ required: true, message: '操作人不能为空', trigger: 'blur' }] },
+          { label: '处理时间', prop: 'createTime', rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] }
+        ]
+      }
     }
   },
   created() {
-    this.listQuery.executionId = this.$route.params && this.$route.params.id
-    this.listQuery.platformCode = this.$route.params && this.$route.params.platform
+    this.routerVal = this.$route.path
+    this.data.executionId = this.$route.params && this.$route.params.id
+    this.data.platformCode = this.$route.params && this.$route.params.platform
   },
   methods: {
-    getList() {
-      this.listLoading = true
-      fetchOperateLogList(this.listQuery).then(response => {
-        this.list = response.body.data
-        this.total = response.body.totalRecord
-
-        // Just to simulate the time of the request
-        setTimeout(() => {
-          this.listLoading = false
-        }, 1.5 * 1000)
+    handleGetList() {
+      if (this.query.condition.platformCode === null || this.query.condition.platformCode === undefined || this.query.condition.platformCode === '') {
+        this.$message.warning('请选择平台')
+        return
+      }
+      this.query.current = this.page.currentPage
+      this.query.size = this.page.pageSize
+      this.loading = true
+      getList('/sales/stock/operate-log', this.query).then(res => {
+        this.datas = res.body.data
+        this.page.total = res.body.totalRecord
+        this.loading = false
       })
     },
-    handleFilter() {
-      this.listQuery.page.current = 1
-      this.getList()
+    handleSearch(params) {
+      this.page.currentPage = 1
+      if (this.query.queryTime !== null && this.query.queryTime !== undefined && this.query.queryTime !== '' && this.query.queryTime.length === 2) {
+        this.query.queryBeginTime = this.query.queryTime[0]
+        this.query.queryEndTime = this.query.queryTime[1]
+      }
+      this.query.condition = params
+      this.handleGetList()
     },
-    statusFilter(status) {
-      return this.statusMap[status]
+    handleCurrentChange(currentPage) {
+      this.page.currentPage = currentPage
+      this.handleGetList()
+    },
+    handleSizeChange(pageSize) {
+      this.page.pageSize = pageSize
+      this.handleGetList()
     }
   }
 }

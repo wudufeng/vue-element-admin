@@ -21,7 +21,7 @@
         <el-button size="small" icon="el-icon-refresh" @click="reloadData(null)">拉取</el-button>
       </template>
       <template slot="menu" slot-scope="scope">
-        <el-button v-if="scope.row.parentProductId === '0'" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="reloadData(scope.row)">刷新</el-button>
+        <el-button v-if="scope.row.parentProductId === scope.row.productId" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="reloadData(scope.row)">刷新</el-button>
       </template>
       <template slot="menuForm">
         <router-link :to="'/product/extension/'+data.platformCode+'/'+(data.parentProductId == 0 ? data.productId : data.parentProductId)">
@@ -74,9 +74,8 @@ export default {
         column: [
           { label: '内部listing ID', prop: 'productId', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '内部listing ID不能为空', trigger: 'blur' }] },
           { label: '父ID', prop: 'parentProductId', hide: true, rules: [{ required: true, message: '上级product_id(0表示无上级)不能为空', trigger: 'blur' }] },
-          { label: '平台', prop: 'platformCode', type: 'select', hide: true, search: { searchDefault: 'ALI' }, editDisabled: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }] },
+          { label: '平台', prop: 'platformCode', type: 'select', search: { searchDefault: 'ALI' }, editDisabled: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'MEESHO', value: 'Meesho' }] },
           { label: '账号ID', prop: 'accountId', width: 80, search: true, rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
-          { label: '站点ID', prop: 'siteId', hide: true, rules: [{ required: true, message: '站点ID不能为空', trigger: 'blur' }] },
           { label: '平台商品编号', prop: 'platformProductId', search: true, rules: [{ required: true, message: '平台listing ID不能为空', trigger: 'blur' }] },
           { label: '商品名称', prop: 'name', rules: [{ required: true, message: '产品标题/名称不能为空', trigger: 'blur' }] },
           { label: 'sku', prop: 'sku', search: true, rules: [{ required: true, message: '系统sku不能为空', trigger: 'blur' }] },
@@ -90,7 +89,7 @@ export default {
           { label: '已售数', prop: 'sold', hide: true, rules: [{ required: true, message: '已售数不能为空', trigger: 'blur' }] },
           { label: '促销/活动ID', prop: 'activityId', hide: true, rules: [{ required: true, message: '促销/活动ID不能为空', trigger: 'blur' }] },
           { label: '多属性', prop: 'variation', hide: true, rules: [{ required: true, message: '请选择是否为多属性', trigger: 'blur' }], type: 'radio', button: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
-          { label: '状态', prop: 'status', width: 80, rules: [{ required: true, message: '产品状态不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '在线' }, { value: 2, label: '下线' }, { value: 3, label: '已删除）' }] },
+          { label: '状态', prop: 'status', width: 80, rules: [{ required: true, message: '产品状态不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '在线' }, { value: 2, label: '下线' }, { value: 3, label: '已删除' }] },
           { label: '产品链接', prop: 'url', hide: true, rules: [{ required: true, message: '产品链接不能为空', trigger: 'blur' }] },
           { label: '商品创建时间', prop: 'productCreateTime', rules: [{ required: true, message: '平台产品创建时间不能为空', trigger: 'blur' }] },
           { label: '商品修改时间', prop: 'productUpdateTime', rules: [{ required: true, message: '平台产品修改时间不能为空', trigger: 'blur' }] },
@@ -105,7 +104,7 @@ export default {
   },
   methods: {
     rowStyle({ row, column, rowIndex }) {
-      if (row.parentProductId === '0') {
+      if (row.parentProductId === row.productId) {
         return {
           backgroundColor: '#fdf5e6'
         }

@@ -1,10 +1,13 @@
 import request from '@/utils/request'
 
-export function fetchList(query) {
+export function fetchList(data) {
   return request({
-    url: '/sales/stock/getRuleConfigList',
-    method: 'get',
-    params: { platform: query }
+    url: '/sales/stock/rule-config/list',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    data
   })
 }
 
@@ -40,11 +43,24 @@ export function updateRuleConfig(data) {
   })
 }
 
-export function operateStock(query) {
+export function operateStock(data) {
   return request({
     url: '/sales/stock/batch/operate',
     method: 'post',
-    params: query
+    transformRequest: [function(data) {
+      let ret = ''
+      for (const it in data) {
+        const key = encodeURIComponent(it)
+        if (key.slice(0, 1) !== '$') {
+          ret += key + '=' + encodeURIComponent(data[it]) + '&'
+        }
+      }
+      return ret
+    }],
+    data: data,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
   })
 }
 

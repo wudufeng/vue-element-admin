@@ -19,14 +19,14 @@ const productRouter = {
       meta: { title: '商品列表' }
     },
     {
-      path: 'pull',
+      path: '/sale/app/product/pull',
       component: () => import('@/views/product/pull-product'),
       name: 'PullProductTrigger',
       meta: { title: ' 拉取商品' }
     },
     {
       path: 'pull-product-log/list',
-      component: () => import('@/views/product/ProductPullLog'),
+      component: () => import('@/views/product/product-pull-log'),
       name: 'ProductPullLog',
       meta: { title: '执行记录' }
     },
