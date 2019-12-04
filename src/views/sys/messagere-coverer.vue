@@ -168,7 +168,7 @@ export default {
       if (row.status !== 1) {
         return
       }
-      update(this.routerVal + '/retry/' + row.id).then(() => {
+      update(this.routerVal + '/retry?id=' + row.id).then(() => {
         this.$notify({
           title: 'Success',
           message: '处理成功!',
