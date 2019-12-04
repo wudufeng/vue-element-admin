@@ -32,7 +32,7 @@ export default {
           { label: '账号ID', prop: 'accountId', placeholder: '留空表示所有账号', valueDefault: '', dataType: 'number' },
           { label: '开始时间', prop: 'queryBeginTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss', rules: [{ required: true, message: '处理起始时间不能为空', trigger: 'blur' }] },
           { label: '结束时间', prop: 'queryEndTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss', rules: [{ required: true, message: '处理结束时间不能为空', trigger: 'blur' }] },
-          { label: '刷新策略', prop: 'compareUseUpdateTime', type: 'switch', valueDefault: true, span: 24, dicData: [{ value: true, label: '判断平台更新时间' }, { value: false, label: '对比字段' }] },
+          { label: '分隔任务周期', prop: 'productSplitDate', type: 'select', valueDefault: '', dicData: [{ value: '', label: '系统默认' }, { value: '60', label: '一小时' }, { value: '360', label: '六小时' }, { value: '1440', label: '一天' }] },
           { label: '额外请求参数', prop: 'extraJSON', type: 'text', span: 24 }
         ]
       }

@@ -50,7 +50,7 @@ export default {
         headerAlign: 'center',
         align: 'center',
         labelWidth: '42%',
-        menuWidth: '32',
+        menuWidth: '140',
         dialogType: 'drawer',
         indexLabel: '序号',
         column: [

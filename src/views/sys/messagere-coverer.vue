@@ -14,9 +14,13 @@
       @refresh-change="handleGetList"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
+      @selection-change="selectionChange"
     >
+      <template slot="menuLeft">
+        <el-button type="primary" size="small" @click="retryAll">重试已选项</el-button>
+      </template>
       <template slot="menu" slot-scope="scope">
-        <el-button v-if="scope.row.status === 1 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row)">重发</el-button>
+        <el-button v-if="scope.row.status === 1 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row)">重试</el-button>
         <el-button v-if="scope.row.status === 1 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="handleDel(scope.row)">忽略</el-button>
       </template>
     </avue-crud>
@@ -47,6 +51,7 @@ export default {
         pageSize: 100
       },
       datas: [],
+      selections: [],
       option: {
         border: true,
         searchResetBtn: false,
@@ -59,6 +64,7 @@ export default {
         labelWidth: '42%',
         dialogType: 'drawer',
         indexLabel: '序号',
+        selection: true,
         column: [
           { label: '主键', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
           { label: '应用名称', prop: 'applicationName', rules: [{ required: true, message: '应用名称不能为空', trigger: 'blur' }] },
@@ -153,7 +159,15 @@ export default {
           this.getList()
         })
     },
+    retryAll() {
+      for (const row in this.selections) {
+        this.retry(this.selections[row])
+      }
+    },
     retry(row) {
+      if (row.status !== 1) {
+        return
+      }
       update(this.routerVal + '/retry/' + row.id).then(() => {
         this.$notify({
           title: 'Success',
@@ -161,6 +175,9 @@ export default {
           type: 'success'
         })
       })
+    },
+    selectionChange(list) {
+      this.selections = list
     }
   }
 }
