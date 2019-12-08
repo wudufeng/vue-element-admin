@@ -84,6 +84,7 @@ export default {
           { label: '平台分类ID', prop: 'platformCategoryId', hide: true, rules: [{ required: true, message: '平台分类ID不能为空', trigger: 'blur' }] },
           { label: '线上库存数', prop: 'quantity', search: true, width: 100, rules: [{ required: true, message: '线上库存数不能为空', trigger: 'blur' }] },
           { label: '价格', prop: 'price', search: true, rules: [{ required: true, message: '价格不能为空', trigger: 'blur' }] },
+          { label: '币种', prop: 'currency', hide: true },
           { label: '浏览量', prop: 'pageview', hide: true, rules: [{ required: true, message: '浏览量不能为空', trigger: 'blur' }] },
           { label: '点赞/关注数', prop: 'interest', hide: true, rules: [{ required: true, message: '点赞/关注数不能为空', trigger: 'blur' }] },
           { label: '已售数', prop: 'sold', hide: true, rules: [{ required: true, message: '已售数不能为空', trigger: 'blur' }] },
