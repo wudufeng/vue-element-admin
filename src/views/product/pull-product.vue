@@ -48,7 +48,7 @@ export default {
         } else if (newVal === 'LAZADA') {
           this.triggerForm.extraJSON = '[{"filter":"deleted"},{"filter":"all"}]'
         } else if (newVal === 'EB') {
-          this.triggerForm.extraJSON = '[{"method":"GetSellerEvents"},{"method":"GetSellerList","dateType":"EndTime"}]'
+          this.triggerForm.extraJSON = '[{"method":"GetSellerEvents"},{"method":"GetSellerList","dateType":"EndTime","addDay":0}]'
         } else {
           this.triggerForm.extraJSON = ''
         }
