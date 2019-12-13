@@ -286,7 +286,7 @@ export default {
         dialogType: 'drawer',
         indexLabel: '序号',
         column: [
-          { label: '执行编号', prop: 'executionId', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '执行编号不能为空', trigger: 'blur' }] },
+          { label: '执行编号', prop: 'executionId', search: true, addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '执行编号不能为空', trigger: 'blur' }] },
           { label: '平台编码', prop: 'platformCode', type: 'select', width: 120, search: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'MEESHO', value: 'Meesho' }] },
           { label: '账号ID', prop: 'accountId', search: true, width: 80, rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
           { label: '处理起始时间', prop: 'queryBeginTime', rules: [{ required: true, message: '处理起始时间不能为空', trigger: 'blur' }] },
