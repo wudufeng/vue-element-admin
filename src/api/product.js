@@ -19,9 +19,9 @@ export function pullProduct(data) {
   })
 }
 
-export function pullRetry(data) {
+export function pullRetry(data, productSplitDate) {
   return request({
-    url: '/sale/app/product/pull/' + data,
+    url: '/sale/app/product/pull/' + data.executionId + '?productSplitDate=' + productSplitDate,
     method: 'get'
   })
 }

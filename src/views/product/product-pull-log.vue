@@ -227,8 +227,9 @@ export default {
       @current-change="handleCurrentChange"
     >
       <template slot="menu" slot-scope="scope">
-        <el-button v-if="scope.row.executionStatus === 1" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row)">执行</el-button>
-        <el-button v-if="scope.row.executionStatus === 4 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row)">重试</el-button>
+        <el-button v-if="scope.row.executionStatus === 1" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row, '')">执行</el-button>
+        <el-button v-if="scope.row.executionStatus === 4 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row, '')">重试</el-button>
+        <el-button v-if="scope.row.executionStatus === 4 && scope.row.platformCode === 'EB' " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row, 1)">切分任务重试</el-button>
       </template>
       <template slot="search">
         <el-form-item label="处理结束时间">
@@ -378,8 +379,8 @@ export default {
           this.getList()
         })
     },
-    retry(row) {
-      pullRetry(row.executionId).then(response => {
+    retry(row, productSplitDate) {
+      pullRetry(row, productSplitDate).then(response => {
         this.$notify({
           title: '成功',
           message: '处理成功!',
