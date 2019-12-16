@@ -28,7 +28,7 @@ export function pullRetry(data) {
 
 export function refreshProduct(data) {
   return request({
-    url: '/sale/app/product/pullDetail',
+    url: '/sale/app/product/' + (data.productId !== undefined ? 'transfer' : 'pullDetail'),
     method: 'get',
     params: {
       platformCode: data.platformCode,
