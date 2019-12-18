@@ -30,7 +30,7 @@ export default {
           { label: '开始时间', prop: 'queryBeginTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss' },
           { label: '结束时间', prop: 'queryEndTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss' },
           { label: '平台订单号', prop: 'platformOrderId' },
-          { label: '分隔任务周期', prop: 'orderSplitDate', type: 'select', valueDefault: '1440', dicData: [{ value: '43200', label: '30天' }, { value: '60', label: '1小时' }, { value: '360', label: '6小时' }, { value: '1440', label: '1天' }, { value: '', label: '系统默认' }] },
+          { label: '分隔任务周期', prop: 'orderSplitDate', type: 'select', valueDefault: '1440', dicData: [{ value: '43200', label: '30天' }, { value: '21600', label: '15天' }, { value: '60', label: '1小时' }, { value: '360', label: '6小时' }, { value: '1440', label: '1天' }, { value: '', label: '系统默认' }] },
           { label: '额外请求参数', prop: 'extraJSON', type: 'text', span: 24 }
           // { label: '刷新策略', prop: 'compareUseUpdateTime', rules: [{ required: true, message: '刷新策略不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: true, label: '判断平台更新时间' }, { value: false, label: '对比字段' }] }
         ]

@@ -44,7 +44,7 @@ export default {
         if (newVal === 'ALI') {
           this.triggerForm.extraJSON = '[{"productStatus":"onSelling"},{"productStatus":"offline"}]'
         } else if (newVal === 'rakuten') {
-          this.triggerForm.extraJSON = '[{"searchKey":"【"},{"searchKey":"☆"}]'
+          this.triggerForm.extraJSON = '[{"searchKey":"【"},{"searchKey":"☆"},{"searchKey":"★"},{"searchKey":"ー"}]'
         } else if (newVal === 'LAZADA') {
           this.triggerForm.extraJSON = '[{"filter":"deleted"},{"filter":"all"}]'
         } else if (newVal === 'EB') {
