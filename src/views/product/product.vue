@@ -80,7 +80,7 @@ export default {
           { label: '平台商品编码', prop: 'platformProductId', search: true, rules: [{ required: true, message: '平台listing ID不能为空', trigger: 'blur' }] },
           { label: '商品名称', prop: 'name', rules: [{ required: true, message: '产品标题/名称不能为空', trigger: 'blur' }] },
           { label: 'sku', prop: 'sku', search: true, rules: [{ required: true, message: '系统sku不能为空', trigger: 'blur' }] },
-          { label: '平台销售sku', prop: 'platformSku', rules: [{ required: true, message: '平台销售sku不能为空', trigger: 'blur' }] },
+          { label: '销售sku', prop: 'platformSku', search: true, rules: [{ required: true, message: '平台销售sku不能为空', trigger: 'blur' }] },
           { label: '内部分类ID', prop: 'categoryId', hide: true, rules: [{ required: true, message: '内部分类ID不能为空', trigger: 'blur' }] },
           { label: '平台分类ID', prop: 'platformCategoryId', hide: true, rules: [{ required: true, message: '平台分类ID不能为空', trigger: 'blur' }] },
           { label: '线上库存数', prop: 'quantity', search: true, width: 100, rules: [{ required: true, message: '线上库存数不能为空', trigger: 'blur' }] },
