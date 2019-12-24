@@ -321,6 +321,9 @@ export default {
       if (this.query.queryTime !== null && this.query.queryTime !== undefined && this.query.queryTime !== '' && this.query.queryTime.length === 2) {
         this.query.queryBeginTime = this.query.queryTime[0]
         this.query.queryEndTime = this.query.queryTime[1]
+      } else {
+        this.query.queryBeginTime = null
+        this.query.queryEndTime = null
       }
       this.page.currentPage = 1
       this.query.condition = params
