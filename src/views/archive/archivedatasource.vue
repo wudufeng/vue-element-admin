@@ -55,7 +55,7 @@ export default {
         indexLabel: '序号',
         column: [
           { label: '', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '不能为空', trigger: 'blur' }] },
-          { label: '数据源类型', prop: 'type', search: true, type: 'select', rules: [{ required: true, message: '数据源类型不能为空', trigger: 'blur' }], dicData: [{ label: '业务库', value: 'Business' }, { label: '归档库', value: 'Archive' }] },
+          { label: '数据源类型', prop: 'type', search: true, type: 'select', rules: [{ required: true, message: '数据源类型不能为空', trigger: 'blur' }], dicData: [{ label: '业务库', value: 1 }, { label: '归档库', value: 2 }] },
           { label: '自定义名', prop: 'name', search: true, rules: [{ required: true, message: '自定义名不能为空', trigger: 'blur' }] },
           { label: '数据库IP', prop: 'host', search: true, rules: [{ required: true, message: '数据库IP不能为空', trigger: 'blur' }] },
           { label: '数据库端口', prop: 'port', rules: [{ required: true, message: '数据库端口不能为空', trigger: 'blur' }] },

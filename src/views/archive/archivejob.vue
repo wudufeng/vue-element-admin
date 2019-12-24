@@ -73,7 +73,7 @@ export default {
           { label: '目标表', prop: 'targetTable', rules: [{ required: true, message: '目标表不能为空', trigger: 'blur' }] },
           { label: '过滤条件', prop: 'sqlWhere', rules: [{ required: true, message: '过滤条件不能为空', trigger: 'blur' }] },
           { label: '事务大小', prop: 'txSize', valueDefault: '122', rules: [{ required: true, message: '事务大小不能为空', trigger: 'blur' }] },
-          { label: '清理源数据', prop: 'isPurge', type: 'radio', rules: [{ required: true, message: '是否清理源数据不能为空', trigger: 'blur' }], dicData: [{ value: true, label: '是' }, { value: false, label: '否' }], valueDefault: true },
+          { label: '清理源数据', prop: 'isPurge', type: 'radio', rules: [{ required: true, message: '是否清理源数据不能为空', trigger: 'blur' }], dicData: [{ value: 1, label: '是' }, { value: 0, label: '否' }], valueDefault: true },
           { label: '启用状态', prop: 'deleted', dicData: [{ label: '禁用', value: true }, { label: '启用', value: false }], addDisplay: false },
           // {
           //   label: '城市',

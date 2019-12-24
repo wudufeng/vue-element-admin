@@ -52,7 +52,7 @@ export default {
         column: [
           { label: '', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '不能为空', trigger: 'blur' }] },
           { label: '库', prop: 'jobId', rules: [{ required: true, message: '库不能为空', trigger: 'blur' }] },
-          { label: '任务执行状态', prop: 'status' },
+          { label: '任务执行状态', prop: 'status', dicData: [{ value: 1, label: '失败' }, { value: 0, label: '成功' }] },
           { label: '任务启动时间', prop: 'jobStartTime', rules: [{ required: true, message: '任务启动时间不能为空', trigger: 'blur' }] },
           { label: '任务结束时间', prop: 'jobEndTime', rules: [{ required: true, message: '任务结束时间不能为空', trigger: 'blur' }] },
           { label: '任务耗时(秒)', prop: 'jobSpend', rules: [{ required: true, message: '任务耗时(秒)不能为空', trigger: 'blur' }] },
