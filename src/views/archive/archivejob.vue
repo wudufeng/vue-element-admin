@@ -50,8 +50,8 @@ export default {
       // if (value === '') {
       // callback(new Error('cron校验'))
       // }
-      // TODO
-      return true
+      // TODO 后端url校验
+      callback()
     }
     return {
       routerVal: '',
@@ -74,13 +74,13 @@ export default {
         searchResetBtn: false,
         viewBtn: true,
         delBtn: true,
-        // columnBtn: false,
-        index: true,
         headerAlign: 'center',
         align: 'center',
         labelWidth: '42%',
         dialogType: 'drawer',
-        indexLabel: '序号',
+        // columnBtn: false,
+        // index: true,
+        // indexLabel: '序号',
         column: [
           {
             label: '',
@@ -91,6 +91,12 @@ export default {
             editDisabled: true,
             hide: true,
             rules: [{ required: true, message: '不能为空', trigger: 'blur' }]
+          },
+          {
+            label: '任务名',
+            prop: 'name',
+            search: true,
+            rules: [{ required: true, message: '归档任务名不能为空', trigger: 'blur' }]
           },
           {
             label: '源数据源',
@@ -121,9 +127,13 @@ export default {
             label: '源库',
             prop: 'sourceDb',
             search: true,
-            rules: [{ required: true, message: '源库不能为空', trigger: 'blur' }]
+            rules: [{ required: true, message: '源库不能为空', trigger: 'blur' }],
+            width: '95%'
           },
-          { label: '目标库', prop: 'targetDb', rules: [{ required: true, message: '目标库不能为空', trigger: 'blur' }] },
+          {
+            label: '目标库', prop: 'targetDb', rules: [{ required: true, message: '目标库不能为空', trigger: 'blur' }],
+            width: '95%'
+          },
           {
             label: '源表',
             prop: 'sourceTable',
@@ -131,12 +141,18 @@ export default {
             rules: [{ required: true, message: '源表不能为空', trigger: 'blur' }]
           },
           { label: '目标表', prop: 'targetTable', rules: [{ required: true, message: '目标表不能为空', trigger: 'blur' }] },
-          { label: '过滤条件', prop: 'sqlWhere', rules: [{ required: true, message: '过滤条件不能为空', trigger: 'blur' }], value: 'create_time < DATE_ADD(CURDATE(),INTERVAL -180 DAY)' },
+          {
+            label: '过滤条件',
+            prop: 'sqlWhere',
+            rules: [{ required: true, message: '过滤条件不能为空', trigger: 'blur' }],
+            value: 'create_time < DATE_ADD(CURDATE(),INTERVAL -180 DAY)'
+          },
           {
             label: '事务大小',
             prop: 'txSize',
             value: 5000,
-            rules: [{ required: true, message: '事务大小不能为空', trigger: 'blur' }]
+            rules: [{ required: true, message: '事务大小不能为空', trigger: 'blur' }],
+            width: '78%'
           },
           {
             label: '清理源数据',
@@ -144,18 +160,25 @@ export default {
             type: 'radio',
             rules: [{ required: true, message: '是否清理源数据不能为空', trigger: 'blur' }],
             dicData: [{ value: 1, label: '是' }, { value: 0, label: '否' }],
-            value: 1
+            value: 1,
+            width: '91%'
           },
           {
             label: '启用状态',
             prop: 'deleted',
             type: 'select',
             search: true,
-            dicData: [{ label: '启用', value: 0 }, { label: '禁用', value: 1 }],
+            dicData: [{ label: '启用', value: false }, { label: '禁用', value: true }],
             addDisplay: false,
-            editDisplay: false
+            editDisplay: false,
+            width: '78%'
           },
-          { label: 'cron', prop: 'execCron', rules: [{ required: true, message: 'cron不能为空', validator: validCron, trigger: 'blur' }], value: '* 15 1 * * ?' }
+          {
+            label: 'cron',
+            prop: 'execCron',
+            rules: [{ required: true, message: 'cron不能为空', validator: validCron, trigger: 'blur' }],
+            value: '* 15 1 * * ?'
+          }
         ]
       }
     }

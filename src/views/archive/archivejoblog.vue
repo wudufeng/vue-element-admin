@@ -56,17 +56,37 @@ export default {
             label: '',
             prop: 'id',
             addDisplay: false,
+            editDisplay: false,
             addDisabled: true,
             editDisabled: true,
             hide: true,
             rules: [{ required: true, message: '不能为空', trigger: 'blur' }]
           },
-          { label: '库', prop: 'jobId', rules: [{ required: true, message: '库不能为空', trigger: 'blur' }] },
-          { label: '任务执行状态', prop: 'status', dicData: [{ value: 1, label: '失败' }, { value: 0, label: '成功' }] },
-          { label: '任务启动时间', prop: 'jobStartTime', rules: [{ required: true, message: '任务启动时间不能为空', trigger: 'blur' }] },
-          { label: '任务结束时间', prop: 'jobEndTime', rules: [{ required: true, message: '任务结束时间不能为空', trigger: 'blur' }] },
-          { label: '任务耗时(秒)', prop: 'jobSpend', rules: [{ required: true, message: '任务耗时(秒)不能为空', trigger: 'blur' }] },
-          { label: '操作数据数', prop: 'count', rules: [{ required: true, message: '操作数据数不能为空', trigger: 'blur' }] },
+          // { label: '任务id', prop: 'jobId', rules: [{ required: true, message: '任务id不能为空', trigger: 'blur' }] },
+          {
+            label: '任务名称',
+            prop: 'jobId',
+            type: 'select',
+            rules: [{ required: true, message: '任务id不能为空', trigger: 'blur' }],
+            search: true,
+            props: {
+              label: 'name',
+              value: 'id',
+              res: 'body'
+            },
+            dicUrl: process.env.VUE_APP_BASE_API + '/archive/archive-job/dic'
+          },
+          {
+            label: '执行状态',
+            prop: 'status',
+            search: true,
+            type: 'select',
+            dicData: [{ value: 1, label: '失败' }, { value: 0, label: '成功' }]
+          },
+          { label: '启动时间', prop: 'jobStartTime', rules: [{ required: true, message: '任务启动时间不能为空', trigger: 'blur' }] },
+          { label: '结束时间', prop: 'jobEndTime', rules: [{ required: true, message: '任务结束时间不能为空', trigger: 'blur' }] },
+          { label: '耗时(秒)', prop: 'jobSpend', rules: [{ required: true, message: '任务耗时(秒)不能为空', trigger: 'blur' }] },
+          { label: '归档数量', prop: 'count', rules: [{ required: true, message: '操作数据数不能为空', trigger: 'blur' }] },
           {
             label: '日志详情',
             prop: 'content',

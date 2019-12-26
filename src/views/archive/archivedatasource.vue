@@ -23,9 +23,8 @@ import { getList, add, update, remove } from '@/api/crud'
 
 export default {
   name: 'ArchiveDatasource',
-  components: { },
-  props: {
-  },
+  components: {},
+  props: {},
   data() {
     return {
       routerVal: '',
@@ -34,7 +33,7 @@ export default {
       query: {
         current: 1,
         size: 100,
-        condition: { }
+        condition: {}
       },
       page: {
         total: 0,
@@ -54,13 +53,44 @@ export default {
         dialogType: 'drawer',
         indexLabel: '序号',
         column: [
-          { label: '', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '不能为空', trigger: 'blur' }] },
-          { label: '数据源类型', prop: 'type', search: true, type: 'select', rules: [{ required: true, message: '数据源类型不能为空', trigger: 'blur' }], dicData: [{ label: '业务库', value: 1 }, { label: '归档库', value: 2 }] },
-          { label: '自定义名', prop: 'name', search: true, rules: [{ required: true, message: '自定义名不能为空', trigger: 'blur' }] },
-          { label: '数据库IP', prop: 'host', search: true, rules: [{ required: true, message: '数据库IP不能为空', trigger: 'blur' }] },
+          {
+            label: '',
+            prop: 'id',
+            addDisplay: false,
+            editDisplay: false,
+            addDisabled: true,
+            editDisabled: true,
+            hide: true,
+            rules: [{ required: true, message: '不能为空', trigger: 'blur' }]
+          },
+          {
+            label: '数据源类型',
+            prop: 'type',
+            search: true,
+            type: 'select',
+            rules: [{ required: true, message: '数据源类型不能为空', trigger: 'blur' }],
+            dicData: [{ label: '业务库', value: 1 }, { label: '归档库', value: 2 }]
+          },
+          {
+            label: '自定义名',
+            prop: 'name',
+            search: true,
+            rules: [{ required: true, message: '自定义名不能为空', trigger: 'blur' }]
+          },
+          {
+            label: '数据库IP',
+            prop: 'host',
+            search: true,
+            rules: [{ required: true, message: '数据库IP不能为空', trigger: 'blur' }]
+          },
           { label: '数据库端口', prop: 'port', rules: [{ required: true, message: '数据库端口不能为空', trigger: 'blur' }] },
           { label: '数据库用户名', prop: 'username', rules: [{ required: true, message: '数据库用户名不能为空', trigger: 'blur' }] },
-          { label: '数据库密码', prop: 'password', type: 'password', rules: [{ required: true, message: '数据库密码不能为空', trigger: 'blur' }] }
+          {
+            label: '数据库密码',
+            prop: 'password',
+            type: 'password',
+            rules: [{ required: true, message: '数据库密码不能为空', trigger: 'blur' }]
+          }
         ]
       }
     }

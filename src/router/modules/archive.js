@@ -9,26 +9,26 @@ const archiveRouter = {
   name: 'archiveManage',
   meta: {
     title: '归档管理',
-    icon: 'table'
+    icon: 'component'
   },
   children: [
     {
       path: 'archive-datasource',
       component: () => import('@/views/archive/archivedatasource'),
       name: 'archivedatasource',
-      meta: { title: '数据源配置', icon: 'list' }
+      meta: { title: '数据源配置', icon: 'password' }
     },
     {
       path: 'archive-job',
       component: () => import('@/views/archive/archivejob'),
       name: 'archivejob',
-      meta: { title: '归档任务', icon: 'list' }
+      meta: { title: '归档任务', icon: 'example' }
     },
     {
       path: 'archive-job-log',
       component: () => import('@/views/archive/archivejoblog'),
       name: 'archivejoblog',
-      meta: { title: '归档日志', icon: 'list' }
+      meta: { title: '归档日志', icon: 'search' }
     }
   ]
 }
