@@ -7,6 +7,7 @@
       :data="datas"
       :table-loading="loading"
       :page="page"
+      @on-load="handleSearch"
       @search-change="handleSearch"
       @row-save="handleAdd"
       @row-update="handleUpdate"
@@ -236,7 +237,7 @@ export default {
         this.datas = res.body.data
         this.page.total = res.body.totalRecord
         this.loading = false
-        done()
+        done ? done() : ''
       })
     },
     handleSearch(params, done) {
