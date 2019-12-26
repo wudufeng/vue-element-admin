@@ -15,20 +15,16 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       @sortable-change="sortableChange"
+      @selection-change="handleSelectionChange"
     >
-      <!--      <template slot="menuLeft" slot-scope="scope">-->
-      <!--        <el-button-->
-      <!--          type="danger"-->
-      <!--          icon="el-icon-check"-->
-      <!--          size="small"-->
-      <!--          plain-->
-      <!--          @click.stop="test(scope)"-->
-      <!--        >禁用</el-button>-->
-      <!--      </template>-->
       <template slot="menu" slot-scope="scope">
-        <el-button icon="el-icon-check" size="small" @click.stop="enableArchiveJob(scope.row.id)">启用</el-button>
-        <el-button icon="el-icon-check" size="small" @click.stop="disableArchiveJob(scope.row.id)">禁用</el-button>
-        <el-button icon="el-icon-check" size="small" @click.stop="execArchiveJob(scope.row)">执行</el-button>
+        <el-button type="text" icon="el-icon-unlock" size="small" @click.stop="enableArchiveJob(scope.row.id)">启用</el-button>
+        <el-button type="text" icon="el-icon-lock" size="small" @click.stop="disableArchiveJob(scope.row.id)">禁用</el-button>
+        <el-button type="text" icon="el-icon-video-play" size="small" @click.stop="execArchiveJob(scope.row.id)">执行</el-button>
+      </template>
+      <template slot="menuLeft">
+        <el-button icon="el-icon-unlock" size="small" @click.stop="enableArchiveJob('')">启用</el-button>
+        <el-button icon="el-icon-lock" size="small" @click.stop="disableArchiveJob('')">禁用</el-button>
       </template>
     </avue-crud>
   </div>
@@ -69,10 +65,11 @@ export default {
       },
       datas: [],
       option: {
+        menuWidth: 330,
         selection: true,
         border: true,
         searchResetBtn: false,
-        viewBtn: true,
+        // viewBtn: true,
         delBtn: true,
         headerAlign: 'center',
         align: 'center',
@@ -180,13 +177,21 @@ export default {
             value: '* 15 1 * * ?'
           }
         ]
-      }
+      },
+      selectData: []
     }
   },
   created() {
     this.routerVal = this.$route.path
   },
   methods: {
+    getSelectIds() {
+      const arr = []
+      for (let i = 0; i < this.selectData.length; i++) {
+        arr.push(this.selectData[i].id)
+      }
+      return arr
+    },
     // 执行归档
     // test(data) {
     //   alert(1)
@@ -204,13 +209,25 @@ export default {
     },
     // 批量启用归档任务
     enableArchiveJob(data) {
-      enableArchiveJob(data)
+      if (data) {
+        enableArchiveJob(data)
+      } else if (this.selectData.length) {
+        enableArchiveJob(this.getSelectIds().join(','))
+      } else {
+        this.$message.error('请选择数据')
+      }
     },
     // 批量禁用归档任务
     disableArchiveJob(data) {
-      disableArchiveJob(data)
+      if (data) {
+        disableArchiveJob(data)
+      } else if (this.selectData.length) {
+        disableArchiveJob(this.getSelectIds().join(','))
+      } else {
+        this.$message.error('请选择数据')
+      }
     },
-    handleGetList() {
+    handleGetList(params, done) {
       this.loading = true
       this.query.current = this.page.currentPage
       this.query.size = this.page.pageSize
@@ -218,12 +235,13 @@ export default {
         this.datas = res.body.data
         this.page.total = res.body.totalRecord
         this.loading = false
+        done()
       })
     },
-    handleSearch(params) {
+    handleSearch(params, done) {
       this.page.currentPage = 1
       this.query.condition = params
-      this.handleGetList()
+      this.handleGetList(params, done)
     },
     handleCurrentChange(currentPage) {
       this.page.currentPage = currentPage
@@ -276,6 +294,10 @@ export default {
           })
           this.getList()
         })
+    },
+    sortableChange() {},
+    handleSelectionChange(list) {
+      this.selectData = list
     }
   }
 }
