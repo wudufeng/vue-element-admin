@@ -15,19 +15,19 @@ const archiveRouter = {
     {
       path: 'archive-datasource',
       component: () => import('@/views/archive/archivedatasource'),
-      name: 'archivedatasource',
+      name: 'ArchiveDatasource',
       meta: { title: '数据源配置', icon: 'password' }
     },
     {
       path: 'archive-job',
       component: () => import('@/views/archive/archivejob'),
-      name: 'archivejob',
+      name: 'ArchiveJob',
       meta: { title: '归档任务', icon: 'example' }
     },
     {
       path: 'archive-job-log',
       component: () => import('@/views/archive/archivejoblog'),
-      name: 'archivejoblog',
+      name: 'ArchiveJobLog',
       meta: { title: '归档日志', icon: 'search' }
     }
   ]
