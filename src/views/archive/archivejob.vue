@@ -96,6 +96,12 @@ export default {
             rules: [{ required: true, message: '归档任务名不能为空', trigger: 'blur' }]
           },
           {
+            label: 'cron',
+            prop: 'execCron',
+            rules: [{ required: true, message: 'cron不能为空', validator: validCron, trigger: 'blur' }],
+            value: '* 15 1 * * ?'
+          },
+          {
             label: '源数据源',
             prop: 'sourceDatasource',
             type: 'select',
@@ -139,12 +145,6 @@ export default {
           },
           { label: '目标表', prop: 'targetTable', rules: [{ required: true, message: '目标表不能为空', trigger: 'blur' }] },
           {
-            label: '过滤条件',
-            prop: 'sqlWhere',
-            rules: [{ required: true, message: '过滤条件不能为空', trigger: 'blur' }],
-            value: 'create_time < DATE_ADD(CURDATE(),INTERVAL -180 DAY)'
-          },
-          {
             label: '事务大小',
             prop: 'txSize',
             value: 5000,
@@ -171,10 +171,11 @@ export default {
             width: '78%'
           },
           {
-            label: 'cron',
-            prop: 'execCron',
-            rules: [{ required: true, message: 'cron不能为空', validator: validCron, trigger: 'blur' }],
-            value: '* 15 1 * * ?'
+            label: '过滤条件',
+            prop: 'sqlWhere',
+            type: 'textarea',
+            rules: [{ required: true, message: '过滤条件不能为空', trigger: 'blur' }],
+            value: 'create_time < DATE_ADD(CURDATE(),INTERVAL -180 DAY)'
           }
         ]
       },
