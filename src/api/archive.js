@@ -107,10 +107,3 @@ export function removeArchiveJob(id) {
   })
 }
 
-export function info() {
-  alert(111)
-  // return request({
-  //   url: '/archive/info',
-  //   method: 'get'
-  // })
-}

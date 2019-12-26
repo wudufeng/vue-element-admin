@@ -1,4 +1,3 @@
-
 <template>
   <div class="app-container">
     <avue-crud
@@ -15,7 +14,17 @@
       @refresh-change="handleGetList"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
+      @sortable-change="sortableChange"
     >
+      <!--      <template slot="menuLeft" slot-scope="scope">-->
+      <!--        <el-button-->
+      <!--          type="danger"-->
+      <!--          icon="el-icon-check"-->
+      <!--          size="small"-->
+      <!--          plain-->
+      <!--          @click.stop="test(scope)"-->
+      <!--        >禁用</el-button>-->
+      <!--      </template>-->
       <template slot="menu" slot-scope="scope">
         <el-button icon="el-icon-check" size="small" @click.stop="enableArchiveJob(scope.row.id)">启用</el-button>
         <el-button icon="el-icon-check" size="small" @click.stop="disableArchiveJob(scope.row.id)">禁用</el-button>
@@ -31,10 +40,19 @@ import { execArchiveJob, enableArchiveJob, disableArchiveJob } from '@/api/archi
 
 export default {
   name: 'ArchiveJob',
-  components: { },
-  props: {
-  },
+  components: {},
+  props: {},
   data() {
+    var validCron = function(rule, value, callback) {
+      if (value === '') {
+        callback(new Error('cron不能为空'))
+      }
+      // if (value === '') {
+      // callback(new Error('cron校验'))
+      // }
+      // TODO
+      return true
+    }
     return {
       routerVal: '',
       data: {},
@@ -42,7 +60,7 @@ export default {
       query: {
         current: 1,
         size: 100,
-        condition: { }
+        condition: {}
       },
       page: {
         total: 0,
@@ -56,6 +74,7 @@ export default {
         searchResetBtn: false,
         viewBtn: true,
         delBtn: true,
+        // columnBtn: false,
         index: true,
         headerAlign: 'center',
         align: 'center',
@@ -63,57 +82,80 @@ export default {
         dialogType: 'drawer',
         indexLabel: '序号',
         column: [
-          { label: '', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '不能为空', trigger: 'blur' }] },
-          { label: '源数据源', prop: 'sourceDatasource', rules: [{ required: true, message: '源数据源不能为空', trigger: 'blur' }] },
-          // { label: '源数据源', prop: 'sourceDatasource', type: 'select', rules: [{ required: true, message: '源数据源不能为空', trigger: 'blur' }] },
-          { label: '目标数据源', prop: 'targetDatasource', rules: [{ required: true, message: '目标数据源不能为空', trigger: 'blur' }] },
-          { label: '源库', prop: 'sourceDb', rules: [{ required: true, message: '源库不能为空', trigger: 'blur' }] },
+          {
+            label: '',
+            prop: 'id',
+            addDisplay: false,
+            editDisplay: false,
+            addDisabled: true,
+            editDisabled: true,
+            hide: true,
+            rules: [{ required: true, message: '不能为空', trigger: 'blur' }]
+          },
+          {
+            label: '源数据源',
+            prop: 'sourceDatasource',
+            type: 'select',
+            search: true,
+            rules: [{ required: true, message: '源数据源不能为空', trigger: 'blur' }],
+            props: {
+              label: 'name',
+              value: 'id',
+              res: 'body'
+            },
+            dicUrl: process.env.VUE_APP_BASE_API + '/archive/archive-datasource/dic'
+          },
+          {
+            label: '目标数据源',
+            prop: 'targetDatasource',
+            type: 'select',
+            rules: [{ required: true, message: '目标数据源不能为空', trigger: 'blur' }],
+            props: {
+              label: 'name',
+              value: 'id',
+              res: 'body'
+            },
+            dicUrl: process.env.VUE_APP_BASE_API + '/archive/archive-datasource/dic'
+          },
+          {
+            label: '源库',
+            prop: 'sourceDb',
+            search: true,
+            rules: [{ required: true, message: '源库不能为空', trigger: 'blur' }]
+          },
           { label: '目标库', prop: 'targetDb', rules: [{ required: true, message: '目标库不能为空', trigger: 'blur' }] },
-          { label: '源表', prop: 'sourceTable', rules: [{ required: true, message: '源表不能为空', trigger: 'blur' }] },
+          {
+            label: '源表',
+            prop: 'sourceTable',
+            search: true,
+            rules: [{ required: true, message: '源表不能为空', trigger: 'blur' }]
+          },
           { label: '目标表', prop: 'targetTable', rules: [{ required: true, message: '目标表不能为空', trigger: 'blur' }] },
-          { label: '过滤条件', prop: 'sqlWhere', rules: [{ required: true, message: '过滤条件不能为空', trigger: 'blur' }] },
-          { label: '事务大小', prop: 'txSize', valueDefault: '122', rules: [{ required: true, message: '事务大小不能为空', trigger: 'blur' }] },
-          { label: '清理源数据', prop: 'isPurge', type: 'radio', rules: [{ required: true, message: '是否清理源数据不能为空', trigger: 'blur' }], dicData: [{ value: 1, label: '是' }, { value: 0, label: '否' }], valueDefault: true },
-          { label: '启用状态', prop: 'deleted', dicData: [{ label: '禁用', value: true }, { label: '启用', value: false }], addDisplay: false },
-          // {
-          //   label: '城市',
-          //   prop: 'city',
-          //   type: 'select',
-          //   props: {
-          //     label: 'name',
-          //     value: 'code'
-          //   },
-          //   dicUrl: 'https://cli2.avuejs.com/api/area/getProvince'
-          // },
-          // {
-          //   label: '权限',
-          //   // prop: 'start-time',
-          //   type: 'select',
-          //   // props: {
-          //   //   label: 'name',
-          //   //   value: 'code'
-          //   // },
-          //   dicUrl: 'info'
-          // },
-          // {
-          //   label: '省份',
-          //   prop: 'province',
-          //   type: 'select',
-          //   dataType: 'number',
-          //   props: {
-          //     label: 'name',
-          //     value: 'code'
-          //   },
-          //   dicUrl: 'http://172.16.6.132:10204/baseplatform/archive/info',
-          //   rules: [
-          //     {
-          //       required: true,
-          //       message: '请选择省份',
-          //       trigger: 'blur'
-          //     }
-          //   ]
-          // },
-          { label: 'cron', prop: 'execCron', rules: [{ required: true, message: 'cron不能为空', trigger: 'blur' }] }
+          { label: '过滤条件', prop: 'sqlWhere', rules: [{ required: true, message: '过滤条件不能为空', trigger: 'blur' }], value: 'create_time < DATE_ADD(CURDATE(),INTERVAL -180 DAY)' },
+          {
+            label: '事务大小',
+            prop: 'txSize',
+            value: 5000,
+            rules: [{ required: true, message: '事务大小不能为空', trigger: 'blur' }]
+          },
+          {
+            label: '清理源数据',
+            prop: 'isPurge',
+            type: 'radio',
+            rules: [{ required: true, message: '是否清理源数据不能为空', trigger: 'blur' }],
+            dicData: [{ value: 1, label: '是' }, { value: 0, label: '否' }],
+            value: 1
+          },
+          {
+            label: '启用状态',
+            prop: 'deleted',
+            type: 'select',
+            search: true,
+            dicData: [{ label: '启用', value: 0 }, { label: '禁用', value: 1 }],
+            addDisplay: false,
+            editDisplay: false
+          },
+          { label: 'cron', prop: 'execCron', rules: [{ required: true, message: 'cron不能为空', validator: validCron, trigger: 'blur' }], value: '* 15 1 * * ?' }
         ]
       }
     }
@@ -122,6 +164,17 @@ export default {
     this.routerVal = this.$route.path
   },
   methods: {
+    // 执行归档
+    // test(data) {
+    //   alert(1)
+    //   alert(JSON.stringify(data))
+    //   alert(this.$refs.crud.store.states.selection)
+    //   console.info(this.multipleSelection)
+    // },
+    // handleSelectionChange(val) {
+    //   console.info(val)
+    //   this.multipleSelection = val
+    // },
     // 执行归档
     execArchiveJob(data) {
       execArchiveJob(data)
@@ -166,10 +219,8 @@ export default {
           message: '新增成功!',
           type: 'success'
         })
-        loading()
-        setTimeout(() => {
-          done()
-        }, 3000)
+        done()
+        this.handleGetList()
       })
     },
     handleUpdate(row, index, done, loading) {
@@ -180,7 +231,8 @@ export default {
           message: '更新成功!',
           type: 'success'
         })
-        loading()
+        done()
+        this.handleGetList()
       })
     },
     handleDel(scope) {
