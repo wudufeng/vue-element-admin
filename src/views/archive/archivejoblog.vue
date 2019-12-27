@@ -57,6 +57,7 @@ export default {
             prop: 'id',
             addDisplay: false,
             editDisplay: false,
+            viewDisplay: false,
             addDisabled: true,
             editDisabled: true,
             hide: true,
@@ -88,17 +89,20 @@ export default {
           { label: '耗时(秒)', prop: 'jobSpend', rules: [{ required: true, message: '任务耗时(秒)不能为空', trigger: 'blur' }] },
           { label: '归档数量', prop: 'count', rules: [{ required: true, message: '操作数据数不能为空', trigger: 'blur' }] },
           {
-            label: '日志详情',
-            prop: 'content',
-            rules: [{ required: true, message: '日志详情不能为空', trigger: 'blur' }],
-            hide: true
-          },
-          {
             label: '日志时间',
             prop: 'createTime',
             rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }],
             addDisplay: false,
             editDisplay: false
+          },
+          {
+            label: '日志详情',
+            prop: 'content',
+            type: 'textarea',
+            rules: [{ required: true, message: '日志详情不能为空', trigger: 'blur' }],
+            hide: true,
+            maxRows: 20,
+            minRows: 20
           }
         ]
       }

@@ -69,7 +69,7 @@ export default {
         menuWidth: 330,
         selection: true,
         border: true,
-        searchResetBtn: false,
+        searchResetBtn: true,
         // viewBtn: true,
         delBtn: true,
         headerAlign: 'center',
