@@ -48,7 +48,7 @@ export default {
         index: true,
         headerAlign: 'center',
         align: 'center',
-        labelWidth: '42%',
+        labelWidth: '142',
         dialogType: 'drawer',
         indexLabel: '序号',
         column: [
@@ -61,15 +61,13 @@ export default {
             addDisabled: true,
             editDisabled: true,
             hide: true,
-            showColumn: false,
-            rules: [{ required: true, message: '不能为空', trigger: 'blur' }]
+            showColumn: false
           },
-          // { label: '任务id', prop: 'jobId', rules: [{ required: true, message: '任务id不能为空', trigger: 'blur' }] },
+          // { label: '任务id', prop: 'jobId', rules: [{  message: '任务id不能为空', trigger: 'blur' }] },
           {
             label: '任务名称',
             prop: 'jobId',
             type: 'select',
-            rules: [{ required: true, message: '任务id不能为空', trigger: 'blur' }],
             search: true,
             props: {
               label: 'name',
@@ -85,14 +83,13 @@ export default {
             type: 'select',
             dicData: [{ value: 1, label: '失败' }, { value: 0, label: '成功' }]
           },
-          { label: '启动时间', prop: 'jobStartTime', rules: [{ required: true, message: '任务启动时间不能为空', trigger: 'blur' }] },
-          { label: '结束时间', prop: 'jobEndTime', rules: [{ required: true, message: '任务结束时间不能为空', trigger: 'blur' }] },
-          { label: '耗时(秒)', prop: 'jobSpend', rules: [{ required: true, message: '任务耗时(秒)不能为空', trigger: 'blur' }] },
-          { label: '归档数量', prop: 'count', rules: [{ required: true, message: '操作数据数不能为空', trigger: 'blur' }] },
+          { label: '启动时间', prop: 'jobStartTime' },
+          { label: '结束时间', prop: 'jobEndTime' },
+          { label: '耗时(秒)', prop: 'jobSpend' },
+          { label: '归档数量', prop: 'count' },
           {
             label: '日志时间',
             prop: 'createTime',
-            rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }],
             addDisplay: false,
             editDisplay: false
           },
@@ -100,10 +97,10 @@ export default {
             label: '日志详情',
             prop: 'content',
             type: 'textarea',
-            rules: [{ required: true, message: '日志详情不能为空', trigger: 'blur' }],
             hide: true,
-            maxRows: 20,
-            minRows: 20
+            maxRows: 25,
+            minRows: 25,
+            span: 24
           }
         ]
       }
