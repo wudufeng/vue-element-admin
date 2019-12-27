@@ -195,8 +195,8 @@ export default {
       return arr
     },
     // 执行归档
-    execArchiveJob(data) {
-      execArchiveJob(data)
+    execArchiveJob(id) {
+      execArchiveJob(id)
     },
     // 批量启用归档任务
     enableArchiveJob(data) {

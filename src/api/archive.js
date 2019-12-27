@@ -61,9 +61,9 @@ import request from '@/utils/request'
 // }
 
 // 执行归档
-export function execArchiveJob(data) {
+export function execArchiveJob(id) {
   return request({
-    url: '/archive/archive-job/exec/' + data.id,
+    url: '/archive/archive-job/exec/' + id,
     method: 'post'
   })
 }
