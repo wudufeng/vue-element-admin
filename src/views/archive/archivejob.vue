@@ -197,7 +197,14 @@ export default {
     },
     // 执行归档
     execArchiveJob(id) {
-      execArchiveJob(id)
+      execArchiveJob(id).then(() => {
+        this.loading = false
+        this.$notify({
+          title: 'Success',
+          message: '执行成功!',
+          type: 'success'
+        })
+      })
     },
     // 批量启用归档任务
     enableArchiveJob(data) {
