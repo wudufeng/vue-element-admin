@@ -124,10 +124,13 @@ export default {
         this.loading = false
       })
     },
-    handleSearch(params) {
+    handleSearch(params, done) {
       this.page.currentPage = 1
       this.query.condition = params
       this.handleGetList()
+      setTimeout(() => {
+        done()
+      }, 3000)
     },
     handleCurrentChange(currentPage) {
       this.page.currentPage = currentPage

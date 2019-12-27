@@ -42,7 +42,7 @@ export default {
     'triggerForm.platformCode': {
       handler(newVal, oldVal) {
         if (newVal === 'ALI') {
-          this.triggerForm.extraJSON = '[{"productStatus":"onSelling"},{"productStatus":"offline"}]'
+          this.triggerForm.extraJSON = '[{"productStatus":"onSelling"},{"productStatus":"offline"},{"productStatus":"service_delete"}]'
         } else if (newVal === 'rakuten') {
           this.triggerForm.extraJSON = '[{"searchKey":"【"},{"searchKey":"☆"},{"searchKey":"★"},{"searchKey":"ー"}]'
         } else if (newVal === 'LAZADA') {

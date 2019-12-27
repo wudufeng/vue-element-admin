@@ -98,7 +98,7 @@ export default {
           { label: '商品创建时间', prop: 'productCreateTime', rules: [{ required: true, message: '平台产品创建时间不能为空', trigger: 'blur' }] },
           { label: '商品修改时间', prop: 'productUpdateTime', rules: [{ required: true, message: '平台产品修改时间不能为空', trigger: 'blur' }] },
           { label: '创建时间', prop: 'createTime', hide: true, rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] },
-          { label: '修改时间', prop: 'updateTime', hide: true, rules: [{ required: true, message: '修改时间不能为空', trigger: 'blur' }] }
+          { label: '修改时间', prop: 'updateTime', hide: true, type: 'datetime', search: true, valueFormat: 'yyyyMMddHHmmss', searchRange: true, searchSpan: 12 }
         ]
       }
     }
@@ -128,11 +128,22 @@ export default {
         this.loading = false
       })
     },
-    handleSearch(params) {
+    handleSearch(params, done) {
+      if (params.updateTime != null && params.updateTime.length === 2) {
+        this.query.queryBeginTime = params.updateTime[0]
+        this.query.queryEndTime = params.updateTime[1]
+        params.updateTime = null
+      } else {
+        this.query.queryBeginTime = null
+        this.query.queryEndTime = null
+      }
       this.page.currentPage = 1
       this.query.extra.filter = params.filter
       this.query.condition = Object.assign({}, params)
       this.handleGetList()
+      setTimeout(() => {
+        done()
+      }, 3000)
     },
     handleCurrentChange(currentPage) {
       this.page.currentPage = currentPage

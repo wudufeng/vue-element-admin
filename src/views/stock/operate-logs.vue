@@ -111,17 +111,21 @@ export default {
         this.loading = false
       })
     },
-    handleSearch(params) {
+    handleSearch(params, done) {
       this.page.currentPage = 1
-      if (this.query.queryTime !== null && this.query.queryTime !== undefined && this.query.queryTime !== '' && this.query.queryTime.length === 2) {
-        this.query.queryBeginTime = this.query.queryTime[0]
-        this.query.queryEndTime = this.query.queryTime[1]
+      if (params.createTime != null && params.createTime.length === 2) {
+        this.query.queryBeginTime = params.createTime[0]
+        this.query.queryEndTime = params.createTime[1]
+        params.createTime = null
       } else {
         this.query.queryBeginTime = null
         this.query.queryEndTime = null
       }
       this.query.condition = params
       this.handleGetList()
+      setTimeout(() => {
+        done()
+      }, 3000)
     },
     handleCurrentChange(currentPage) {
       this.page.currentPage = currentPage

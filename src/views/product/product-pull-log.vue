@@ -231,18 +231,6 @@ export default {
         <el-button v-if="scope.row.executionStatus === 4 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row, '')">重试</el-button>
         <el-button v-if="scope.row.executionStatus === 4 && scope.row.platformCode === 'EB' " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row, 1)">切分任务重试</el-button>
       </template>
-      <template slot="search">
-        <el-form-item label="处理结束时间">
-          <el-date-picker
-            v-model="query.queryTime"
-            type="datetimerange"
-            value-format="yyyyMMddHHmmss"
-            range-separator="至"
-            start-placeholder="开始时间"
-            end-placeholder="结束时间"
-          />
-        </el-form-item>
-      </template>
     </avue-crud>
   </div>
 </template>
@@ -291,14 +279,14 @@ export default {
           { label: '平台编码', prop: 'platformCode', type: 'select', width: 120, search: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'MEESHO', value: 'Meesho' }] },
           { label: '账号ID', prop: 'accountId', search: true, width: 80, rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
           { label: '处理起始时间', prop: 'queryBeginTime', rules: [{ required: true, message: '处理起始时间不能为空', trigger: 'blur' }] },
-          { label: '处理结束时间', prop: 'queryEndTime', rules: [{ required: true, message: '处理结束时间不能为空', trigger: 'blur' }] },
+          { label: '处理结束时间', prop: 'queryEndTime', type: 'datetime', search: true, valueFormat: 'yyyyMMddHHmmss', searchRange: true, searchSpan: 12 },
           { label: '执行状态', prop: 'executionStatus', width: 100, type: 'select', search: true, dicData: [{ value: 1, label: '待处理' }, { value: 2, label: '处理中' }, { value: 3, label: '处理成功' }, { value: 4, label: '处理失败' }, { value: 5, label: '忽略' }] },
           { label: '数据量', prop: 'dataRecord', search: true, width: 80, rules: [{ required: true, message: '处理数据数量不能为空', trigger: 'blur' }] },
           { label: '重试次数', prop: 'retryCount', width: 80, rules: [{ required: true, message: '重试次数不能为空', trigger: 'blur' }] },
           { label: '异常消息', prop: 'message', rules: [{ required: true, message: '响应消息不能为空', trigger: 'blur' }] },
           { label: '创建时间', prop: 'createTime', rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] },
           { label: '修改时间', prop: 'updateTime', rules: [{ required: true, message: '修改时间不能为空', trigger: 'blur' }] },
-          { label: '请求参数', prop: 'extraJSON', hide: true, span: 24 }
+          { label: '请求参数', prop: 'extraJSON', hide: true, type: 'textarea', span: 24 }
         ]
       }
     }
@@ -317,10 +305,11 @@ export default {
         this.loading = false
       })
     },
-    handleSearch(params) {
-      if (this.query.queryTime !== null && this.query.queryTime !== undefined && this.query.queryTime !== '' && this.query.queryTime.length === 2) {
-        this.query.queryBeginTime = this.query.queryTime[0]
-        this.query.queryEndTime = this.query.queryTime[1]
+    handleSearch(params, done) {
+      if (params.queryEndTime != null && params.queryEndTime.length === 2) {
+        this.query.queryBeginTime = params.queryEndTime[0]
+        this.query.queryEndTime = params.queryEndTime[1]
+        params.queryEndTime = null
       } else {
         this.query.queryBeginTime = null
         this.query.queryEndTime = null
@@ -328,6 +317,9 @@ export default {
       this.page.currentPage = 1
       this.query.condition = params
       this.handleGetList()
+      setTimeout(() => {
+        done()
+      }, 3000)
     },
     handleCurrentChange(currentPage) {
       this.page.currentPage = currentPage
