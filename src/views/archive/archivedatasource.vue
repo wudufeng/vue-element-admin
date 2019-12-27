@@ -7,6 +7,7 @@
       :data="datas"
       :table-loading="loading"
       :page="page"
+      @on-load="handleSearch"
       @search-change="handleSearch"
       @row-save="handleAdd"
       @row-update="handleUpdate"
@@ -99,7 +100,7 @@ export default {
     this.routerVal = this.$route.path
   },
   methods: {
-    handleGetList() {
+    handleGetList(params, done) {
       this.loading = true
       this.query.current = this.page.currentPage
       this.query.size = this.page.pageSize
@@ -107,12 +108,13 @@ export default {
         this.datas = res.body.data
         this.page.total = res.body.totalRecord
         this.loading = false
+        done ? done() : ''
       })
     },
-    handleSearch(params) {
+    handleSearch(params, done) {
       this.page.currentPage = 1
       this.query.condition = params
-      this.handleGetList()
+      this.handleGetList(params, done)
     },
     handleCurrentChange(currentPage) {
       this.page.currentPage = currentPage
@@ -131,10 +133,8 @@ export default {
           message: '新增成功!',
           type: 'success'
         })
-        loading()
-        setTimeout(() => {
-          done()
-        }, 3000)
+        done()
+        this.handleGetList()
       })
     },
     handleUpdate(row, index, done, loading) {
@@ -145,7 +145,8 @@ export default {
           message: '更新成功!',
           type: 'success'
         })
-        loading()
+        done()
+        this.handleGetList()
       })
     },
     handleDel(scope) {
@@ -164,7 +165,7 @@ export default {
             message: '删除成功',
             type: 'success'
           })
-          this.getList()
+          this.handleGetList()
         })
     }
   }

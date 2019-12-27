@@ -180,7 +180,7 @@ export default {
           }
         ]
       },
-      selectData: []
+      selection: []
     }
   },
   created() {
@@ -189,22 +189,11 @@ export default {
   methods: {
     getSelectIds() {
       const arr = []
-      for (let i = 0; i < this.selectData.length; i++) {
-        arr.push(this.selectData[i].id)
+      for (let i = 0; i < this.selection.length; i++) {
+        arr.push(this.selection[i].id)
       }
       return arr
     },
-    // 执行归档
-    // test(data) {
-    //   alert(1)
-    //   alert(JSON.stringify(data))
-    //   alert(this.$refs.crud.store.states.selection)
-    //   console.info(this.multipleSelection)
-    // },
-    // handleSelectionChange(val) {
-    //   console.info(val)
-    //   this.multipleSelection = val
-    // },
     // 执行归档
     execArchiveJob(data) {
       execArchiveJob(data)
@@ -212,19 +201,52 @@ export default {
     // 批量启用归档任务
     enableArchiveJob(data) {
       if (data) {
-        enableArchiveJob(data)
-      } else if (this.selectData.length) {
-        enableArchiveJob(this.getSelectIds().join(','))
+        enableArchiveJob(data).then(() => {
+          this.loading = false
+          this.$notify({
+            title: 'Success',
+            message: '启用成功!',
+            type: 'success'
+          })
+          this.handleGetList()
+        })
+      } else if (this.selection.length) {
+        enableArchiveJob(this.getSelectIds().join(',')).then(() => {
+          this.loading = false
+          this.$notify({
+            title: 'Success',
+            message: '批量启用成功!',
+            type: 'success'
+          })
+          this.handleGetList()
+        })
       } else {
         this.$message.error('请选择数据')
       }
+      this.handleGetList()
     },
     // 批量禁用归档任务
     disableArchiveJob(data) {
       if (data) {
-        disableArchiveJob(data)
-      } else if (this.selectData.length) {
-        disableArchiveJob(this.getSelectIds().join(','))
+        disableArchiveJob(data).then(() => {
+          this.loading = false
+          this.$notify({
+            title: 'Success',
+            message: '禁用成功!',
+            type: 'success'
+          })
+          this.handleGetList()
+        })
+      } else if (this.selection.length) {
+        disableArchiveJob(this.getSelectIds().join(',')).then(() => {
+          this.loading = false
+          this.$notify({
+            title: 'Success',
+            message: '批量禁用成功!',
+            type: 'success'
+          })
+          this.handleGetList()
+        })
       } else {
         this.$message.error('请选择数据')
       }
@@ -294,12 +316,12 @@ export default {
             message: '删除成功',
             type: 'success'
           })
-          this.getList()
+          this.handleGetList()
         })
     },
     sortableChange() {},
-    handleSelectionChange(list) {
-      this.selectData = list
+    handleSelectionChange(selection) {
+      this.selection = selection
     }
   }
 }
