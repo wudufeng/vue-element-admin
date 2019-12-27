@@ -62,6 +62,7 @@ export default {
             addDisabled: true,
             editDisabled: true,
             hide: true,
+            showColumn: false,
             rules: [{ required: true, message: '不能为空', trigger: 'blur' }]
           },
           {

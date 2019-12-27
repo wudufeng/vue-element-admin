@@ -61,6 +61,7 @@ export default {
             addDisabled: true,
             editDisabled: true,
             hide: true,
+            showColumn: false,
             rules: [{ required: true, message: '不能为空', trigger: 'blur' }]
           },
           // { label: '任务id', prop: 'jobId', rules: [{ required: true, message: '任务id不能为空', trigger: 'blur' }] },
