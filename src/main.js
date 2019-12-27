@@ -31,9 +31,9 @@ import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
 import axios from 'axios'
 import VueResource from 'vue-resource'
-if (process.env.NODE_ENV === 'development') {
-  mockXHR()
-}
+// if (process.env.NODE_ENV === 'development') {
+mockXHR()
+// }
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
