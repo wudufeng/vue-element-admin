@@ -11,20 +11,7 @@
       @refresh-change="handleGetList"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-    >
-      <template slot="search">
-        <el-form-item label="处理时间">
-          <el-date-picker
-            v-model="query.queryTime"
-            type="datetimerange"
-            value-format="yyyyMMddHHmmss"
-            range-separator="至"
-            start-placeholder="开始时间"
-            end-placeholder="结束时间"
-          />
-        </el-form-item>
-      </template>
-    </avue-crud>
+    />
   </div>
 </template>
 
@@ -86,7 +73,7 @@ export default {
           { label: '处理批次号', prop: 'executionId', search: true, rules: [{ required: true, message: '处理批次号不能为空', trigger: 'blur' }] },
           { label: '重试次数', prop: 'retryCount', width: 80, hide: true, rules: [{ required: true, message: '失败重试次数不能为空', trigger: 'blur' }] },
           { label: '操作人', prop: 'operUserId', hide: true, rules: [{ required: true, message: '操作人不能为空', trigger: 'blur' }] },
-          { label: '处理时间', prop: 'createTime', rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] }
+          { label: '处理时间', prop: 'createTime', type: 'datetime', search: true, valueFormat: 'yyyyMMddHHmmss', searchRange: true, searchSpan: 12 }
         ]
       }
     }
