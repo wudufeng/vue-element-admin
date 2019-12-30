@@ -70,7 +70,7 @@ export default {
     this.routerVal = this.$route.path
   },
   methods: {
-    handleGetList() {
+    handleGetList(done) {
       this.loading = true
       this.query.current = this.page.currentPage
       this.query.size = this.page.pageSize
@@ -78,12 +78,13 @@ export default {
         this.datas = res.body.data
         this.page.total = res.body.totalRecord
         this.loading = false
+        done()
       })
     },
-    handleSearch(params) {
+    handleSearch(params, done) {
       this.page.currentPage = 1
       this.query.condition = params
-      this.handleGetList()
+      this.handleGetList(done)
     },
     handleCurrentChange(currentPage) {
       this.page.currentPage = currentPage

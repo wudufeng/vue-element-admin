@@ -113,8 +113,8 @@ export default {
             prop: 'sqlxx',
             icon: 'el-icon-edit-outline',
             column: [
-              { label: '排除条件', prop: 'exclusiveCondition', hide: true },
-              { label: '线上库存调整阈值', prop: 'onlineStockCondition', hide: true }
+              { label: '排除条件', prop: 'exclusiveCondition', hide: true, type: 'textarea' },
+              { label: '线上库存调整阈值', prop: 'onlineStockCondition', hide: true, type: 'textarea' }
             ]
           },
           {
@@ -148,10 +148,13 @@ export default {
         this.page.total = res.body.totalRecord
       })
     },
-    handleSearch(params) {
+    handleSearch(params, done) {
       this.page.currentPage = 1
       this.query.condition = params
       this.handleGetList()
+      setTimeout(() => {
+        done()
+      }, 3000)
     },
     handleAdd(row, done, loading) {
       this.data.id = ''
