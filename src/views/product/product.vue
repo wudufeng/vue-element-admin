@@ -77,12 +77,12 @@ export default {
           { label: '账号ID', prop: 'accountId', width: 80, search: true, rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
           { label: '平台商品编码', prop: 'platformProductId', search: true, rules: [{ required: true, message: '平台listing ID不能为空', trigger: 'blur' }] },
           { label: '商品名称', prop: 'name', rules: [{ required: true, message: '产品标题/名称不能为空', trigger: 'blur' }] },
-          { label: 'sku', prop: 'sku', search: true, rules: [{ required: true, message: '系统sku不能为空', trigger: 'blur' }] },
-          { label: '销售sku', prop: 'platformSku', search: true, rules: [{ required: true, message: '平台销售sku不能为空', trigger: 'blur' }] },
+          { label: 'sku', prop: 'sku', width: 85, search: true, rules: [{ required: true, message: '系统sku不能为空', trigger: 'blur' }] },
+          { label: '销售sku', prop: 'platformSku', width: 85, search: true, rules: [{ required: true, message: '平台销售sku不能为空', trigger: 'blur' }] },
           { label: '内部分类ID', prop: 'categoryId', hide: true, rules: [{ required: true, message: '内部分类ID不能为空', trigger: 'blur' }] },
           { label: '平台分类ID', prop: 'platformCategoryId', hide: true, rules: [{ required: true, message: '平台分类ID不能为空', trigger: 'blur' }] },
-          { label: '线上库存数', prop: 'quantity', search: true, width: 100, rules: [{ required: true, message: '线上库存数不能为空', trigger: 'blur' }] },
-          { label: '价格', prop: 'price', search: true, rules: [{ required: true, message: '价格不能为空', trigger: 'blur' }] },
+          { label: '在线库存', prop: 'quantity', width: 70, search: true, rules: [{ required: true, message: '线上库存数不能为空', trigger: 'blur' }] },
+          { label: '价格', prop: 'price', width: 70, search: true, rules: [{ required: true, message: '价格不能为空', trigger: 'blur' }] },
           { label: '币种', prop: 'currency', hide: true },
           { label: '浏览量', prop: 'pageview', hide: true, rules: [{ required: true, message: '浏览量不能为空', trigger: 'blur' }] },
           { label: '点赞/关注数', prop: 'interest', hide: true, rules: [{ required: true, message: '点赞/关注数不能为空', trigger: 'blur' }] },
@@ -96,7 +96,7 @@ export default {
           { label: '商品创建时间', prop: 'productCreateTime', rules: [{ required: true, message: '平台产品创建时间不能为空', trigger: 'blur' }] },
           { label: '商品修改时间', prop: 'productUpdateTime', rules: [{ required: true, message: '平台产品修改时间不能为空', trigger: 'blur' }] },
           { label: '创建时间', prop: 'createTime', hide: true, rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] },
-          { label: '修改时间', prop: 'updateTime', hide: true, type: 'datetime', search: true, valueFormat: 'yyyyMMddHHmmss', searchRange: true, searchSpan: 12 }
+          { label: '修改时间', prop: 'updateTime', type: 'datetime', search: true, valueFormat: 'yyyyMMddHHmmss', searchRange: true, searchSpan: 12 }
         ]
       }
     }
