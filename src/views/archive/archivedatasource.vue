@@ -70,6 +70,7 @@ export default {
             prop: 'type',
             search: true,
             type: 'select',
+            searchLabelWidth: 100,
             rules: [{ required: true, message: '数据源类型不能为空', trigger: 'blur' }],
             dicData: [{ label: '业务库', value: 1 }, { label: '归档库', value: 2 }]
           },

@@ -69,6 +69,7 @@ export default {
             prop: 'jobId',
             type: 'select',
             search: true,
+            searchFilterable: true,
             props: {
               label: 'name',
               value: 'id',

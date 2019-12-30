@@ -19,8 +19,8 @@
       @selection-change="handleSelectionChange"
     >
       <template slot="menu" slot-scope="scope">
-        <el-button type="text" icon="el-icon-unlock" size="small" @click.stop="enableArchiveJob(scope.row.id)">启用</el-button>
-        <el-button type="text" icon="el-icon-lock" size="small" @click.stop="disableArchiveJob(scope.row.id)">禁用</el-button>
+        <el-button v-if="scope.row.deleted" type="text" icon="el-icon-unlock" size="small" @click.stop="enableArchiveJob(scope.row.id)">启用</el-button>
+        <el-button v-if="!scope.row.deleted" type="text" icon="el-icon-lock" size="small" @click.stop="disableArchiveJob(scope.row.id)">禁用</el-button>
         <el-button type="text" icon="el-icon-video-play" size="small" @click.stop="execArchiveJob(scope.row.id)">执行</el-button>
       </template>
       <template slot="menuLeft">
@@ -66,12 +66,12 @@ export default {
       },
       datas: [],
       option: {
-        menuWidth: 330,
+        menuWidth: 200,
         selection: true,
         border: true,
         searchResetBtn: true,
         // viewBtn: true,
-        delBtn: true,
+        delBtn: false,
         headerAlign: 'center',
         align: 'center',
         labelWidth: '42%',
@@ -101,13 +101,16 @@ export default {
             label: 'cron',
             prop: 'execCron',
             rules: [{ required: true, message: 'cron不能为空', validator: validCron, trigger: 'blur' }],
-            value: '* 15 1 * * ?'
+            value: '* 15 1 * * ?',
+            width: '98%'
           },
           {
             label: '源数据源',
             prop: 'sourceDatasource',
             type: 'select',
+            width: '100%',
             search: true,
+            searchFilterable: true,
             rules: [{ required: true, message: '源数据源不能为空', trigger: 'blur' }],
             props: {
               label: 'name',
@@ -120,6 +123,8 @@ export default {
             label: '目标数据源',
             prop: 'targetDatasource',
             type: 'select',
+            width: '100%',
+            searchFilterable: true,
             rules: [{ required: true, message: '目标数据源不能为空', trigger: 'blur' }],
             props: {
               label: 'name',
@@ -150,6 +155,7 @@ export default {
             label: '事务大小',
             prop: 'txSize',
             value: 5000,
+            hide: true,
             rules: [{ required: true, message: '事务大小不能为空', trigger: 'blur' }],
             width: '78%'
           },
@@ -157,6 +163,7 @@ export default {
             label: '清理源数据',
             prop: 'isPurge',
             type: 'radio',
+            hide: true,
             rules: [{ required: true, message: '是否清理源数据不能为空', trigger: 'blur' }],
             dicData: [{ value: 1, label: '是' }, { value: 0, label: '否' }],
             value: 1,
@@ -176,6 +183,7 @@ export default {
             label: '过滤条件',
             prop: 'sqlWhere',
             type: 'textarea',
+            hide: true,
             rules: [{ required: true, message: '过滤条件不能为空', trigger: 'blur' }],
             value: 'create_time < DATE_ADD(CURDATE(),INTERVAL -180 DAY)'
           }
