@@ -35,7 +35,7 @@
         <el-row align="center">
           <el-col :span="24">
             <el-form-item style="margin-bottom: 40px;" prop="sku">
-              <MDinput v-model.trim="triggerForm.sku" name="name" required>
+              <MDinput v-model.trim="triggerForm.sku" name="name">
                 SKU
               </MDinput>
             </el-form-item>
@@ -81,7 +81,6 @@ export default {
       loading: false,
       ruleConfigListOptions: [],
       rules: {
-        sku: [{ required: true, message: '请输入要处理的Sku!', trigger: 'blur' }]
       },
       processResult: '',
       tempRoute: {}
@@ -99,6 +98,7 @@ export default {
       })
     },
     submitForm() {
+      if (this.loading === true) return
       this.$refs.triggerForm.validate(valid => {
         this.processResult = ''
         if (valid) {
@@ -111,8 +111,10 @@ export default {
               type: 'success',
               duration: 4000
             })
-            this.loading = false
           })
+          setTimeout(() => {
+            this.loading = false
+          }, 3000)
         } else {
           return false
         }
