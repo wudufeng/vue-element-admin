@@ -42,6 +42,9 @@ export default {
       handler(newVal, oldVal) {
         if (newVal === 'rakuten') {
           this.data.extraJSON = '[{"dateType":"3"},{"dateType":"4"},{"dateType":"5"},{"dateType":"6"}]'
+        } else
+        if (newVal === 'Flipkart') {
+          this.data.extraJSON = '[{"status":"new"},{"status":"cancelled"}]'
         } else {
           this.data.extraJSON = ''
         }

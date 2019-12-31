@@ -58,8 +58,8 @@ export default {
         indexLabel: '序号',
         column: [
           { label: '主键', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
-          { label: '平台代码', prop: 'platformCode', search: true, rules: [{ required: true, message: '平台代码不能为空', trigger: 'blur' }] },
-          { label: '系统订单号', prop: 'orderNo', search: true, rules: [{ required: true, message: 'ueb订单号不能为空', trigger: 'blur' }] },
+          { label: '平台代码', prop: 'platformCode', search: true, type: 'select', dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }] },
+          { label: '系统订单号', prop: 'orderNo', search: true, searchLabelWidth: 160, searchSpan: 12 },
           { label: '异常类型', prop: 'exceptionType', rules: [{ required: true, message: '异常类型:1-订单规则异常,2-订单利润亏损异常,3-订单sku异常,4-交易记录未知异常,5-匹配物流规则异常不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '订单规则异常' }, { value: 2, label: '订单利润亏损异常' }, { value: 3, label: '订单sku异常' }, { value: 4, label: '交易记录未知异常' }, { value: 5, label: '匹配物流规则异常' }] },
           { label: '异常原因', prop: 'exceptionReason', rules: [{ required: true, message: '异常原因不能为空', trigger: 'blur' }] }
         ]
