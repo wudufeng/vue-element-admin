@@ -17,6 +17,7 @@
 
 <script>
 import { getList } from '@/api/crud'
+import { fetchList } from '@/api/stock'
 
 export default {
   name: 'OfflineLogs',
@@ -55,7 +56,7 @@ export default {
         indexLabel: '序号',
         column: [
           { label: '主键', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
-          { label: '平台', prop: 'platformCode', type: 'select', search: { searchDefault: 'ALI' }, hide: true, rules: [{ required: true, message: '平台CODE不能为空', trigger: 'blur' }], dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'MEESHO', value: 'Meesho' }, { label: 'RAKUTEN', value: 'rakuten' }] },
+          { label: '平台', prop: 'platformCode', type: 'select', change: (val) => { this.getRuleConfig(val) }, search: { searchDefault: 'ALI' }, hide: true, rules: [{ required: true, message: '平台CODE不能为空', trigger: 'blur' }], dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'MEESHO', value: 'Meesho' }, { label: 'RAKUTEN', value: 'rakuten' }] },
           { label: '站点ID', prop: 'siteId', hide: true, rules: [{ required: true, message: '站点ID不能为空', trigger: 'blur' }] },
           { label: '账号ID', prop: 'accountId', search: true, rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
           { label: '系统商品编码', prop: 'productId', hide: true, rules: [{ required: true, message: '内部listing ID不能为空', trigger: 'blur' }] },
@@ -64,7 +65,7 @@ export default {
           { label: '平台多属性产品id', prop: 'platformItemId', hide: true, rules: [{ required: true, message: '平台多属性产品id不能为空', trigger: 'blur' }] },
           { label: 'sku', prop: 'sku', search: true, rules: [{ required: true, message: '系统sku不能为空', trigger: 'blur' }] },
           { label: '平台销售sku', prop: 'platformSku', hide: true, rules: [{ required: true, message: '平台销售sku不能为空', trigger: 'blur' }] },
-          { label: '操作类型', prop: 'operType', search: {}, rules: [{ required: true, message: '操作类型不能为空', trigger: 'blur' }] },
+          { label: '操作类型', prop: 'operType', search: {}, type: 'select', dicData: [{}] },
           { label: '处理状态', prop: 'status', type: 'select', width: 80, search: {}, rules: [{ required: true, message: '处理状态1：成功 , 2：失败不能为空', trigger: 'blur' }], dicData: [{ value: 1, label: '成功' }, { value: 2, label: '失败' }] },
           { label: '响应信息', prop: 'msg', rules: [{ required: true, message: '响应信息不能为空', trigger: 'blur' }] },
           { label: '处理批次号', prop: 'executionId', search: true, rules: [{ required: true, message: '处理批次号不能为空', trigger: 'blur' }] },
@@ -118,6 +119,18 @@ export default {
     handleSizeChange(pageSize) {
       this.page.pageSize = pageSize
       this.handleGetList()
+    },
+    getRuleConfig(val) {
+      if (val.value === '') return
+      const conditions = { 'condition': { 'platform': val.value }}
+      fetchList(conditions).then(response => {
+        if (!response.body.data) return
+        const dic = [{}]
+        for (const x in response.body.data) {
+          dic[x] = { label: response.body.data[x].id + '-' + response.body.data[x].description, value: response.body.data[x].id }
+        }
+        this.option.column[10].dicData = dic
+      })
     }
   }
 }

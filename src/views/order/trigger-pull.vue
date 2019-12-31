@@ -25,7 +25,7 @@ export default {
         labelWidth: '238',
         labelPosition: 'right',
         column: [
-          { label: '平台编码', prop: 'platformCode', type: 'select', rules: [{ required: true, message: '内部平台编码不能为空', trigger: 'blur' }], dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }] },
+          { label: '平台编码', prop: 'platformCode', type: 'select', rules: [{ required: true, message: '内部平台编码不能为空', trigger: 'blur' }], dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }] },
           { label: '账号ID', prop: 'accountId' },
           { label: '开始时间', prop: 'queryBeginTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss' },
           { label: '结束时间', prop: 'queryEndTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss' },
@@ -42,6 +42,9 @@ export default {
       handler(newVal, oldVal) {
         if (newVal === 'rakuten') {
           this.data.extraJSON = '[{"dateType":"3"},{"dateType":"4"},{"dateType":"5"},{"dateType":"6"}]'
+        } else
+        if (newVal === 'Flipkart') {
+          this.data.extraJSON = '[{"status":"new"},{"status":"cancelled"}]'
         } else {
           this.data.extraJSON = ''
         }

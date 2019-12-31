@@ -81,8 +81,8 @@ export default {
           { label: '消息出错时间', prop: 'messageTime', rules: [{ required: true, message: '消息出错时间不能为空', trigger: 'blur' }] },
           { label: '处理次数', prop: 'retryCount', width: 60, rules: [{ required: true, message: '处理次数不能为空', trigger: 'blur' }] },
           { label: '处理状态', prop: 'status', search: true, width: 60, rules: [{ required: true, message: '状态:1-待处理,2-已处理,3-忽略不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '待处理' }, { value: 2, label: '已处理' }, { value: 3, label: '忽略' }, { value: 4, label: '处理中' }] },
-          { label: '创建时间', prop: 'createTime', rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] },
-          { label: '修改时间', prop: 'updateTime', rules: [{ required: true, message: '修改时间不能为空', trigger: 'blur' }] }
+          { label: '创建时间', prop: 'createTime', type: 'datetime', rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] },
+          { label: '修改时间', prop: 'updateTime', type: 'datetime', rules: [{ required: true, message: '修改时间不能为空', trigger: 'blur' }], search: true, valueFormat: 'yyyyMMddHHmmss', searchRange: true, searchSpan: 12 }
         ]
       }
     }
