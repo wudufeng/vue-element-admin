@@ -186,6 +186,17 @@ export default {
             hide: true,
             rules: [{ required: true, message: '过滤条件不能为空', trigger: 'blur' }],
             value: 'create_time < DATE_ADD(CURDATE(),INTERVAL -180 DAY)'
+          },
+          {
+            label: '批量操作',
+            prop: 'isBatch',
+            type: 'radio',
+            hide: true,
+            searchTip: '非自增长主键请勿使用批量操作',
+            rules: [{ required: true, message: '是否批量操作不能为空', trigger: 'blur' }],
+            dicData: [{ value: 1, label: '是' }, { value: 0, label: '否' }],
+            value: 1,
+            width: '91%'
           }
         ]
       },
