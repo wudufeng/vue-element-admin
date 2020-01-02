@@ -77,13 +77,6 @@ export default {
             },
             dicUrl: process.env.VUE_APP_BASE_API + '/archive/archive-job/dic'
           },
-          {
-            label: '执行状态',
-            prop: 'status',
-            search: true,
-            type: 'select',
-            dicData: [{ value: 1, label: '失败' }, { value: 0, label: '成功' }]
-          },
           { label: '启动时间', prop: 'jobStartTime' },
           { label: '结束时间', prop: 'jobEndTime' },
           { label: '耗时(秒)', prop: 'jobSpend' },
@@ -102,6 +95,30 @@ export default {
             maxRows: 25,
             minRows: 25,
             span: 24
+          },
+          {
+            label: '日志时间起始',
+            prop: 'queryBeginTime',
+            type: 'datetime',
+            hide: true,
+            valueFormat: 'yyyyMMddHHmmss'
+          },
+          {
+            label: '日志时间',
+            prop: 'queryEndTime',
+            type: 'datetime',
+            search: true,
+            searchRange: true,
+            hide: true,
+            searchLabelWidth: 100,
+            valueFormat: 'yyyyMMddHHmmss'
+          },
+          {
+            label: '执行状态',
+            prop: 'status',
+            search: true,
+            type: 'select',
+            dicData: [{ value: 1, label: '失败' }, { value: 0, label: '成功' }]
           }
         ]
       }
@@ -112,6 +129,14 @@ export default {
   },
   methods: {
     handleGetList(params, done) {
+      if (params.queryEndTime != null && params.queryEndTime.length === 2) {
+        this.query.queryBeginTime = params.queryEndTime[0]
+        this.query.queryEndTime = params.queryEndTime[1]
+        params.queryEndTime = null
+      } else {
+        this.query.queryBeginTime = null
+        this.query.queryEndTime = null
+      }
       this.loading = true
       this.query.current = this.page.currentPage
       this.query.size = this.page.pageSize

@@ -101,7 +101,7 @@ export default {
             label: 'cron',
             prop: 'execCron',
             rules: [{ required: true, message: 'cron不能为空', validator: validCron, trigger: 'blur' }],
-            value: '* 15 1 * * ?',
+            value: '0 15 1 * * ?',
             width: '98%'
           },
           {
