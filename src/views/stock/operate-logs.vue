@@ -125,7 +125,7 @@ export default {
     },
     getRuleConfig(val) {
       if (val.value === '') return
-      const conditions = { 'condition': { 'platform': val.value }}
+      const conditions = { 'condition': { 'platformCode': val.value }}
       fetchList(conditions).then(response => {
         if (!response.body.data) return
         const dic = [{}]
