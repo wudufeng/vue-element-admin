@@ -59,7 +59,7 @@ export function getEventLogList(data) {
 
 export function getPullProductLogList(data) {
   return request({
-    url: '/sale/app/product/getPullProductLogPage',
+    url: '/sale/app/product/pull-log/list',
     method: 'post',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'

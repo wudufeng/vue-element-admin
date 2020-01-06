@@ -58,7 +58,7 @@ export default {
         indexLabel: '序号',
         column: [
           { label: '规则ID', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true },
-          { label: '平台', prop: 'platform', type: 'select', valueDefault: 'ALI', hide: true, search: { searchDefault: 'ALI' }, editDisabled: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'MEESHO', value: 'Meesho' }] },
+          { label: '平台', prop: 'platformCode', type: 'select', valueDefault: 'ALI', hide: true, search: { searchDefault: 'ALI' }, editDisabled: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'MEESHO', value: 'Meesho' }] },
           { label: '规则类型', prop: 'ruleType', type: 'select', dicData: [{ value: 'AUTO', label: '自动触发' }, { value: 'MANUAL', label: '人工触发' }] },
           { label: '仓库编码', prop: 'warehouseIds', rules: [{ required: true, message: '请输入仓库编码', trigger: 'blur' }] },
           { label: '库存汇总类型', prop: 'stockTypes', type: 'checkbox', dicData: [{ value: 'AVAILABLE', label: '可用' }, { value: 'TRANSIT', label: '在途' }, { value: 'TRUE', label: '实际' }] },
@@ -86,7 +86,7 @@ export default {
             icon: 'el-icon-edit-outline',
             column: [
               { label: '规则ID', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true },
-              { label: '平台', prop: 'platform', type: 'select', valueDefault: 'ALI', hide: true, search: true, editDisabled: true, rules: [{ required: true, message: '请选择平台编码', trigger: 'change' }], dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'MEESHO', value: 'Meesho' }] },
+              { label: '平台', prop: 'platformCode', type: 'select', valueDefault: 'ALI', hide: true, search: true, editDisabled: true, rules: [{ required: true, message: '请选择平台编码', trigger: 'change' }], dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'MEESHO', value: 'Meesho' }] },
               { label: '规则类型', prop: 'ruleType', type: 'select', rules: [{ required: true, message: '请选择规则类型', trigger: 'change' }], dicData: [{ value: 'AUTO', label: '自动触发' }, { value: 'MANUAL', label: '人工触发' }] },
               { label: '仓库编码', prop: 'warehouseIds', rules: [{ required: true, message: '请输入仓库编码', trigger: 'change' }] },
               { label: '库存汇总类型', prop: 'stockTypes', type: 'checkbox', rules: [{ required: true, message: '请输入库存汇总类型', trigger: 'change' }], dicData: [{ value: 'AVAILABLE', label: '可用' }, { value: 'TRANSIT', label: '在途' }, { value: 'TRUE', label: '实际' }] },
@@ -113,8 +113,8 @@ export default {
             prop: 'sqlxx',
             icon: 'el-icon-edit-outline',
             column: [
-              { label: '排除条件', prop: 'exclusiveCondition', hide: true, type: 'textarea' },
-              { label: '线上库存调整阈值', prop: 'onlineStockCondition', hide: true, type: 'textarea' }
+              { label: '排除条件', prop: 'exclusiveCondition', hide: true },
+              { label: '线上库存调整阈值', prop: 'onlineStockCondition', hide: true }
             ]
           },
           {
@@ -137,7 +137,7 @@ export default {
   },
   methods: {
     handleGetList() {
-      if (this.query.condition.platform === undefined || this.query.condition.platform === '') {
+      if (this.query.condition.platformCode === undefined || this.query.condition.platformCode === '') {
         this.$message.warning('请选择平台!')
         return
       }
@@ -154,7 +154,7 @@ export default {
       this.handleGetList()
       setTimeout(() => {
         done()
-      }, 3000)
+      }, 2000)
     },
     handleAdd(row, done, loading) {
       this.data.id = ''

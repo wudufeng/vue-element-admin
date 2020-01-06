@@ -25,6 +25,12 @@ const stockRouter = {
       meta: { title: '触发调整' }
     },
     {
+      path: 'operate-request',
+      component: () => import('@/views/stock/operate-request'),
+      name: 'StockOperateRequest',
+      meta: { title: '操作任务' }
+    },
+    {
       path: 'operate-logs',
       component: () => import('@/views/stock/operate-logs'),
       name: 'OperateLogs',
