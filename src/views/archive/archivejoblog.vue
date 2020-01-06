@@ -70,6 +70,7 @@ export default {
             type: 'select',
             search: true,
             searchFilterable: true,
+            sortable: true,
             props: {
               label: 'name',
               value: 'id',
@@ -79,13 +80,14 @@ export default {
           },
           { label: '启动时间', prop: 'jobStartTime' },
           { label: '结束时间', prop: 'jobEndTime' },
-          { label: '耗时(秒)', prop: 'jobSpend' },
-          { label: '归档数量', prop: 'count' },
+          { label: '耗时(秒)', prop: 'jobSpend', sortable: true },
+          { label: '归档数量', prop: 'count', sortable: true },
           {
             label: '日志时间',
             prop: 'createTime',
             addDisplay: false,
-            editDisplay: false
+            editDisplay: false,
+            sortable: true
           },
           {
             label: '日志详情',
