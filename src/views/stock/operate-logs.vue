@@ -68,7 +68,7 @@ export default {
           { label: '当时库存', prop: 'stock', width: 80, rules: [{ required: true, message: '当前库存数不能为空', trigger: 'blur' }] },
           { label: '原线上库存', prop: 'oldQuantity', width: 90, rules: [{ required: true, message: '原线上库存数不能为空', trigger: 'blur' }] },
           { label: '更新库存', prop: 'newQuantity', width: 80, rules: [{ required: true, message: '更新线上库存数不能为空', trigger: 'blur' }] },
-          { label: '操作类型', prop: 'operType', search: {}, type: 'select', dicData: [{}] },
+          { label: '操作类型', prop: 'operType', type: 'select', search: true, dicData: [{ label: '', value: '' }] },
           { label: '处理状态', prop: 'status', type: 'select', width: 80, search: {}, rules: [{ required: true, message: '处理状态1：成功 , 2：失败不能为空', trigger: 'blur' }], dicData: [{ value: 1, label: '成功' }, { value: 2, label: '失败' }] },
           { label: '响应信息', prop: 'msg', rules: [{ required: true, message: '响应信息不能为空', trigger: 'blur' }] },
           { label: '处理批次号', prop: 'executionId', search: true },
@@ -130,7 +130,7 @@ export default {
         if (!response.body.data) return
         const dic = [{}]
         for (const x in response.body.data) {
-          dic[x] = { label: response.body.data[x].id + '-' + response.body.data[x].description, value: response.body.data[x].id }
+          dic[x] = { label: response.body.data[x].id + '-' + response.body.data[x].description, value: parseInt(response.body.data[x].id) }
         }
         this.option.column[13].dicData = dic
       })

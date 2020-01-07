@@ -127,7 +127,7 @@ export default {
         if (!response.body.data) return
         const dic = [{}]
         for (const x in response.body.data) {
-          dic[x] = { label: response.body.data[x].id + '-' + response.body.data[x].description, value: response.body.data[x].id }
+          dic[x] = { label: response.body.data[x].id + '-' + response.body.data[x].description, value: parseInt(response.body.data[x].id) }
         }
         this.option.column[10].dicData = dic
       })
