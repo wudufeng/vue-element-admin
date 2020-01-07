@@ -95,6 +95,7 @@ export default {
             label: '任务名',
             prop: 'name',
             search: true,
+            sortable: true,
             rules: [{ required: true, message: '归档任务名不能为空', trigger: 'blur' }]
           },
           {
