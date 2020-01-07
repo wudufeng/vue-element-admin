@@ -18,7 +18,7 @@
       <template slot="menu" slot-scope="scope">
         <el-button v-if="scope.row.executionStatus === 1" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row, '')">执行</el-button>
         <el-button v-if="scope.row.executionStatus === 4 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row, '')">重试</el-button>
-        <el-button v-if="scope.row.executionStatus === 4 && scope.row.platformCode === 'EB' " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row, 1)">切分任务重试</el-button>
+        <el-button v-if="scope.row.executionStatus === 4 && (scope.row.platformCode === 'EB' || scope.row.platformCode === 'KF')" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row, 1)">切分任务重试</el-button>
       </template>
     </avue-crud>
   </div>
