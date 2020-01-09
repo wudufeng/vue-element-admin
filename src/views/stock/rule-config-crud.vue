@@ -53,7 +53,7 @@ export default {
         index: true,
         headerAlign: 'center',
         align: 'center',
-        labelWidth: '42%',
+        labelWidth: '142',
         dialogType: 'drawer',
         indexLabel: '序号',
         column: [
@@ -114,7 +114,7 @@ export default {
             icon: 'el-icon-edit-outline',
             column: [
               { label: '排除条件', prop: 'exclusiveCondition', hide: true },
-              { label: '线上库存调整阈值', prop: 'onlineStockCondition', hide: true }
+              { label: '线上库存调整阈值', prop: 'onlineStockCondition', hide: true, type: 'textarea', span: 24 }
             ]
           },
           {

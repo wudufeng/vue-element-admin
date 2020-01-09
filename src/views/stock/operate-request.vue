@@ -14,7 +14,12 @@
       @refresh-change="handleGetList"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-    />
+    >
+      <template slot="menu" slot-scope="scope">
+        <el-button v-if="scope.row.executionStatus === 4 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row)">重试</el-button>
+        <el-button v-if="scope.row.executionStatus === 4 " icon="el-icon-delete" class="el-button el-button--text el-button--small" @click="ignore(scope.row)">忽略</el-button>
+      </template>
+    </avue-crud>
   </div>
 </template>
 
@@ -56,7 +61,7 @@ export default {
         labelWidth: '164',
         dialogType: 'drawer',
         indexLabel: '序号',
-        menuWidth: 126,
+        menuWidth: 129,
         column: [
           { label: '任务编号', prop: 'id', search: true, addDisplay: false, editDisplay: false, addDisabled: true, editDisabled: true, hide: true, showColumn: false, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
           { label: '平台', prop: 'platformCode', search: true, type: 'select', change: (val) => { this.getRuleConfig(val) }, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'MEESHO', value: 'Meesho' }] },
@@ -174,6 +179,28 @@ export default {
           dic[x] = { label: response.body.data[x].id + '-' + response.body.data[x].description, value: response.body.data[x].id }
         }
         this.option.column[10].dicData = dic
+      })
+    },
+    retry(row) {
+      update(this.routerVal + '/' + row.platformCode + '/retry?id=' + row.id + '&version=' + row.version).then(response => {
+        this.$notify({
+          title: '成功',
+          message: '处理成功!',
+          type: 'success',
+          duration: 2000
+        })
+        row.executionStatus = 2
+      })
+    },
+    ignore(row) {
+      update(this.routerVal + '/' + row.platformCode + '/ignore?id=' + row.id + '&version=' + row.version).then(response => {
+        this.$notify({
+          title: '成功',
+          message: '处理成功!',
+          type: 'success',
+          duration: 2000
+        })
+        row.executionStatus = 2
       })
     }
   }
