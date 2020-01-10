@@ -55,7 +55,7 @@ export default {
         delBtn: false,
         addBtn: false,
         editBtn: true,
-        menu: false,
+        menu: true,
         excelBtn: true,
         index: true,
         headerAlign: 'center',
