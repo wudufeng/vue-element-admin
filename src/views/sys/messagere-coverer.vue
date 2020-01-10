@@ -67,10 +67,10 @@ export default {
         selection: true,
         column: [
           { label: '主键', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
-          { label: '应用名称', prop: 'applicationName', rules: [{ required: true, message: '应用名称不能为空', trigger: 'blur' }] },
+          { label: '应用名称', prop: 'applicationName', search: true, rules: [{ required: true, message: '应用名称不能为空', trigger: 'blur' }] },
           { label: '虚拟主机', prop: 'virtualHost', hide: true, rules: [{ required: true, message: '虚拟主机不能为空', trigger: 'blur' }] },
-          { label: '交换机', prop: 'exchange', rules: [{ required: true, message: '交换机不能为空', trigger: 'blur' }] },
-          { label: '路由名', prop: 'routingKey', rules: [{ required: true, message: '路由名不能为空', trigger: 'blur' }] },
+          { label: '交换机', prop: 'exchange', search: true, rules: [{ required: true, message: '交换机不能为空', trigger: 'blur' }] },
+          { label: '路由名', prop: 'routingKey', search: true, rules: [{ required: true, message: '路由名不能为空', trigger: 'blur' }] },
           { label: '队列名称', prop: 'consumerQueue', search: true, rules: [{ required: true, message: '队列名称不能为空', trigger: 'blur' }] },
           { label: '消息编号', prop: 'messageId', hide: true, rules: [{ required: true, message: '消息编号不能为空', trigger: 'blur' }] },
           { label: '异常机器IP', prop: 'ip', rules: [{ required: true, message: '异常机器IP不能为空', trigger: 'blur' }] },

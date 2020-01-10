@@ -55,6 +55,8 @@ export default {
         delBtn: false,
         addBtn: false,
         editBtn: true,
+        menu: false,
+        excelBtn: true,
         index: true,
         headerAlign: 'center',
         align: 'center',
@@ -82,7 +84,7 @@ export default {
           { label: '处理信息', prop: 'respMsg', rules: [{ required: true, message: '处理信息不能为空', trigger: 'blur' }] },
           { label: '重试次数', prop: 'retryCount', hide: true, rules: [{ required: true, message: '重试次数不能为空', trigger: 'blur' }] },
           { label: '操作人', prop: 'operUserId', hide: true, rules: [{ required: true, message: '操作人不能为空', trigger: 'blur' }] },
-          { label: '乐观锁', prop: 'version', hide: true },
+          { label: '版本号', prop: 'version', hide: true },
           { label: '创建时间', prop: 'createTime', type: 'datetime' },
           { label: '修改时间', prop: 'updateTime', type: 'datetime', search: true, valueFormat: 'yyyyMMddHHmmss', searchRange: true, searchSpan: 12 }
         ]
