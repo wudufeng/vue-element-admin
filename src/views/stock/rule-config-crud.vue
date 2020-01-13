@@ -50,6 +50,7 @@ export default {
         border: true,
         viewBtn: true,
         delBtn: false,
+		excelBtn: true,
         index: true,
         headerAlign: 'center',
         align: 'center',
