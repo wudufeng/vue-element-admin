@@ -3,6 +3,6 @@ const platformList = [
   { label: 'RAKUTEN', value: 'rakuten' },
   { label: 'FLIPKART', value: 'Flipkart' },
   { label: 'JOYBUY', value: 'joybuy' },
-  { label: 'ML', value: 'MERCADOLIBRE' }
+  { label: 'MERCADOLIBRE', value: 'ML' }
 ]
 export default platformList
