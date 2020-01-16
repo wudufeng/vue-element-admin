@@ -25,7 +25,7 @@ export default {
         labelWidth: '238',
         labelPosition: 'right',
         column: [
-          { label: '平台编码', prop: 'platformCode', type: 'select', rules: [{ required: true, message: '内部平台编码不能为空', trigger: 'blur' }], dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }] },
+          { label: '平台编码', prop: 'platformCode', type: 'select', rules: [{ required: true, message: '内部平台编码不能为空', trigger: 'blur' }], dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }, { label: 'ML', value: 'mercadolibre' }] },
           { label: '账号ID', prop: 'accountId' },
           { label: '开始时间', prop: 'queryBeginTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss' },
           { label: '结束时间', prop: 'queryEndTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss' },

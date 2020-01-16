@@ -66,7 +66,7 @@ export default {
         indexLabel: '序号',
         column: [
           { label: '订单ID', prop: 'id', viewDisplay: false, addDisplay: false, addDisabled: true, editDisabled: true, hide: true },
-          { label: '平台编码', prop: 'platformCode', viewDisplay: false, type: 'select', search: true, dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }] },
+          { label: '平台编码', prop: 'platformCode', viewDisplay: false, type: 'select', search: true, dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }, { label: 'ML', value: 'mercadolibre' }] },
           { label: '账号ID', prop: 'accountId', search: true, viewDisplay: false, width: 80 },
           { label: '平台订单编号', prop: 'platformOrderId', search: true, viewDisplay: false },
           { label: '平台订单状态', prop: 'platformOrderStatus', viewDisplay: false },

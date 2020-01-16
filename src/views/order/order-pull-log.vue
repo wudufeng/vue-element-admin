@@ -63,7 +63,7 @@ export default {
         indexLabel: '序号',
         column: [
           { label: '执行编号', prop: 'executionId', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '执行编号不能为空', trigger: 'blur' }] },
-          { label: '平台编码', prop: 'platformCode', type: 'select', search: true, dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }] },
+          { label: '平台编码', prop: 'platformCode', type: 'select', search: true, dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }, { label: 'ML', value: 'mercadolibre' }] },
           { label: '账号ID', prop: 'accountId', width: 80, search: true, rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
           { label: '拉取起始时间', prop: 'queryBeginTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss', rules: [{ required: true, message: '处理起始时间不能为空', trigger: 'blur' }] },
           { label: '拉取结束时间', prop: 'queryEndTime', type: 'datetime', search: true, valueFormat: 'yyyyMMddHHmmss', searchRange: true, searchSpan: 12 },

@@ -58,8 +58,8 @@ export default {
         indexLabel: '序号',
         column: [
           { label: '主键', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
-          { label: '平台', prop: 'platformCode', search: true, type: 'select', dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }] },
-          { label: '订单号', prop: 'orderNo', search: true, type: 'select', dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }] },
+          { label: '平台', prop: 'platformCode', search: true, type: 'select', dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }, { label: 'ML', value: 'mercadolibre' }] },
+          { label: '订单号', prop: 'orderNo', search: true, type: 'select', dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }, { label: 'ML', value: 'mercadolibre' }] },
           { label: '交易号', prop: 'transactionNo', search: true, rules: [{ required: true, message: '交易号不能为空', trigger: 'blur' }] },
           { label: '站点', prop: 'site', hide: true, rules: [{ required: true, message: '站点不能为空', trigger: 'blur' }] },
           { label: '产品标题', prop: 'title', hide: true, rules: [{ required: true, message: '产品标题不能为空', trigger: 'blur' }] },

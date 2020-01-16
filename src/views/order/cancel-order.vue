@@ -61,7 +61,7 @@ export default {
         indexLabel: '序号',
         column: [
           { label: '主键', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
-          { label: '平台代码', prop: 'platformCode', search: true, type: 'select', dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }] },
+          { label: '平台代码', prop: 'platformCode', search: true, type: 'select', dicData: [{ label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }, { label: 'FLIPKART', value: 'Flipkart' }, { label: 'JOYBUY', value: 'joybuy' }, { label: 'ML', value: 'mercadolibre' }] },
           { label: '账号', prop: 'accountId', search: true, rules: [{ required: true, message: '账号不能为空', trigger: 'blur' }] },
           { label: '系统订单号', prop: 'orderNo', search: true, rules: [{ required: true, message: 'ueb订单号不能为空', trigger: 'blur' }] },
           { label: '平台订单号', prop: 'platformOrderId', search: true, rules: [{ required: true, message: '平台订单号不能为空', trigger: 'blur' }] },
