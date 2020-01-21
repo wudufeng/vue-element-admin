@@ -39,13 +39,13 @@ export default {
       loading: false,
       query: {
         current: 1,
-        size: 100,
+        size: 1000,
         condition: { }
       },
       page: {
         total: 0,
         currentPage: 1,
-        pageSize: 100
+        pageSize: 1000
       },
       datas: [],
       option: {
