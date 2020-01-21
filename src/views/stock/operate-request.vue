@@ -64,7 +64,7 @@ export default {
         dialogType: 'drawer',
         indexLabel: '序号',
         menuWidth: 129,
-		pageSizes: [10, 20, 30, 50, 100, 1000, 5000],
+		pageSizes: [10, 50, 100, 1000, 5000],
         column: [
           { label: '任务编号', prop: 'id', search: true, addDisplay: false, editDisplay: false, addDisabled: true, editDisabled: true, hide: true, showColumn: false, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
           { label: '平台', prop: 'platformCode', search: true, type: 'select', change: (val) => { this.getRuleConfig(val) }, cascaderItem: ['accountId'], dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'MEESHO', value: 'Meesho' }] },
