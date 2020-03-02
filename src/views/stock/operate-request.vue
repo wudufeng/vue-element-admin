@@ -184,7 +184,7 @@ export default {
         for (const x in response.body.data) {
           dic[x] = { label: response.body.data[x].id + '-' + response.body.data[x].description, value: response.body.data[x].id }
         }
-        this.option.column[10].dicData = dic
+        this.option.column[12].dicData = dic
       })
     },
     retry(row) {
