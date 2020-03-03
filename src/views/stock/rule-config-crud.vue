@@ -126,8 +126,8 @@ export default {
               { label: '设置库存数', prop: 'updateStock', dicData: [{ value: -1, label: '实时库存' }, { value: -2, label: '刊登库存' }], rules: [{ required: true, message: '请设置库存数', trigger: 'blur' }] },
               { label: '下架/删除', prop: 'offline', type: 'select', dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
               { label: '判断多属性', prop: 'offlineConsiderOtherSku', type: 'select', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
-              { label: '判断活动', prop: 'dropActivity', type: 'select', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] }
-              { label: '是否触发拉取listing', prop: 'triggerListing', hide: false, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
+              { label: '判断活动', prop: 'dropActivity', type: 'select', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
+              { label: '是否触发拉取listing', prop: 'triggerListing', hide: false, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] }
             ]
           }
         ]
