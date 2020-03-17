@@ -45,7 +45,7 @@ export default {
       page: {
         total: 0,
         currentPage: 1,
-		pageSizes: [10, 50, 100, 1000, 5000],
+        pageSizes: [10, 50, 100, 1000, 5000],
         pageSize: 50
       },
       datas: [],
