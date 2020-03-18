@@ -78,7 +78,7 @@ export default {
           { label: '原库存', prop: 'onlineStock' },
           { label: '修改库存', prop: 'updateStock' },
           { label: 'SKU状态', prop: 'skuStatus', search: true, type: 'select', dicData: [{ value: 4, label: '在售中' }, { value: 5, label: '已滞销' }, { value: 6, label: '待清仓' }, { value: 7, label: '已停售' }] },
-          { label: '操作类型', prop: 'actionType', search: true, type: 'select', dicData: [{ value: 'SYNCHRONIZE_STOCK', label: '调整库存' }, { value: 'OFFLINE', label: '下架' }] },
+          { label: '操作类型', prop: 'actionType', search: true, type: 'select', dicData: [{ value: 'SYNCHRONIZE_STOCK', label: '修改库存' }, { value: 'OUT_OF_STOCK', label: '调0' }, { value: 'OFFLINE', label: '下架' }] },
           { label: '调整规则', prop: 'ruleConfigId', type: 'select', search: true, dicData: [{}] },
           { label: '执行状态', prop: 'executionStatus', search: true, type: 'select', dicData: [{ value: 1, label: '待处理' }, { value: 2, label: '处理中' }, { value: 3, label: '处理成功' }, { value: 4, label: '处理失败' }, { value: 5, label: '忽略异常' }] },
           { label: '请求ID', prop: 'requestId', hide: true, search: true },
