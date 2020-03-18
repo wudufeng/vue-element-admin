@@ -50,7 +50,7 @@ export default {
         border: true,
         viewBtn: true,
         delBtn: false,
-		excelBtn: true,
+        excelBtn: true,
         index: true,
         headerAlign: 'center',
         align: 'center',
@@ -60,19 +60,19 @@ export default {
         column: [
           { label: '规则ID', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true },
           { label: '平台', prop: 'platformCode', type: 'select', valueDefault: 'ALI', hide: true, search: { searchDefault: 'ALI' }, editDisabled: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'MEESHO', value: 'Meesho' }] },
-          { label: '规则类型', prop: 'ruleType', type: 'select', dicData: [{ value: 'AUTO', label: '自动触发' }, { value: 'MANUAL', label: '人工触发' }] },
+          { label: '规则类型', prop: 'ruleType', type: 'select', dicData: [{ value: 'AUTO', label: '自动触发' }, { value: 'MANUAL', label: '接口触发' }] },
           { label: '仓库编码', prop: 'warehouseIds', rules: [{ required: true, message: '请输入仓库编码', trigger: 'blur' }] },
           { label: '库存汇总类型', prop: 'stockTypes', type: 'checkbox', dicData: [{ value: 'AVAILABLE', label: '可用' }, { value: 'TRANSIT', label: '在途' }, { value: 'TRUE', label: '实际' }] },
           { label: '当前库存数量条件', prop: 'stockCondition' },
           { label: 'Sku状态', prop: 'statusCondition', type: 'checkbox', dicData: [{ value: 4, label: '在售中' }, { value: 5, label: '已滞销' }, { value: 6, label: '待清仓' }, { value: 7, label: '已停售' }] },
           { label: 'Sku创建时间', prop: 'createTimeCondition', hide: true },
-          { label: '断货状态', prop: 'shortOfSupplyCondition', type: 'checkbox', dicData: [{ value: 'NEVER_SET', label: '未设置' }, { value: 'CANCAL', label: '已取消' }, { value: 'EFFECTIVE', label: '生效中' }] },
+          { label: '断货状态', prop: 'shortOfSupplyCondition', type: 'checkbox', dicData: [{ value: 'NEVER_SET', label: '未设置' }, { value: 'CANCEL', label: '已取消' }, { value: 'EFFECTIVE', label: '生效中' }] },
           { label: '采购周期', prop: 'purchasingCycleCondition', hide: true },
           { label: '判断侵权', prop: 'checkInfringement', hide: true, type: 'select', dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
-          { label: '排除条件', prop: 'exclusiveCondition', hide: true },
+          { label: '是否判断排除条件', prop: 'exclusiveCondition', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
           { label: '线上库存调整阈值', prop: 'onlineStockCondition', hide: true },
           { label: '设置库存数', prop: 'updateStock', dicData: [{ value: -1, label: '实时库存' }, { value: -2, label: '刊登库存' }] },
-          { label: '是否触发拉取listing', prop: 'triggerListing', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
+          { label: '是否触发拉取listing', prop: 'triggerListing', type: 'select', hide: false, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
           { label: '下架/删除', prop: 'offline', type: 'select', dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
           { label: '判断多属性', prop: 'offlineConsiderOtherSku', type: 'select', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
           { label: '判断活动', prop: 'dropActivity', type: 'select', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
@@ -88,7 +88,7 @@ export default {
             column: [
               { label: '规则ID', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true },
               { label: '平台', prop: 'platformCode', type: 'select', valueDefault: 'ALI', hide: true, search: true, editDisabled: true, rules: [{ required: true, message: '请选择平台编码', trigger: 'change' }], dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'MEESHO', value: 'Meesho' }] },
-              { label: '规则类型', prop: 'ruleType', type: 'select', rules: [{ required: true, message: '请选择规则类型', trigger: 'change' }], dicData: [{ value: 'AUTO', label: '自动触发' }, { value: 'MANUAL', label: '人工触发' }] },
+              { label: '规则类型', prop: 'ruleType', type: 'select', rules: [{ required: true, message: '请选择规则类型', trigger: 'change' }], dicData: [{ value: 'AUTO', label: '自动触发' }, { value: 'MANUAL', label: '接口触发' }] },
               { label: '仓库编码', prop: 'warehouseIds', rules: [{ required: true, message: '请输入仓库编码', trigger: 'change' }] },
               { label: '库存汇总类型', prop: 'stockTypes', type: 'checkbox', rules: [{ required: true, message: '请输入库存汇总类型', trigger: 'change' }], dicData: [{ value: 'AVAILABLE', label: '可用' }, { value: 'TRANSIT', label: '在途' }, { value: 'TRUE', label: '实际' }] },
               { label: '操作类型', prop: 'operType', hide: true },
@@ -104,7 +104,7 @@ export default {
               { label: '当前库存数量条件', prop: 'stockCondition' },
               { label: 'Sku状态', prop: 'statusCondition', type: 'checkbox', dicData: [{ value: 4, label: '在售中' }, { value: 5, label: '已滞销' }, { value: 6, label: '待清仓' }, { value: 7, label: '已停售' }] },
               { label: 'Sku创建时间', prop: 'createTimeCondition', hide: true },
-              { label: '断货状态', prop: 'shortOfSupplyCondition', type: 'checkbox', dicData: [{ value: 'NEVER_SET', label: '未设置' }, { value: 'CANCAL', label: '已取消' }, { value: 'EFFECTIVE', label: '生效中' }] },
+              { label: '断货状态', prop: 'shortOfSupplyCondition', type: 'checkbox', dicData: [{ value: 'NEVER_SET', label: '未设置' }, { value: 'CANCEL', label: '已取消' }, { value: 'EFFECTIVE', label: '生效中' }] },
               { label: '采购周期', prop: 'purchasingCycleCondition', hide: true },
               { label: '判断侵权', prop: 'checkInfringement', hide: true, type: 'select', rules: [{ required: true, message: '请选择是否需要判断侵权', trigger: 'change' }], dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] }
             ]
@@ -114,7 +114,7 @@ export default {
             prop: 'sqlxx',
             icon: 'el-icon-edit-outline',
             column: [
-              { label: '排除条件', prop: 'exclusiveCondition', hide: true },
+              { label: '是否判断排除条件', prop: 'exclusiveCondition', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
               { label: '线上库存调整阈值', prop: 'onlineStockCondition', hide: true, type: 'textarea', span: 24 }
             ]
           },
@@ -126,7 +126,8 @@ export default {
               { label: '设置库存数', prop: 'updateStock', dicData: [{ value: -1, label: '实时库存' }, { value: -2, label: '刊登库存' }], rules: [{ required: true, message: '请设置库存数', trigger: 'blur' }] },
               { label: '下架/删除', prop: 'offline', type: 'select', dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
               { label: '判断多属性', prop: 'offlineConsiderOtherSku', type: 'select', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
-              { label: '判断活动', prop: 'dropActivity', type: 'select', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] }
+              { label: '判断活动', prop: 'dropActivity', type: 'select', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
+              { label: '是否触发拉取listing', prop: 'triggerListing', type: 'select', hide: false, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] }
             ]
           }
         ]

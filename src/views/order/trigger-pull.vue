@@ -25,7 +25,7 @@ export default {
         labelWidth: '238',
         labelPosition: 'right',
         column: [
-          { label: '平台编码', prop: 'platformCode', type: 'select', rules: platformList },
+          { label: '平台编码', prop: 'platformCode', type: 'select', search: true, dicData: platformList },
           { label: '账号ID', prop: 'accountId' },
           { label: '开始时间', prop: 'queryBeginTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss' },
           { label: '结束时间', prop: 'queryEndTime', type: 'datetime', valueFormat: 'yyyyMMddHHmmss' },

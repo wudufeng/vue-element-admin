@@ -31,6 +31,12 @@ const stockRouter = {
       meta: { title: '操作任务' }
     },
     {
+      path: 'rule-exclusive',
+      component: () => import('@/views/stock/rule-exclusive'),
+      name: 'StockOperateRequest',
+      meta: { title: '排除列表' }
+    },
+    {
       path: 'operate-logs',
       component: () => import('@/views/stock/operate-logs'),
       name: 'OperateLogs',

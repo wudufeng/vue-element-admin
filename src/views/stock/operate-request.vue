@@ -39,13 +39,14 @@ export default {
       loading: false,
       query: {
         current: 1,
-        size: 100,
+        size: 50,
         condition: { }
       },
       page: {
         total: 0,
         currentPage: 1,
-        pageSize: 100
+        pageSizes: [10, 50, 100, 1000, 5000],
+        pageSize: 50
       },
       datas: [],
       option: {
@@ -73,7 +74,9 @@ export default {
           { label: '系统sku', prop: 'sku', search: true },
           { label: '销售sku', prop: 'platformSku', search: true },
           { label: '站点/仓库', prop: 'site', hide: true },
-          { label: '系统库存', prop: 'stock', rules: [{ required: true, message: '当时库存不能为空', trigger: 'blur' }] },
+          { label: '系统库存', prop: 'stock' },
+          { label: '原库存', prop: 'onlineStock' },
+          { label: '修改库存', prop: 'updateStock' },
           { label: 'SKU状态', prop: 'skuStatus', search: true, type: 'select', dicData: [{ value: 4, label: '在售中' }, { value: 5, label: '已滞销' }, { value: 6, label: '待清仓' }, { value: 7, label: '已停售' }] },
           { label: '操作类型', prop: 'actionType', search: true, type: 'select', dicData: [{ value: 'SYNCHRONIZE_STOCK', label: '调整库存' }, { value: 'OFFLINE', label: '下架' }] },
           { label: '调整规则', prop: 'ruleConfigId', type: 'select', search: true, dicData: [{}] },
@@ -181,7 +184,7 @@ export default {
         for (const x in response.body.data) {
           dic[x] = { label: response.body.data[x].id + '-' + response.body.data[x].description, value: response.body.data[x].id }
         }
-        this.option.column[10].dicData = dic
+        this.option.column[12].dicData = dic
       })
     },
     retry(row) {
