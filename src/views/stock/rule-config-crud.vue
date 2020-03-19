@@ -69,7 +69,7 @@ export default {
           { label: '断货状态', prop: 'shortOfSupplyCondition', type: 'checkbox', dicData: [{ value: 'NEVER_SET', label: '未设置' }, { value: 'CANCEL', label: '已取消' }, { value: 'EFFECTIVE', label: '生效中' }] },
           { label: '采购周期', prop: 'purchasingCycleCondition', hide: true },
           { label: '判断侵权', prop: 'checkInfringement', hide: true, type: 'select', dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
-          { label: '是否判断排除条件', prop: 'exclusiveCondition', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
+          { label: '是否判断排除条件', prop: 'exclusiveCondition', hide: true, type: 'select', dicData: [{ value: 'true', label: '是' }, { value: 'false', label: '否' }] },
           { label: '线上库存调整阈值', prop: 'onlineStockCondition', hide: true },
           { label: '设置库存数', prop: 'updateStock', dicData: [{ value: -1, label: '实时库存' }, { value: -2, label: '刊登库存' }] },
           { label: '是否触发拉取listing', prop: 'triggerListing', type: 'select', hide: false, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
@@ -114,7 +114,7 @@ export default {
             prop: 'sqlxx',
             icon: 'el-icon-edit-outline',
             column: [
-              { label: '是否判断排除条件', prop: 'exclusiveCondition', hide: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
+              { label: '是否判断排除条件', prop: 'exclusiveCondition', type: 'select', hide: true, dicData: [{ value: 'true', label: '是' }, { value: 'false', label: '否' }] },
               { label: '线上库存调整阈值', prop: 'onlineStockCondition', hide: true, type: 'textarea', span: 24 }
             ]
           },

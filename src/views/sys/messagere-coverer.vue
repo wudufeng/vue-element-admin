@@ -66,7 +66,7 @@ export default {
         indexLabel: '序号',
         selection: true,
         column: [
-          { label: '主键', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
+          { label: '主键', prop: 'id', search: true, addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
           { label: '应用名称', prop: 'applicationName', search: true, rules: [{ required: true, message: '应用名称不能为空', trigger: 'blur' }] },
           { label: '虚拟主机', prop: 'virtualHost', hide: true, rules: [{ required: true, message: '虚拟主机不能为空', trigger: 'blur' }] },
           { label: '交换机', prop: 'exchange', search: true, rules: [{ required: true, message: '交换机不能为空', trigger: 'blur' }] },
@@ -102,6 +102,14 @@ export default {
       })
     },
     handleSearch(params, done) {
+      if (params.updateTime != null && params.updateTime.length === 2) {
+        this.query.queryBeginTime = params.updateTime[0]
+        this.query.queryEndTime = params.updateTime[1]
+        params.updateTime = null
+      } else {
+        this.query.queryBeginTime = null
+        this.query.queryEndTime = null
+      }
       this.page.currentPage = 1
       this.query.condition = params
       this.handleGetList()
