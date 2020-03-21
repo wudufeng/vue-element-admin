@@ -33,7 +33,7 @@ const stockRouter = {
     {
       path: 'rule-exclusive',
       component: () => import('@/views/stock/rule-exclusive'),
-      name: 'StockOperateRequest',
+      name: 'RuleExclusive',
       meta: { title: '排除列表' }
     },
     {
