@@ -91,7 +91,7 @@ export default {
       if (this.triggerForm.platform === undefined) {
         return
       }
-      const conditions = { 'condition': { 'platform': this.triggerForm.platform }}
+      const conditions = { 'condition': { 'platformCode': this.triggerForm.platform }}
       fetchList(conditions).then(response => {
         if (!response.body.data) return
         this.ruleConfigListOptions = response.body.data

@@ -53,7 +53,7 @@ export default {
         border: true,
         searchResetBtn: false,
         addBtn: false,
-        editBtn: false,
+        editBtn: true,
         viewBtn: true,
         delBtn: false,
         index: true,

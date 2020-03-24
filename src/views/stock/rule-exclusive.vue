@@ -69,7 +69,7 @@ export default {
           { label: '级联类型值', prop: 'cascadeVal', type: 'textarea', span: 24, search: true },
           { label: '状态', prop: 'status', addDisplay: false, type: 'select', dicData: [{ value: false, label: '无效' }, { value: true, label: '有效' }] },
           { label: '创建时间', prop: 'createTime', type: 'datetime', addDisplay: false, editDisplay: false, addDisabled: true, editDisabled: true },
-          { label: '修改时间', prop: 'updateTime', type: 'datetime', addDisplay: false, editDisplay: false, addDisabled: true, editDisabled: true }
+          { label: '修改时间', prop: 'updateTime', type: 'datetime', addDisplay: false, editDisplay: false, addDisabled: true, editDisabled: true, search: true, valueFormat: 'yyyyMMddHHmmss', searchRange: true, searchSpan: 12 }
         ]
       }
     }
@@ -91,6 +91,14 @@ export default {
       })
     },
     handleSearch(params, done) {
+      if (params.updateTime != null && params.updateTime.length === 2) {
+        this.query.queryBeginTime = params.updateTime[0]
+        this.query.queryEndTime = params.updateTime[1]
+        params.updateTime = null
+      } else {
+        this.query.queryBeginTime = null
+        this.query.queryEndTime = null
+      }
       this.page.currentPage = 1
       this.query.condition = params
       this.handleGetList(params, done)
