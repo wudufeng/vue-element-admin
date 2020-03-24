@@ -46,7 +46,7 @@ export default {
         } else if (newVal === 'rakuten') {
           this.triggerForm.extraJSON = '[{"searchKey":"【"},{"searchKey":"☆"},{"searchKey":"★"},{"searchKey":"ー"}]'
         } else if (newVal === 'LAZADA') {
-          this.triggerForm.extraJSON = '[{"filter":"deleted"},{"filter":"all"}]'
+          this.triggerForm.extraJSON = '[{"filter":"live","dateType":"CreateTime"},{"filter":"all","dateType":"UpdateTime"},{"filter":"deleted"}]'
         } else if (newVal === 'EB') {
           this.triggerForm.extraJSON = '[{"method":"GetSellerEvents"},{"method":"GetSellerList","dateType":"EndTime","addDay":0}]'
         } else {
