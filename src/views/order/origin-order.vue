@@ -14,7 +14,8 @@
     >
       <template slot="originDataForm">
         <div>
-          <json-editor ref="jsonEditor" :value="data.originData" />
+          <div v-show="typeof(data.originData) === 'string'" v-html="data.originData" />
+          <json-editor v-show="typeof(data.originData) !== 'string'" ref="jsonEditor" :value="data.originData" />
         </div>
       </template>
       <template slot="menu" slot-scope="scope">
@@ -26,9 +27,11 @@
 </template>
 
 <script>
-import { getList, get, add } from '@/api/crud'
 import JsonEditor from '@/components/JsonEditor'
 import platformList from '../../api/platform'
+import vkbeautify from 'vkbeautify'
+import formatXml from '@/utils/format-xml'
+import { getList, get, add } from '@/api/crud'
 export default {
   name: 'OriginOrder',
   components: { JsonEditor },
@@ -41,15 +44,16 @@ export default {
       loading: false,
       query: {
         current: 1,
-        size: 100,
+        size: 20,
         condition: { }
       },
       page: {
         total: 0,
         currentPage: 1,
-        pageSize: 100
+        pageSize: 20
       },
       datas: [],
+      xmlValue: 'Loading xml ...',
       option: {
         border: true,
         searchResetBtn: false,
@@ -94,7 +98,7 @@ export default {
         this.datas = res.body.data
         for (var i = 0; i < this.datas.length; i++) {
           if (this.datas[i].originData !== undefined && this.datas[i].originData !== null && this.datas[i].originData !== '') {
-            this.datas[i].originData = JSON.parse(this.datas[i].originData)
+            this.datas[i].originData = this.datas[i].originData.substring(0, 1) === '<' ? formatXml(vkbeautify.xml(this.datas[i].originData)) : JSON.parse(this.datas[i].originData)
           }
         }
         this.page.total = res.body.totalRecord
