@@ -107,6 +107,7 @@
         :data="data"
         :option="option"
         :page.sync="page"
+        :table-loading="loading"
         @search-change="imageSearch"
         @row-update="imageUpdate"
         @size-change="imageSearch"
@@ -156,6 +157,7 @@ export default {
       limitShowNum: 2
     }
     return {
+      loading: false,
       dataType: 1,
       dialogTableVisible: false,
       value: 1,
@@ -483,6 +485,7 @@ export default {
       }
     },
     imageSearch(params, done) {
+      this.loading = true
       if (this.value === 1) {
         if (this.dataType === 2 || this.dataType === 3) {
           this.$message.warning('本地没有自定义图 边框图!')
@@ -534,6 +537,7 @@ export default {
         this.page.total = res.data.total
         this.loading = false
         done ? done() : ''
+        this.loading = false
       })
     },
     imageUpdate(form, index, done) {
