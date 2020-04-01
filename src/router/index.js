@@ -13,6 +13,7 @@ import stockRouter from './modules/stock'
 import orderRouter from './modules/order'
 import marketingRouter from './modules/marketing'
 import archiveRouter from './modules/archive'
+import imageRouter from './modules/image'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -125,6 +126,7 @@ export const asyncRoutes = [
   stockRouter,
   orderRouter,
   archiveRouter,
+  imageRouter,
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

@@ -60,6 +60,34 @@ module.exports = {
           ['^' + process.env.VUE_APP_BASE_API + '/archive' ]: ''
         }
       },
+      '/dev-api/local/image': {
+        target: `http://172.16.6.36:8084/`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API + '/local/image' ]: ''
+        }
+      },
+      '/dev-api/qx/image': {
+        target: `http://172.16.6.36:8084/`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API + '/qx/image' ]: ''
+        }
+      },
+      '/dev-api/overseas/image': {
+        target: `http://172.16.6.36:8084/`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API + '/overseas/image' ]: ''
+        }
+      },
+      '/dev-api/middle/image': {
+        target: `http://172.16.6.36:8084/`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API + '/middle/image' ]: ''
+        }
+      },
       [process.env.VUE_APP_BASE_API]: {
         target: `http://127.0.0.1:${port}/mock`,
         changeOrigin: true,

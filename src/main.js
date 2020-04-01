@@ -18,6 +18,8 @@ import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
 
+import VCharts from 'v-charts' // VCharts
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -40,6 +42,7 @@ Vue.use(Element, {
 })
 Vue.use(Avue)
 Vue.use(VueResource)
+Vue.use(VCharts)
 Vue.prototype.$axios = axios
 window.axios = axios
 
