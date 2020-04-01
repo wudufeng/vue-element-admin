@@ -45,7 +45,7 @@ export default {
           this.triggerForm.extraJSON = '[{"productStatus":"onSelling","dateType":"CreateTime"},{"productStatus":"onSelling"},{"productStatus":"offline"},{"productStatus":"service_delete"}]'
         } else if (newVal === 'rakuten') {
           this.triggerForm.extraJSON = '[{"searchKey":"【"},{"searchKey":"☆"},{"searchKey":"★"},{"searchKey":"ー"}]'
-        } else if (newVal === 'LAZADA') {
+        } else if (newVal === 'LAZADA' || newVal === 'daraz') {
           this.triggerForm.extraJSON = '[{"filter":"live","dateType":"CreateTime"},{"filter":"all","dateType":"UpdateTime"},{"filter":"deleted"}]'
         } else if (newVal === 'EB') {
           this.triggerForm.extraJSON = '[{"method":"GetSellerEvents"},{"method":"GetSellerList","dateType":"EndTime","addDay":0}]'
