@@ -483,9 +483,15 @@ export default {
       }
     },
     imageSearch(params, done) {
-      if (this.value === 1 || this.value === 2) {
+      if (this.value === 1) {
         if (this.dataType === 2 || this.dataType === 3) {
-          this.$message.warning('本地和清溪没有自定义图和边框图!')
+          this.$message.warning('本地没有自定义图 边框图!')
+          return
+        }
+      }
+      if (this.value === 2) {
+        if (this.dataType === 2 || this.dataType === 3 || this.dataType === 4) {
+          this.$message.warning('清溪没有自定义图 边框图 水印图!')
           return
         }
       }
