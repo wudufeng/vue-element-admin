@@ -18,6 +18,7 @@
       <template slot="menu" slot-scope="scope">
         <el-button v-if="scope.row.executionStatus === 1" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row, '')">执行</el-button>
         <el-button v-if="scope.row.executionStatus === 4 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row, '')">重试</el-button>
+        <el-button v-if="scope.row.executionStatus === 4 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="ignore(scope.row)">忽略</el-button>
         <el-button v-if="scope.row.executionStatus === 4 && (scope.row.platformCode === 'EB' || scope.row.platformCode === 'KF')" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row, 1)">切分任务重试</el-button>
       </template>
     </avue-crud>
@@ -26,7 +27,7 @@
 
 <script>
 import { add, update, remove } from '@/api/crud'
-import { getPullProductLogList, pullRetry } from '@/api/product'
+import { getPullProductLogList, pullRetry, ignore } from '@/api/product'
 
 export default {
   name: 'ProductPullLog',
@@ -172,6 +173,17 @@ export default {
           duration: 2000
         })
         row.executionStatus = 3
+      })
+    },
+    ignore(row,) {
+      ignore(row.platformCode, row.executionId).then(response => {
+        this.$notify({
+          title: '成功',
+          message: '处理成功!',
+          type: 'success',
+          duration: 2000
+        })
+        row.executionStatus = 5
       })
     }
   }

@@ -26,6 +26,13 @@ export function pullRetry(data, productSplitDate) {
   })
 }
 
+export function ignore(platformCode, executionId) {
+  return request({
+    url: '/sale/app/product/pull-log/ignore?platformCode=' + platformCode + '&executionId=' + executionId,
+    method: 'put'
+  })
+}
+
 export function refreshProduct(data) {
   return request({
     url: '/sale/app/product/' + (data.productId !== undefined ? 'transfer' : 'pullDetail'),

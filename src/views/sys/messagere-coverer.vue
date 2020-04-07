@@ -167,6 +167,7 @@ export default {
             message: '处理成功',
             type: 'success'
           })
+          scope.status = 3
           this.getList()
         })
     },

@@ -5,7 +5,7 @@ import Layout from '@/layout'
 const stockRouter = {
   path: '/sales/stock',
   component: Layout,
-  redirect: '/rule-config',
+  redirect: 'rule-config',
   name: 'stockManage',
   meta: {
     title: '库存调整',

@@ -3,9 +3,9 @@
 import Layout from '@/layout'
 
 const productRouter = {
-  path: '/product',
+  path: '/sale/app/product',
   component: Layout,
-  redirect: '/sale/app/product',
+  redirect: '',
   name: 'productManage',
   meta: {
     title: '商品管理',
@@ -13,19 +13,19 @@ const productRouter = {
   },
   children: [
     {
-      path: '/sale/app/product',
+      path: '',
       component: () => import('@/views/product/product'),
       name: 'Product',
       meta: { title: '商品列表' }
     },
     {
-      path: '/sale/app/product/pull',
+      path: 'pull',
       component: () => import('@/views/product/pull-product'),
       name: 'PullProductTrigger',
       meta: { title: ' 拉取商品' }
     },
     {
-      path: 'pull-product-log/list',
+      path: 'pull-log',
       component: () => import('@/views/product/product-pull-log'),
       name: 'ProductPullLog',
       meta: { title: '执行记录' }
