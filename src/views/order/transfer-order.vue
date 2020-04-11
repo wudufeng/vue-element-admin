@@ -68,7 +68,7 @@ export default {
           { label: '平台订单号', prop: 'platformOrderId', search: true },
           { label: '买家id', prop: 'buyerId', hide: true },
           { label: '买家email', prop: 'buyerEmail', hide: true },
-          { label: '订单状态', prop: 'orderStatus', type: 'select', dicData: [{ value: 0, label: '刚导入' }, { value: 4, label: '异常订单' }, { value: 9, label: '待取消' }] },
+          { label: '订单状态', prop: 'orderStatus', type: 'select', dicData: [{ value: 0, label: '刚导入' }, { value: 1, label: '留言客服待处理' }, { value: 4, label: '异常订单' }, { value: 9, label: '待取消' }] },
           { label: '平台订单状态', prop: 'platformOrderStatus' },
           { label: '付款方式', prop: 'paymentMethod', hide: true, rules: [{ required: true, message: '付款方式不能为空', trigger: 'blur' }] },
           { label: '付款类型', prop: 'paymentType', hide: true, rules: [{ required: true, message: '付款类型不能为空', trigger: 'blur' }] },
