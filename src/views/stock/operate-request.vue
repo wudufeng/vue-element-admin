@@ -184,7 +184,7 @@ export default {
         for (const x in response.body.data) {
           dic[x] = { label: response.body.data[x].id + '-' + response.body.data[x].description, value: response.body.data[x].id }
         }
-        dic[dic.length] = { label: '自定义调整', value: 0 }
+        dic[dic.length] = { label: '自定义调整', value: '0' }
         this.option.column[12].dicData = dic
       })
     },
