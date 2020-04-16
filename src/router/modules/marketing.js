@@ -9,26 +9,26 @@ const marketingRouter = {
   name: 'marketingManage',
   meta: {
     title: '营销管理',
-    icon: 'table'
+    icon: 'el-icon-data-line'
   },
   children: [
     {
       path: 'gift-relation',
       component: () => import('@/views/marketing/gift-relation'),
       name: 'GiftRelation',
-      meta: { title: '赠品管理', icon: 'list' }
+      meta: { title: '赠品管理', icon: 'el-icon-present' }
     },
     {
       path: 'platform-sku-map',
       component: () => import('@/views/marketing/platform-sku-map'),
       name: 'PlatformSkuMap',
-      meta: { title: '销售SKU映射', icon: 'list' }
+      meta: { title: '销售SKU映射', icon: 'el-icon-set-up' }
     },
     {
       path: 'customer-blacklist',
       component: () => import('@/views/marketing/customer-blacklist'),
       name: 'CustomerBlacklist',
-      meta: { title: '顾客黑名单', icon: 'list' }
+      meta: { title: '顾客黑名单', icon: 'el-icon-s-opportunity' }
     }
   ]
 }

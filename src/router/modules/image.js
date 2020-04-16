@@ -9,26 +9,26 @@ const imageRouter = {
   name: 'imageManage',
   meta: {
     title: '图片管理',
-    icon: 'chart'
+    icon: 'el-icon-picture-outline'
   },
   children: [
     {
       path: 'list',
       component: () => import('@/views/image/image-list'),
       name: 'ImageList',
-      meta: { title: '图片列表', icon: 'list' }
+      meta: { title: '图片列表', icon: 'el-icon-s-grid' }
     },
     {
       path: 'sync',
       component: () => import('@/views/image/image-sync'),
       name: 'ImageSync',
-      meta: { title: '图片同步', icon: 'tree' }
+      meta: { title: '图片同步', icon: 'el-icon-sort' }
     },
     {
       path: 'upload',
       component: () => import('@/views/image/image-upload'),
       name: 'ImageUpload',
-      meta: { title: '图片上传', icon: 'link' }
+      meta: { title: '图片上传', icon: 'el-icon-upload' }
     }
   ]
 }

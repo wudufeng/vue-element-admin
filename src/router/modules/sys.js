@@ -9,20 +9,20 @@ const accountRouter = {
   name: 'accountManage',
   meta: {
     title: '系统管理',
-    icon: 'table'
+    icon: 'el-icon-setting'
   },
   children: [
     {
       path: 'account/info',
       component: () => import('@/views/sys/account-info'),
       name: 'AccountInfo',
-      meta: { title: '账号管理', icon: 'list' }
+      meta: { title: '账号管理', icon: 'el-icon-user' }
     },
     {
       path: 'sys/message-recoverer',
       component: () => import('@/views/sys/messagere-coverer'),
       name: 'MessageRecoverer',
-      meta: { title: '异常管理', icon: 'list' }
+      meta: { title: '异常管理', icon: 'el-icon-warning-outline' }
     }
   ]
 }
