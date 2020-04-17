@@ -22,10 +22,8 @@
       </template>
       <template slot="menu" slot-scope="scope">
         <el-button v-if="scope.row.parentProductId === scope.row.productId" icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="reloadData(scope.row)">刷新</el-button>
-      </template>
-      <template slot="menuForm">
-        <router-link :to="'/product/payload/'+data.platformCode+'/'+(data.parentProductId == 0 ? data.productId : data.parentProductId)">
-          <el-button type="info" icon="el-icon-check" size="small">查看原始报文</el-button>
+        <router-link :to="'product/payload/'+scope.row.platformCode+'/'+(scope.row.parentProductId === scope.row.productId ? scope.row.productId : scope.row.parentProductId)">
+          <el-button v-if="scope.row.parentProductId === scope.row.productId" type="info" size="small" icon="el-icon-view" class="el-button el-button--text el-button--small">原始数据</el-button>
         </router-link>
       </template>
     </avue-crud>
@@ -49,7 +47,8 @@ export default {
       query: {
         current: 1,
         size: 10,
-        condition: { }
+        condition: { },
+        extra: { filter: 'false' }
       },
       page: {
         total: 0,
@@ -78,23 +77,26 @@ export default {
           { label: '账号ID', prop: 'accountId', width: 80, search: true, rules: [{ required: true, message: '账号ID不能为空', trigger: 'blur' }] },
           { label: '平台商品编码', prop: 'platformProductId', search: true, rules: [{ required: true, message: '平台listing ID不能为空', trigger: 'blur' }] },
           { label: '商品名称', prop: 'name', rules: [{ required: true, message: '产品标题/名称不能为空', trigger: 'blur' }] },
-          { label: 'sku', prop: 'sku', search: true, rules: [{ required: true, message: '系统sku不能为空', trigger: 'blur' }] },
-          { label: '平台销售sku', prop: 'platformSku', rules: [{ required: true, message: '平台销售sku不能为空', trigger: 'blur' }] },
+          { label: 'sku', prop: 'sku', width: 85, search: true, rules: [{ required: true, message: '系统sku不能为空', trigger: 'blur' }] },
+          { label: '销售sku', prop: 'platformSku', width: 85, search: true, rules: [{ required: true, message: '平台销售sku不能为空', trigger: 'blur' }] },
           { label: '内部分类ID', prop: 'categoryId', hide: true, rules: [{ required: true, message: '内部分类ID不能为空', trigger: 'blur' }] },
           { label: '平台分类ID', prop: 'platformCategoryId', hide: true, rules: [{ required: true, message: '平台分类ID不能为空', trigger: 'blur' }] },
-          { label: '线上库存数', prop: 'quantity', search: true, width: 100, rules: [{ required: true, message: '线上库存数不能为空', trigger: 'blur' }] },
-          { label: '价格', prop: 'price', search: true, rules: [{ required: true, message: '价格不能为空', trigger: 'blur' }] },
+          { label: '在线库存', prop: 'quantity', width: 70, search: true, rules: [{ required: true, message: '线上库存数不能为空', trigger: 'blur' }] },
+          { label: '价格', prop: 'price', width: 70, search: true, rules: [{ required: true, message: '价格不能为空', trigger: 'blur' }] },
+          { label: '币种', prop: 'currency', hide: true },
           { label: '浏览量', prop: 'pageview', hide: true, rules: [{ required: true, message: '浏览量不能为空', trigger: 'blur' }] },
           { label: '点赞/关注数', prop: 'interest', hide: true, rules: [{ required: true, message: '点赞/关注数不能为空', trigger: 'blur' }] },
           { label: '已售数', prop: 'sold', hide: true, rules: [{ required: true, message: '已售数不能为空', trigger: 'blur' }] },
           { label: '促销/活动ID', prop: 'activityId', hide: true, rules: [{ required: true, message: '促销/活动ID不能为空', trigger: 'blur' }] },
           { label: '多属性', prop: 'variation', hide: true, rules: [{ required: true, message: '请选择是否为多属性', trigger: 'blur' }], type: 'radio', button: true, dicData: [{ value: true, label: '是' }, { value: false, label: '否' }] },
           { label: '状态', prop: 'status', width: 80, search: true, rules: [{ required: true, message: '产品状态不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '在线' }, { value: 2, label: '下线' }, { value: 3, label: '已删除' }] },
+          { label: '过滤', prop: 'filter', hide: true, viewDisplay: false, addDisplay: false, addDisabled: true, editDisabled: true, width: 80, search: true, type: 'select', dicData: [{ value: 'true', label: '仅显示主商品' }] },
           { label: '产品链接', prop: 'url', hide: true, rules: [{ required: true, message: '产品链接不能为空', trigger: 'blur' }] },
+          { label: '收款账户', prop: 'benefitAccount', hide: true },
           { label: '商品创建时间', prop: 'productCreateTime', rules: [{ required: true, message: '平台产品创建时间不能为空', trigger: 'blur' }] },
           { label: '商品修改时间', prop: 'productUpdateTime', rules: [{ required: true, message: '平台产品修改时间不能为空', trigger: 'blur' }] },
           { label: '创建时间', prop: 'createTime', hide: true, rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] },
-          { label: '修改时间', prop: 'updateTime', hide: true, rules: [{ required: true, message: '修改时间不能为空', trigger: 'blur' }] }
+          { label: '修改时间', prop: 'updateTime', type: 'datetime', search: true, valueFormat: 'yyyyMMddHHmmss', searchRange: true, searchSpan: 12 }
         ]
       }
     }
@@ -124,10 +126,22 @@ export default {
         this.loading = false
       })
     },
-    handleSearch(params) {
+    handleSearch(params, done) {
+      if (params.updateTime != null && params.updateTime.length === 2) {
+        this.query.queryBeginTime = params.updateTime[0]
+        this.query.queryEndTime = params.updateTime[1]
+        params.updateTime = null
+      } else {
+        this.query.queryBeginTime = null
+        this.query.queryEndTime = null
+      }
       this.page.currentPage = 1
+      this.query.extra.filter = params.filter
       this.query.condition = Object.assign({}, params)
       this.handleGetList()
+      setTimeout(() => {
+        done()
+      }, 3000)
     },
     handleCurrentChange(currentPage) {
       this.page.currentPage = currentPage

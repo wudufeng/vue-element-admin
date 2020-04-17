@@ -15,6 +15,8 @@ import productRouter from './modules/product'
 import stockRouter from './modules/stock'
 import orderRouter from './modules/order'
 import marketingRouter from './modules/marketing'
+import archiveRouter from './modules/archive'
+import imageRouter from './modules/image'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -83,23 +85,23 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        meta: { title: '首页', icon: 'el-icon-s-home', affix: true }
       }
     ]
   },
-  {
-    path: '/guide',
-    component: Layout,
-    redirect: '/guide/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/guide/index'),
-        name: 'Guide',
-        meta: { title: 'Guide', icon: 'guide', noCache: true }
-      }
-    ]
-  },
+  // {
+  //   path: '/guide',
+  //   component: Layout,
+  //   redirect: '/guide/index',
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/guide/index'),
+  //       name: 'Guide',
+  //       meta: { title: 'Guide', icon: 'el-icon-s-promotion', noCache: true }
+  //     }
+  //   ]
+  // },
   {
     path: '/profile',
     component: Layout,
@@ -125,10 +127,13 @@ export const asyncRoutes = [
   codegenRouter,
   sequenceRouter,
   sysRouter,
+
   marketingRouter,
   productRouter,
   stockRouter,
   orderRouter,
+  archiveRouter,
+  imageRouter,
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

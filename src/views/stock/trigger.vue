@@ -32,11 +32,36 @@
             </el-form-item>
           </el-col>
         </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item v-show="batchUpdate" label="修改值:" class="postInfo-container-item" prop="updateStock">
+              <el-input-number v-model="triggerForm.updateStock" controls-position="right" :min="0" :max="2000" value="0" />
+            </el-form-item>
+          </el-col>
+        </el-row>
         <el-row align="center">
           <el-col :span="24">
             <el-form-item style="margin-bottom: 40px;" prop="sku">
-              <MDinput v-model.trim="triggerForm.sku" name="name" required>
+              <MDinput v-model.trim="triggerForm.sku" name="name">
                 SKU
+              </MDinput>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row align="center">
+          <el-col :span="24">
+            <el-form-item v-show="batchUpdate" style="margin-bottom: 40px;" prop="sku">
+              <MDinput v-model.trim="triggerForm.platformProductIds" name="platformProductIds">
+                平台商品编码
+              </MDinput>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row align="center">
+          <el-col :span="24">
+            <el-form-item v-show="batchUpdate" style="margin-bottom: 40px;" prop="sku">
+              <MDinput v-model.trim="triggerForm.platformSkus" name="platformSkus">
+                Seller Sku
               </MDinput>
             </el-form-item>
           </el-col>
@@ -53,7 +78,7 @@
             </el-button>
           </el-col>
           <el-col v-if="processResult !== ''" :span="3">
-            <router-link :to="'/sales/stock/operate-logs/'+triggerForm.platform+'/'+processResult">
+            <router-link :to="'operate-logs/'+triggerForm.platform+'/'+processResult">
               <el-button style="margin-left: 10px;" type="info">
                 查看执行结果
               </el-button>
@@ -67,7 +92,7 @@
 
 <script>
 import MDinput from '@/components/MDinput'
-import { fetchList, operateStock } from '@/api/stock'
+import { fetchList, operateStock, batchUpdateStock } from '@/api/stock'
 import PlatformCode from '@/components/PlatformCode'
 
 export default {
@@ -77,14 +102,25 @@ export default {
   },
   data() {
     return {
-      triggerForm: Object.assign({}),
+      triggerForm: { 'ruleConfigId': '' },
       loading: false,
       ruleConfigListOptions: [],
       rules: {
-        sku: [{ required: true, message: '请输入要处理的Sku!', trigger: 'blur' }]
       },
+      batchUpdate: false,
       processResult: '',
       tempRoute: {}
+    }
+  },
+  watch: {
+    'triggerForm.ruleConfigId': {
+      handler(newVal, oldVal) {
+        if (newVal === '0') {
+          this.batchUpdate = true
+        } else {
+          this.batchUpdate = false
+        }
+      }
     }
   },
   methods: {
@@ -92,27 +128,43 @@ export default {
       if (this.triggerForm.platform === undefined) {
         return
       }
-      const conditions = { 'condition': { 'platform': this.triggerForm.platform }}
+      const conditions = { 'condition': { 'platformCode': this.triggerForm.platform }}
       fetchList(conditions).then(response => {
         if (!response.body.data) return
         this.ruleConfigListOptions = response.body.data
+        this.ruleConfigListOptions[this.ruleConfigListOptions.length] = { 'id': '0', 'description': '自定义调整规则' }
       })
     },
     submitForm() {
+      if (this.loading === true) return
       this.$refs.triggerForm.validate(valid => {
         this.processResult = ''
         if (valid) {
           this.loading = true
-          operateStock(this.triggerForm).then(response => {
-            this.processResult = response.body
-            this.$notify({
-              title: '成功',
-              message: '触发调整触发成功!',
-              type: 'success',
-              duration: 4000
+          if (this.triggerForm.ruleConfigId === '0') {
+            batchUpdateStock(this.triggerForm).then(response => {
+              this.processResult = response.body
+              this.$notify({
+                title: '成功',
+                message: '触发调整触发成功!',
+                type: 'success',
+                duration: 4000
+              })
             })
+          } else {
+            operateStock(this.triggerForm).then(response => {
+              this.processResult = response.body
+              this.$notify({
+                title: '成功',
+                message: '触发调整触发成功!',
+                type: 'success',
+                duration: 4000
+              })
+            })
+          }
+          setTimeout(() => {
             this.loading = false
-          })
+          }, 3000)
         } else {
           return false
         }

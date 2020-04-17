@@ -64,6 +64,17 @@ export function operateStock(data) {
   })
 }
 
+export function batchUpdateStock(data) {
+  return request({
+    url: '/sales/stock/EB/batch-update',
+    method: 'post',
+    data,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  })
+}
+
 export function fetchOperateLogList(data) {
   return request({
     url: '/sales/stock/getOperateLogPage',

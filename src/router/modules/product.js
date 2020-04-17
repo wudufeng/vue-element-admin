@@ -3,38 +3,38 @@
 import Layout from '@/layout'
 
 const productRouter = {
-  path: '/product',
+  path: '/sale/app/product',
   component: Layout,
-  redirect: '/sale/app/product',
+  redirect: '',
   name: 'productManage',
   meta: {
     title: '商品管理',
-    icon: 'table'
+    icon: 'el-icon-goods'
   },
   children: [
     {
-      path: '/sale/app/product',
+      path: '',
       component: () => import('@/views/product/product'),
       name: 'Product',
-      meta: { title: '商品列表' }
+      meta: { title: '商品列表', icon: 'el-icon-tickets' }
     },
     {
-      path: '/sale/app/product/pull',
+      path: 'pull',
       component: () => import('@/views/product/pull-product'),
       name: 'PullProductTrigger',
-      meta: { title: ' 拉取商品' }
+      meta: { title: ' 拉取商品', icon: 'el-icon-download' }
     },
     {
-      path: 'pull-product-log/list',
+      path: 'pull-log',
       component: () => import('@/views/product/product-pull-log'),
       name: 'ProductPullLog',
-      meta: { title: '执行记录' }
+      meta: { title: '执行记录', icon: 'el-icon-document' }
     },
     {
       path: 'event-log/list',
       component: () => import('@/views/product/event-log'),
       name: 'EventLogList',
-      meta: { title: ' 变更日志' }
+      meta: { title: ' 变更日志', icon: 'el-icon-edit-outline' }
     },
     {
       path: 'payload/:platform(\\w+)/:productId(\\d+)',

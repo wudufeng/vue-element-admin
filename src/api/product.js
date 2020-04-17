@@ -19,16 +19,23 @@ export function pullProduct(data) {
   })
 }
 
-export function pullRetry(data) {
+export function pullRetry(data, productSplitDate) {
   return request({
-    url: '/sale/app/product/pull/' + data,
+    url: '/sale/app/product/pull/' + data.executionId + '?productSplitDate=' + productSplitDate,
     method: 'get'
+  })
+}
+
+export function ignore(platformCode, executionId) {
+  return request({
+    url: '/sale/app/product/pull-log/ignore?platformCode=' + platformCode + '&executionId=' + executionId,
+    method: 'put'
   })
 }
 
 export function refreshProduct(data) {
   return request({
-    url: '/sale/app/product/pullDetail',
+    url: '/sale/app/product/' + (data.productId !== undefined ? 'transfer' : 'pullDetail'),
     method: 'get',
     params: {
       platformCode: data.platformCode,
@@ -59,7 +66,7 @@ export function getEventLogList(data) {
 
 export function getPullProductLogList(data) {
   return request({
-    url: '/sale/app/product/getPullProductLogPage',
+    url: '/sale/app/product/pull-log/list',
     method: 'post',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'

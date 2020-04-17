@@ -6,13 +6,13 @@
         <h3 class="title" />
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="loginName">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
           ref="username"
-          v-model="loginForm.username"
+          v-model="loginForm.loginName"
           placeholder="Username"
           name="username"
           type="text"
@@ -60,20 +60,12 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
-
+import { loginCrypto } from '@/utils/crypto'
 export default {
   name: 'Login',
   components: { SocialSign },
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
-      } else {
-        callback()
-      }
-    }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
         callback(new Error('The password can not be less than 6 digits'))
@@ -83,11 +75,11 @@ export default {
     }
     return {
       loginForm: {
-        username: '',
+        loginName: '',
         password: ''
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        loginName: [{ required: true, trigger: 'blur' }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password',
@@ -114,7 +106,7 @@ export default {
     // window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
-    if (this.loginForm.username === '') {
+    if (this.loginForm.loginName === '') {
       this.$refs.username.focus()
     } else if (this.loginForm.password === '') {
       this.$refs.password.focus()
@@ -149,16 +141,14 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          if (this.loginForm.password !== '012813680221572474') {
-            return
-          }
           this.loading = true
+          this.loginForm.password = loginCrypto(this.loginForm.password)
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.loading = false
             })
-            .catch(() => {
+            .catch((e) => {
               this.loading = false
             })
         } else {

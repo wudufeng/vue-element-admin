@@ -14,9 +14,13 @@
       @refresh-change="handleGetList"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
+      @selection-change="selectionChange"
     >
+      <template slot="menuLeft">
+        <el-button type="primary" size="small" @click="retryAll">重试已选项</el-button>
+      </template>
       <template slot="menu" slot-scope="scope">
-        <el-button v-if="scope.row.status === 1 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row)">重发</el-button>
+        <el-button v-if="scope.row.status === 1 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retry(scope.row)">重试</el-button>
         <el-button v-if="scope.row.status === 1 " icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="handleDel(scope.row)">忽略</el-button>
       </template>
     </avue-crud>
@@ -47,6 +51,7 @@ export default {
         pageSize: 100
       },
       datas: [],
+      selections: [],
       option: {
         border: true,
         searchResetBtn: false,
@@ -59,24 +64,25 @@ export default {
         labelWidth: '42%',
         dialogType: 'drawer',
         indexLabel: '序号',
+        selection: true,
         column: [
-          { label: '主键', prop: 'id', addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
-          { label: '应用名称', prop: 'applicationName', rules: [{ required: true, message: '应用名称不能为空', trigger: 'blur' }] },
+          { label: '主键', prop: 'id', search: true, addDisplay: false, addDisabled: true, editDisabled: true, hide: true, rules: [{ required: true, message: '主键不能为空', trigger: 'blur' }] },
+          { label: '应用名称', prop: 'applicationName', search: true, rules: [{ required: true, message: '应用名称不能为空', trigger: 'blur' }] },
           { label: '虚拟主机', prop: 'virtualHost', hide: true, rules: [{ required: true, message: '虚拟主机不能为空', trigger: 'blur' }] },
-          { label: '交换机', prop: 'exchange', rules: [{ required: true, message: '交换机不能为空', trigger: 'blur' }] },
-          { label: '路由名', prop: 'routingKey', rules: [{ required: true, message: '路由名不能为空', trigger: 'blur' }] },
+          { label: '交换机', prop: 'exchange', search: true, rules: [{ required: true, message: '交换机不能为空', trigger: 'blur' }] },
+          { label: '路由名', prop: 'routingKey', search: true, rules: [{ required: true, message: '路由名不能为空', trigger: 'blur' }] },
           { label: '队列名称', prop: 'consumerQueue', search: true, rules: [{ required: true, message: '队列名称不能为空', trigger: 'blur' }] },
           { label: '消息编号', prop: 'messageId', hide: true, rules: [{ required: true, message: '消息编号不能为空', trigger: 'blur' }] },
-          { label: '消息内容', prop: 'messageBody', rules: [{ required: true, message: '消息编号不能为空', trigger: 'blur' }] },
-          { label: '异常信息', prop: 'exception', hide: true, rules: [{ required: true, message: '异常信息不能为空', trigger: 'blur' }] },
+          { label: '异常机器IP', prop: 'ip', rules: [{ required: true, message: '异常机器IP不能为空', trigger: 'blur' }] },
+          { label: '消息内容', prop: 'messageBody', search: true, type: 'textarea', rules: [{ required: true, message: '消息编号不能为空', trigger: 'blur' }] },
+          { label: '异常信息', prop: 'exception', search: true, type: 'textarea', hide: true, rules: [{ required: true, message: '异常信息不能为空', trigger: 'blur' }] },
           { label: 'TraceId', prop: 'traceId', hide: true, rules: [{ required: true, message: '跟踪号不能为空', trigger: 'blur' }] },
           { label: 'SpanId', prop: 'spanId', hide: true, rules: [{ required: true, message: '跟踪号不能为空', trigger: 'blur' }] },
-          { label: '异常机器IP', prop: 'ip', rules: [{ required: true, message: '异常机器IP不能为空', trigger: 'blur' }] },
           { label: '消息出错时间', prop: 'messageTime', rules: [{ required: true, message: '消息出错时间不能为空', trigger: 'blur' }] },
           { label: '处理次数', prop: 'retryCount', width: 60, rules: [{ required: true, message: '处理次数不能为空', trigger: 'blur' }] },
-          { label: '处理状态', prop: 'status', search: true, width: 60, rules: [{ required: true, message: '状态:1-待处理,2-已处理,3-忽略不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '待处理' }, { value: 2, label: '已处理' }, { value: 3, label: '忽略' }] },
-          { label: '创建时间', prop: 'createTime', rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] },
-          { label: '修改时间', prop: 'updateTime', rules: [{ required: true, message: '修改时间不能为空', trigger: 'blur' }] }
+          { label: '处理状态', prop: 'status', search: true, width: 60, rules: [{ required: true, message: '状态:1-待处理,2-已处理,3-忽略不能为空', trigger: 'blur' }], type: 'select', dicData: [{ value: 1, label: '待处理' }, { value: 2, label: '已处理' }, { value: 3, label: '忽略' }, { value: 4, label: '处理中' }] },
+          { label: '创建时间', prop: 'createTime', type: 'datetime', rules: [{ required: true, message: '创建时间不能为空', trigger: 'blur' }] },
+          { label: '修改时间', prop: 'updateTime', type: 'datetime', rules: [{ required: true, message: '修改时间不能为空', trigger: 'blur' }], search: true, valueFormat: 'yyyyMMddHHmmss', searchRange: true, searchSpan: 12 }
         ]
       }
     }
@@ -95,10 +101,21 @@ export default {
         this.loading = false
       })
     },
-    handleSearch(params) {
+    handleSearch(params, done) {
+      if (params.updateTime != null && params.updateTime.length === 2) {
+        this.query.queryBeginTime = params.updateTime[0]
+        this.query.queryEndTime = params.updateTime[1]
+        params.updateTime = null
+      } else {
+        this.query.queryBeginTime = null
+        this.query.queryEndTime = null
+      }
       this.page.currentPage = 1
       this.query.condition = params
       this.handleGetList()
+      setTimeout(() => {
+        done()
+      }, 3000)
     },
     handleCurrentChange(currentPage) {
       this.page.currentPage = currentPage
@@ -150,17 +167,29 @@ export default {
             message: '处理成功',
             type: 'success'
           })
+          scope.status = 3
           this.getList()
         })
     },
+    retryAll() {
+      for (const row in this.selections) {
+        this.retry(this.selections[row])
+      }
+    },
     retry(row) {
-      update(this.routerVal + '/retry/' + row.id).then(() => {
+      if (row.status !== 1) {
+        return
+      }
+      update(this.routerVal + '/retry?id=' + row.id).then(() => {
         this.$notify({
           title: 'Success',
           message: '处理成功!',
           type: 'success'
         })
       })
+    },
+    selectionChange(list) {
+      this.selections = list
     }
   }
 }

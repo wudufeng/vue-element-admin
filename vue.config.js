@@ -37,6 +37,12 @@ module.exports = {
       errors: true
     },
     proxy: {
+      '/auth/login':{
+        target: 'http://172.16.3.44:9000',
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API]: ''
+        }
+      },
       // change xxx-api/login => mock/login
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       '/dev-api/sale/app/product': {
@@ -72,6 +78,41 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
+        }
+      },
+      '/dev-api/archive': {
+        target: `http://172.16.6.132:10204/baseplatform/archive`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API + '/archive' ]: ''
+        }
+      },
+      '/dev-api/local/image': {
+        target: `http://172.16.6.36:8084/`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API + '/local/image' ]: ''
+        }
+      },
+      '/dev-api/qx/image': {
+        target: `http://172.16.6.36:8084/`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API + '/qx/image' ]: ''
+        }
+      },
+      '/dev-api/overseas/image': {
+        target: `http://172.16.6.36:8084/`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API + '/overseas/image' ]: ''
+        }
+      },
+      '/dev-api/middle/image': {
+        target: `http://172.16.6.36:8084/`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API + '/middle/image' ]: ''
         }
       },
       [process.env.VUE_APP_BASE_API]: {

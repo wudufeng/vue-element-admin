@@ -14,11 +14,12 @@
     >
       <template slot="originDataForm">
         <div>
-          <json-editor ref="jsonEditor" :value="data.originData" />
+          <div v-show="typeof(data.originData) === 'string'" v-html="data.originData" />
+          <json-editor v-show="typeof(data.originData) !== 'string'" ref="jsonEditor" :value="data.originData" />
         </div>
       </template>
       <template slot="menu" slot-scope="scope">
-        <el-button icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retryPullOrder(scope.row)">刷新</el-button>
+        <el-button icon="el-icon-refresh" class="el-button el-button--text el-button--small" @click="retryPullOrder(scope.row)">重拉</el-button>
         <el-button v-if="scope.row.processStatus==='PULL'" icon="el-icon-message" class="el-button el-button--text el-button--small" @click="transferOrder(scope.row)">转换</el-button>
       </template>
     </avue-crud>
@@ -26,9 +27,11 @@
 </template>
 
 <script>
-import { getList, get, add } from '@/api/crud'
 import JsonEditor from '@/components/JsonEditor'
-
+import platformList from '../../api/platform'
+import vkbeautify from 'vkbeautify'
+import formatXml from '@/utils/format-xml'
+import { getList, get, add } from '@/api/crud'
 export default {
   name: 'OriginOrder',
   components: { JsonEditor },
@@ -41,15 +44,16 @@ export default {
       loading: false,
       query: {
         current: 1,
-        size: 100,
+        size: 20,
         condition: { }
       },
       page: {
         total: 0,
         currentPage: 1,
-        pageSize: 100
+        pageSize: 20
       },
       datas: [],
+      xmlValue: 'Loading xml ...',
       option: {
         border: true,
         searchResetBtn: false,
@@ -66,7 +70,7 @@ export default {
         indexLabel: '序号',
         column: [
           { label: '订单ID', prop: 'id', viewDisplay: false, addDisplay: false, addDisabled: true, editDisabled: true, hide: true },
-          { label: '平台编码', prop: 'platformCode', viewDisplay: false, type: 'select', search: true, dicData: [{ label: 'ALIEXPRESS', value: 'ALI' }, { label: 'AMAZON', value: 'AMAZON' }, { label: 'DARAZ', value: 'daraz' }, { label: 'EBAY', value: 'EB' }, { label: 'JOOM', value: 'JM' }, { label: 'WISH', value: 'KF' }, { label: 'LAZADA', value: 'LAZADA' }, { label: 'MYMALL', value: 'MY' }, { label: 'SHOPEE', value: 'SHOPEE' }, { label: 'RAKUTEN', value: 'rakuten' }] },
+          { label: '平台编码', prop: 'platformCode', viewDisplay: false, type: 'select', search: true, dicData: platformList },
           { label: '账号ID', prop: 'accountId', search: true, viewDisplay: false, width: 80 },
           { label: '平台订单编号', prop: 'platformOrderId', search: true, viewDisplay: false },
           { label: '平台订单状态', prop: 'platformOrderStatus', viewDisplay: false },
@@ -94,17 +98,20 @@ export default {
         this.datas = res.body.data
         for (var i = 0; i < this.datas.length; i++) {
           if (this.datas[i].originData !== undefined && this.datas[i].originData !== null && this.datas[i].originData !== '') {
-            this.datas[i].originData = JSON.parse(this.datas[i].originData)
+            this.datas[i].originData = this.datas[i].originData.substring(0, 1) === '<' ? formatXml(vkbeautify.xml(this.datas[i].originData)) : JSON.parse(this.datas[i].originData)
           }
         }
         this.page.total = res.body.totalRecord
         this.loading = false
       })
     },
-    handleSearch(params) {
+    handleSearch(params, done) {
       this.page.currentPage = 1
       this.query.condition = params
-      this.handleGetList()
+      this.handleGetList(done)
+      setTimeout(() => {
+        done()
+      }, 3000)
     },
     handleCurrentChange(currentPage) {
       this.page.currentPage = currentPage

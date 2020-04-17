@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <PlatformCode v-model="listQuery.platform" />
+      <PlatformCode v-model="listQuery.platformCode" />
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         Search
       </el-button>
@@ -43,7 +43,7 @@
       </el-table-column>
       <el-table-column label="平台编码" width="80px" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.platform }}</span>
+          <span>{{ scope.row.platformCode }}</span>
         </template>
       </el-table-column>
       <el-table-column label="规则类型" width="80px" align="center">
@@ -161,8 +161,8 @@
         <el-form-item v-if="dialogStatus==='update'" label="规则编号" prop="id">
           <el-input v-model="temp.id" readonly="true" />
         </el-form-item>
-        <el-form-item label="平台编码" prop="platform">
-          <PlatformCode v-model="temp.platform" />
+        <el-form-item label="平台编码" prop="platformCode">
+          <PlatformCode v-model="temp.platformCode" />
         </el-form-item>
         <el-form-item label="规则类型" prop="ruleType">
           <el-select v-model="temp.ruleType" class="filter-item" placeholder="Please select">
@@ -265,7 +265,7 @@ export default {
       listQuery: {
         page: 1,
         limit: 50,
-        platform: 'ALI'
+        platformCode: 'ALI'
       },
       showCreateTimeCondition: false,
       showOnlineStockCondition: false,
@@ -304,7 +304,7 @@ export default {
         create: '新增'
       },
       rules: {
-        platform: [{ required: true, message: '请选择平台编码', trigger: 'change' }],
+        platformCode: [{ required: true, message: '请选择平台编码', trigger: 'change' }],
         ruleType: [{ required: true, message: '请选择规则类型', trigger: 'blur' }],
         warehouseIds: [{ required: true, message: '请仓库ID', trigger: 'blur' }],
         stockTypes: [{ required: true, message: '请输入库存汇总类型', trigger: 'blur' }],
@@ -322,7 +322,7 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      fetchList(this.listQuery.platform).then(response => {
+      fetchList(this.listQuery.platformCode).then(response => {
         this.list = response.body.data
         this.total = response.body.totalRecord
 
